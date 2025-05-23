@@ -11,11 +11,21 @@ function index(req, res) {
         res.json(results)
     });
 }
-//Funzione indexSearchOrder per filtrare i vari prodotti a seconda di cosa si cerca
+//Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    const sql = `SELECT * FROM products p WHERE p.name LIKE ? ORDER BY ?`
-    console.log('indexSearchOrder path');
-    res.send('indexSearchOrder path');
+    const {search,choice} = req.body
+    const sql = `SELECT * FROM products p WHERE p.name LIKE ? ORDER BY ?`;
+    const searchParams = `%${search}%`
+    conn.query(sql,[searchParams,choice], (err, results) => {
+        if (err) {
+            console.error('Query error:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        if (!results || results.length === 0) {
+            return res.status(400).json({ error: "Product not found" })
+        }
+        res.json(results)
+    });
 }
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {
@@ -29,7 +39,7 @@ function checkout(req, res) {
         user_phone,
         products
     } = req.body;
-    
+
     const now = new Date().toISOString().slice(0, 19).replace("T", " ");
     const status = "pending";
     //Inserisce l'ordine nella tabella orders del db
@@ -49,28 +59,28 @@ function checkout(req, res) {
         now,
         now
     ];
-    conn.query(orderQuery, orderValues, (err,result)=>{
-        if(err) return res.status(500).json({error:"Insert Order Failed"})
+    conn.query(orderQuery, orderValues, (err, result) => {
+        if (err) return res.status(500).json({ error: "Insert Order Failed" })
         //Prendo l'id del ordine appena creato
         const orderId = result.insertId;
         //Inserisce i prodotti uno a uno
         let insertCount = 0;
-        if(!products || products.length === 0){
-            return res.status(400).json({error:"Order not found"})
+        if (!products || products.length === 0) {
+            return res.status(400).json({ error: "Order not found" })
         }
         products.forEach((p) => {
             //Inserisco dentro product_order l'ordine appena creato
             const productQuery = `INSERT INTO product_order(product_id, order_id,quantity, tot_price) VALUES (?,?,?,?)`;
-            conn.query(productQuery, [p.product_id,orderId,p.quantity,
+            conn.query(productQuery, [p.product_id, orderId, p.quantity,
             p.tot_price
-            ], (err2) =>{
-                if(err2) console.error("Error product order:", err2);
+            ], (err2) => {
+                if (err2) console.error("Error product order:", err2);
                 insertCount++;
-                if(insertCount === products.length){
-                    res.status(201).json({message:"Order added", orderId})
+                if (insertCount === products.length) {
+                    res.status(201).json({ message: "Order added", orderId })
                 }
             })
-            
+
         });
     })
 }
@@ -78,8 +88,8 @@ function checkout(req, res) {
 function productDetails(req, res) {
     const { slug } = req.params;
     const sql = `SELECT * from products WHERE products.slug = ?`
-    conn.query(sql,[slug], (err,result) =>{
-        if(err) res.status(400).json({error:"Product not found"})
+    conn.query(sql, [slug], (err, result) => {
+        if (err) res.status(400).json({ error: "Product not found" })
         res.json(result)
     })
 }
