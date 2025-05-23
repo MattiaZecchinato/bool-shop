@@ -11,55 +11,55 @@ function checkCheckout(req, res, next) {
     } = req.body;
 
     let error = 0
-    let errorMessage = `si sono verificati i seguenti errori`
+    let errorMessage = `The following errors occurred:`
 
     if (total_order === '') {
         error++
-        errorMessage += `, il totale non puo essere vuoto`
+        errorMessage += `, the total cannot be empty`
     }
     let controllTotal = parseInt(total_order)
     if (isNaN(controllTotal)) {
         error++
-        errorMessage += `, il totale deve essere un numero`
+        errorMessage += `, the total must be a number`
     }
     if (user_first_name === '') {
         error++
-        errorMessage += `, il nome non puo essere vuoto`
+        errorMessage += `, the firstname cannot be empty`
     }
     if (user_last_name === '') {
         error++
-        errorMessage += `, il cognome non puo essere vuoto`
+        errorMessage += `, the lastname cannot be empty`
     }
     if (user_email === '') {
         error++
-        errorMessage += `, l'email non puo essere vuoto`
+        errorMessage += `, the email cannot be empty`
     }
     if (!user_email.includes("@")) {
         error++
-        errorMessage += `, l'email deve conterenere un @`
+        errorMessage += `, the email must contain an "@" symbol`
     }
     if (user_address === '') {
         error++
-        errorMessage += `, l'indirizzo non puo essere vuoto`
+        errorMessage += `, the address cannot be empty`
     }
     if (user_phone === '') {
         error++
-        errorMessage += `, il numero di telefono non puo essere vuoto`
+        errorMessage += `, the phone number cannot be empty`
     }
 
     products.forEach(product => {
         if (product.quantity <= 0) {
             error++
-            errorMessage += `, la quantita non puo essere 0 `
+            errorMessage += `, the quantity cannot be 0 `
         }
         if (product.tot_price <= 0) {
             error++
-            errorMessage += `, il prezzo non puo essere 0 `
+            errorMessage += `, the price cannot be 0 `
         }
     });
 
     if (error > 0) {
-        console.log('sono qui')
+        console.log(`I'm here`)
         res.status(500).json({
 
             status: '500',
@@ -69,7 +69,6 @@ function checkCheckout(req, res, next) {
         next()
     }
 
-
-
 }
+
 module.exports = checkCheckout;
