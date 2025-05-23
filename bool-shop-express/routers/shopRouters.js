@@ -1,5 +1,7 @@
 const express = require('express');
 
+const checkCheckout = require('../middlewares/checkCheckout')
+
 const router = express.Router();
 
 //shop controllers
@@ -12,7 +14,7 @@ router.get('/', shopControllers.index);
 router.get('/search', shopControllers.indexSearchOrder);
 
 // checkout
-router.post('/checkout', shopControllers.checkout);
+router.post('/checkout', checkCheckout, shopControllers.checkout);
 
 // product details (slug deve essere per ultimo)
 router.get('/:slug', shopControllers.productDetails);
