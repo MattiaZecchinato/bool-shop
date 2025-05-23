@@ -56,7 +56,7 @@ function checkout(req, res) {
         //Inserisce i prodotti uno a uno
         let insertCount = 0;
         if(!products || products.length === 0){
-            return res.status(400).json({error:"Order Not Found"})
+            return res.status(400).json({error:"Order not found"})
         }
         products.forEach((p) => {
             //Inserisco dentro product_order l'ordine appena creato
@@ -74,12 +74,14 @@ function checkout(req, res) {
         });
     })
 }
-
+//Funzione per controllare lo specifico prodotto
 function productDetails(req, res) {
     const { slug } = req.params;
-    
-    console.log(`productDetails path whit slug: ${slug}`);
-    res.send(`productDetails path whit slug: ${slug}`);
+    const sql = `SELECT * from products WHERE products.slug = ?`
+    conn.query(sql,[slug], (err,result) =>{
+        if(err) res.status(400).json({error:"Product not found"})
+        res.json(result)
+    })
 }
 
 module.exports = { index, indexSearchOrder, checkout, productDetails };
