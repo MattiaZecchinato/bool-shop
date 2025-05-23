@@ -1,4 +1,4 @@
-function checkCheckout(err, req, res, next) {
+function checkCheckout(req, res, next) {
 
     const {
         total_order,
@@ -59,7 +59,7 @@ function checkCheckout(err, req, res, next) {
     });
 
     if (error > 0) {
-
+        console.log('sono qui')
         res.status(500).json({
 
             status: '500',
