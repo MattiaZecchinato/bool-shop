@@ -1,6 +1,7 @@
+const conn = require('../data/dbShop')
 function index(req, res) {
     const sql = `SELECT * FROM products`;
-    connection.query(sql, (err, results) => {
+    conn.query(sql, (err, results) => {
         if (err) {
             console.error('Errore nella query INDEX:', err);
             return res.status(500).json({ error: 'Errore interno al server' });
