@@ -18,40 +18,40 @@ function checkCheckout(conn) {
 
         if (total_order === '' || !total_order) {
             error++;
-            errorMessage += `, the total cannot be empty or not exist`;
+            errorMessage += `, total cannot be empty or do not exist`;
         }
         if (isNaN(controllTotal)) {
             error++;
-            errorMessage += `, the total must be a number`;
+            errorMessage += `, total must be a number`;
         }
         if (user_first_name === '' || !user_first_name) {
             error++;
-            errorMessage += `, the firstname cannot be empty or not exist`;
+            errorMessage += `, firstname cannot be empty or not exist`;
         }
         if (user_last_name === '' || !user_last_name) {
             error++;
-            errorMessage += `, the lastname cannot be empty or not exist`;
+            errorMessage += `, lastname cannot be empty or not exist`;
         }
         if (user_email === '' || !user_email) {
             error++;
-            errorMessage += `, the email cannot be empty or not exist`;
+            errorMessage += `, email cannot be empty or not exist`;
         } else if (!user_email.includes("@")) {
             error++;
-            errorMessage += `, the email must contain an "@" symbol`;
+            errorMessage += `, email must contain an "@" symbol`;
         }
         nonConsentitiEmail.forEach(element => {
             if (user_email.includes(element)) {
                 error++;
-                errorMessage += `, the email must contain an ${element} symbol`;
+                errorMessage += `, email must contain an "${element}" symbol`;
             }
         });
         if (user_address === '' || !user_email) {
             error++;
-            errorMessage += `, the address cannot be empty or not exist`;
+            errorMessage += `, address cannot be empty or do not exist`;
         }
         if (user_phone === '' || !user_phone) {
             error++;
-            errorMessage += `, the phone number cannot be empty or not exist`;
+            errorMessage += `, phone number cannot be empty or do not exist`;
         }
 
         let checktotal = 0;
@@ -60,7 +60,7 @@ function checkCheckout(conn) {
 
         if (!products || products.length === 0) {
             error++;
-            errorMessage += `, L'ordine deve contenere almeno un prodotto`;
+            errorMessage += `, order must contain at least one product`;
             checkIfAllQueriesDone();
             return;
         } else {
@@ -72,13 +72,13 @@ function checkCheckout(conn) {
 
             if (!product.product_id) {
                 error++;
-                errorMessage += `, id non valido`;
+                errorMessage += `, not valid ID`;
                 dbQueriesCompleted++;
                 checkIfAllQueriesDone();
                 return;
             } else if (isNaN(productId)) {
                 error++;
-                errorMessage += `, id non valido`;
+                errorMessage += `, not valid ID`;
                 dbQueriesCompleted++;
                 checkIfAllQueriesDone();
                 return;
@@ -89,11 +89,11 @@ function checkCheckout(conn) {
 
                     if (err) {
                         error++;
-                        errorMessage += `, errore sul database per l'ID ${productId}`;
+                        errorMessage += `, error on database for ID: ${productId}`;
                     } else {
                         if (result.length === 0) {
                             error++;
-                            errorMessage += `, prodotto con ID ${productId} non trovato`;
+                            errorMessage += `, product with ID: ${productId} not found`;
                         } else {
                             let dbProductData = result[0];
                             let unitPriceFromDb = dbProductData.price;
@@ -103,7 +103,7 @@ function checkCheckout(conn) {
 
                             if (checktotalproduct !== product.tot_price) {
                                 error++;
-                                errorMessage += `, errore sul totale del prodotto ${productId}`;
+                                errorMessage += `, error on total of product with ID:${productId}`;
                             }
                         }
                     }
@@ -113,11 +113,11 @@ function checkCheckout(conn) {
 
             if (product.quantity <= 0) {
                 error++;
-                errorMessage += `, la quantità del prodotto ${product.product_id || 'sconosciuto'} non può essere 0`;
+                errorMessage += `, product quantity ${product.product_id || 'unknown'} can't be 0`;
             }
             if (product.tot_price <= 0) {
                 error++;
-                errorMessage += `, il prezzo del prodotto ${product.product_id || 'sconosciuto'} non può essere 0`;
+                errorMessage += `, product price ${product.product_id || 'unknown'} can't be 0`;
             }
         });
 
@@ -127,7 +127,7 @@ function checkCheckout(conn) {
 
                 if (total_order !== checktotal) {
                     error++;
-                    errorMessage += `, errore nel totale prodotti finale`;
+                    errorMessage += `, error on total about final products`;
                 }
 
                 if (error > 0) {
