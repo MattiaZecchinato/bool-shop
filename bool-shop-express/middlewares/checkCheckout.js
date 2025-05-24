@@ -14,7 +14,7 @@ function checkCheckout(conn) {
         let errorMessage = `The following errors occurred:`;
         let controllTotal = parseInt(total_order);
 
-        const nonConsentitiEmail = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '<', '>', '/', '?', '`', '~'];
+        const notAllowedSymbols = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '<', '>', '/', '?', '`', '~'];
 
         if (total_order === '' || !total_order) {
             error++;
@@ -39,7 +39,7 @@ function checkCheckout(conn) {
             error++;
             errorMessage += `, email must contain an "@" symbol`;
         }
-        nonConsentitiEmail.forEach(element => {
+        notAllowedSymbols.forEach(element => {
             if (user_email.includes(element)) {
                 error++;
                 errorMessage += `, email must contain an "${element}" symbol`;
