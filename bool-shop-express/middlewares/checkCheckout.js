@@ -12,39 +12,46 @@ function checkCheckout(conn) {
 
         let error = 0;
         let errorMessage = `The following errors occurred:`;
-
-        if (total_order === '') {
-            error++;
-            errorMessage += `, the total cannot be empty`;
-        }
         let controllTotal = parseInt(total_order);
+
+        const nonConsentitiEmail = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '<', '>', '/', '?', '`', '~'];
+
+        if (total_order === '' || !total_order) {
+            error++;
+            errorMessage += `, the total cannot be empty or not exist`;
+        }
         if (isNaN(controllTotal)) {
             error++;
             errorMessage += `, the total must be a number`;
         }
-        if (user_first_name === '') {
+        if (user_first_name === '' || !user_first_name) {
             error++;
-            errorMessage += `, the firstname cannot be empty`;
+            errorMessage += `, the firstname cannot be empty or not exist`;
         }
-        if (user_last_name === '') {
+        if (user_last_name === '' || !user_last_name) {
             error++;
-            errorMessage += `, the lastname cannot be empty`;
+            errorMessage += `, the lastname cannot be empty or not exist`;
         }
-        if (user_email === '') {
+        if (user_email === '' || !user_email) {
             error++;
-            errorMessage += `, the email cannot be empty`;
-        }
-        if (!user_email.includes("@")) {
+            errorMessage += `, the email cannot be empty or not exist`;
+        } else if (!user_email.includes("@")) {
             error++;
             errorMessage += `, the email must contain an "@" symbol`;
         }
-        if (user_address === '') {
+        nonConsentitiEmail.forEach(element => {
+            if (user_email.includes(element)) {
+                error++;
+                errorMessage += `, the email must contain an ${element} symbol`;
+            }
+        });
+        if (user_address === '' || !user_email) {
             error++;
-            errorMessage += `, the address cannot be empty`;
+            errorMessage += `, the address cannot be empty or not exist`;
         }
-        if (user_phone === '') {
+        if (user_phone === '' || !user_phone) {
             error++;
-            errorMessage += `, the phone number cannot be empty`;
+            errorMessage += `, the phone number cannot be empty or not exist`;
         }
 
         let checktotal = 0;
