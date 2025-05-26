@@ -110,9 +110,7 @@ function checkCheckout(conn) {
                             errorMessage += `, product with ID: ${productId} not found`;
                         } else {
                             let dbProductData = result[0];
-                            console.log(dbProductData)
                             let unitPriceFromDb = parseFloat(dbProductData.price);
-
                             if (dbProductData.discount_type === "fixed") {
                                 unitPriceFromDb = unitPriceFromDb - parseFloat(dbProductData.discount_amount)
                             } else if (dbProductData.discount_type === "percentage") {
@@ -121,7 +119,6 @@ function checkCheckout(conn) {
                             }
 
                             let checktotalproduct = unitPriceFromDb * product.quantity;
-                            console.log(checktotalproduct)
                             checktotal += checktotalproduct;
 
                             if (checktotalproduct !== product.tot_price) {
