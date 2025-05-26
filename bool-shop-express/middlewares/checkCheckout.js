@@ -13,8 +13,9 @@ function checkCheckout(conn) {
         let error = 0;
         let errorMessage = `The following errors occurred:`;
         let controllTotal = parseInt(total_order);
-
         const notAllowedSymbols = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '<', '>', '/', '?', '`', '~'];
+
+
 
         if (total_order === '' || !total_order) {
             error++;
@@ -38,6 +39,19 @@ function checkCheckout(conn) {
         } else if (!user_email.includes("@")) {
             error++;
             errorMessage += `, email must contain an "@" symbol`;
+        } else {
+            let email = user_email
+            let checkmail = email.split('')
+            let controlmail = 0
+            checkmail.forEach(element => {
+                if (element.includes('@')) {
+                    controlmail++
+                }
+            });
+            if (controlmail > 1) {
+                error++;
+                errorMessage += `, email cannot contain more than 1 "@" symbol`;
+            }
         }
         notAllowedSymbols.forEach(element => {
             if (user_email.includes(element)) {
