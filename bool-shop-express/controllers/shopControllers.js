@@ -1,4 +1,15 @@
 const conn = require('../data/dbShop')
+function calculatedProduct(product) {
+    const { price, discount_type, discount_amount } = product;
+    if (discount_type === 'fixed') {
+        return (price - discount_amount)
+    }
+    else if (discount_type === 'percentage') {
+        return price - (price * (discount_amount / 100))
+    }else{
+        return price
+    }
+}
 //Funzione Index per visualizzare tutti i prodotti dentro il db
 function index(req, res) {
     //Query per visualizzare i prodotti
@@ -8,15 +19,19 @@ function index(req, res) {
             console.error('Query error:', err);
             return res.status(500).json({ error: 'Internal server error' });
         }
-        res.json(results)
+        const productDiscounted = results.map(p =>({
+            ...p,
+            final_price : parseFloat(calculatedProduct(p)).toFixed(2)
+        }))
+        res.json(productDiscounted)
     });
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    const {search,choice} = req.body
+    const { search, choice } = req.body
     const sql = `SELECT * FROM products p WHERE p.name LIKE ? ORDER BY ?`;
     const searchParams = `%${search}%`
-    conn.query(sql,[searchParams,choice], (err, results) => {
+    conn.query(sql, [searchParams, choice], (err, results) => {
         if (err) {
             console.error('Query error:', err);
             return res.status(500).json({ error: 'Internal server error' });
