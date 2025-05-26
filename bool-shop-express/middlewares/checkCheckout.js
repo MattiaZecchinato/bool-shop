@@ -97,7 +97,7 @@ function checkCheckout(conn) {
                 checkIfAllQueriesDone();
                 return;
             } else {
-                const sql = `SELECT price from products WHERE products.id = ?`;
+                const sql = `SELECT price , discount_type, discount_amount from products WHERE products.id = ?`;
                 conn.query(sql, [productId], (err, result) => {
                     dbQueriesCompleted++;
 
@@ -110,9 +110,18 @@ function checkCheckout(conn) {
                             errorMessage += `, product with ID: ${productId} not found`;
                         } else {
                             let dbProductData = result[0];
-                            let unitPriceFromDb = dbProductData.price;
+                            console.log(dbProductData)
+                            let unitPriceFromDb = parseFloat(dbProductData.price);
+
+                            if (dbProductData.discount_type === "fixed") {
+                                unitPriceFromDb = unitPriceFromDb - parseFloat(dbProductData.discount_amount)
+                            } else if (dbProductData.discount_type === "percentage") {
+                                unitPriceFromDb = unitPriceFromDb - parseFloat((unitPriceFromDb * (dbProductData.discount_amount / 100)))
+                                unitPriceFromDb = unitPriceFromDb.toFixed(2)
+                            }
 
                             let checktotalproduct = unitPriceFromDb * product.quantity;
+                            console.log(checktotalproduct)
                             checktotal += checktotalproduct;
 
                             if (checktotalproduct !== product.tot_price) {
