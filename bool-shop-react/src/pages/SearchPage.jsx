@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardProduct from "../components/CardProduct";
 
 function SearchPage() {
@@ -37,9 +37,18 @@ function SearchPage() {
 
         console.log(formSearch)
 
+        callEndPoint()
+    }
+
+    useEffect(() => {
+
+        callEndPoint()
+    }, [])
+
+    function callEndPoint() {
+
         axios.get(uri)
             .then(res => {
-
                 console.log(res.data)
                 setFound(res.data)
             })
