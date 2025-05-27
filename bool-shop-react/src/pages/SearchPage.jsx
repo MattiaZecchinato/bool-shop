@@ -51,11 +51,20 @@ function SearchPage() {
 
         axios.get(uri)
             .then(res => {
+                if (formSearch.choice === "created_at") {
+                    console.log('sono qui')
+                    res.data.reverse()
+                }
                 console.log(res.data)
                 setFound(res.data)
             })
             .catch(err => console.log(err.message))
+
+
+
+
     }
+
 
     return <>
         <form className="row g-3" onSubmit={sendForm}>
@@ -68,7 +77,7 @@ function SearchPage() {
                 <select id="inputOrder" className="form-select" name="choice" value={formSearch.choice} onChange={handleData}>
                     <option value="name">Nome</option>
                     <option value="price">Prezzo</option>
-                    <option value="recent">Recenti</option>
+                    <option value="created_at">Recenti</option>
                 </select>
             </div>
             <div className="col-12">
