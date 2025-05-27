@@ -18,8 +18,6 @@ function HomePage() {
 
     useEffect(getData, []);
 
-    const rifDate = new Date('01/01/2025');
-
     return (<>
         <div id="carouselExampleIndicators" className="carousel slide">
             <div className="carousel-indicators">
@@ -53,13 +51,13 @@ function HomePage() {
         <ul>
             {data && data
                 .filter(element => {
-                    const rifDate = new Date('2025/05/21');
+                    const rifDate = new Date('2024-01-01');
                     const createdDate = new Date(element.created_at);
                     return createdDate > rifDate;
                 })
                 .map(element => <li key={element.id}>
                     <div className="card col-3">
-                        <img src={element.image} className="card-img-top" alt={element.name} />
+                        <img src={`http://127.0.0.1:3000/img/${element.image}`} className="card-img-top" alt={element.name} />
                         <div className="card-body">
                             <h5 className="card-title">{element.name}</h5>
                             <p className="card-text">{element.description}</p>
@@ -74,14 +72,3 @@ function HomePage() {
 }
 
 export default HomePage;
-
-{/* <li key={element.id}>
-                <div className="card col-3">
-                    <img src={element.image} className="card-img-top" alt={element.name} />
-                    <div className="card-body">
-                        <h5 className="card-title">{element.name}</h5>
-                        <p className="card-text">{element.description}</p>
-                        <a href="#" className="btn btn-primary">Acquista ora</a>
-                    </div>
-                </div> 
-                </li>)*/}
