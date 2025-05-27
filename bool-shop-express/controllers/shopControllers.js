@@ -6,32 +6,35 @@ function calculatedProduct(product) {
     }
     else if (discount_type === 'percentage') {
         return price - (price * (discount_amount / 100))
-    }else{
+    } else {
         return price
     }
 }
 //Funzione Index per visualizzare tutti i prodotti dentro il db
 function index(req, res) {
     //Query per visualizzare i prodotti
+
     const sql = `SELECT * FROM products`;
     conn.query(sql, (err, results) => {
         if (err) {
             console.error('Query error:', err);
             return res.status(500).json({ error: 'Internal server error' });
         }
-        const productDiscounted = results.map(p =>({
+        const productDiscounted = results.map(p => ({
             ...p,
-            final_price : parseFloat(calculatedProduct(p)).toFixed(2)
+            final_price: parseFloat(calculatedProduct(p)).toFixed(2)
         }))
         res.json(productDiscounted)
     });
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    const { search, choice } = req.body
-    const sql = `SELECT * FROM products p WHERE p.name LIKE ? ORDER BY ?`;
+    console.log(req.query)
+    const { search, choice } = req.query
+
+    const sql = `SELECT * FROM products p WHERE p.name LIKE ? ORDER BY ${choice}`;
     const searchParams = `%${search}%`
-    conn.query(sql, [searchParams, choice], (err, results) => {
+    conn.query(sql, [searchParams], (err, results) => {
         if (err) {
             console.error('Query error:', err);
             return res.status(500).json({ error: 'Internal server error' });
