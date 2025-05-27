@@ -4,6 +4,8 @@ import CardProduct from "../components/CardProduct";
 
 function SearchPage() {
 
+    const { VITE_BE_PATH } = import.meta.env;
+
     const [found, setFound] = useState({})
 
     const resetFormSearch = {
@@ -14,7 +16,7 @@ function SearchPage() {
 
     const [formSearch, setFormSearch] = useState(resetFormSearch)
 
-    const uri = `http://127.0.0.1:3000/shop/search?search=${formSearch.search}&choice=${formSearch.choice}`
+    const uri = `${VITE_BE_PATH}/shop/search?search=${formSearch.search}&choice=${formSearch.choice}`
 
     function handleData(e) {
 
