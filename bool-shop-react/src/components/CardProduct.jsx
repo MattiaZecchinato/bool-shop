@@ -2,10 +2,12 @@ function CardProduct({ data }) {
 
     const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount } = data
 
+    const { VITE_BE_PATH } = import.meta.env;
+
     return <>
         <div className="col-4">
             <div className="card" style={{ width: '18rem' }}>
-                <img src={`http://127.0.0.1:3000/img/${image}`} className="card-img-top" alt={name} />
+                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <p className="card-text">{description}</p>
