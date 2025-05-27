@@ -59,7 +59,7 @@ function HomePage() {
                 })
                 .map(element => <li key={element.id}>
                     <div className="card col-3">
-                        <img src={`http://127.0.0.1:3000/img/${element.image}`} className="card-img-top" alt={element.name} />
+                        <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
                         <div className="card-body">
                             <h5 className="card-title">{element.name}</h5>
                             <p className="card-text">{element.description}</p>
