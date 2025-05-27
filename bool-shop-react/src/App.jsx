@@ -1,15 +1,17 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 function App() {
 
   return (
     <>
-      <div class="card">
-        <img src="..." class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<h1>homepage</h1>} />
+          <Route path="/search" element={<h1>pagina di ricerca</h1>} />
+          <Route path="*" element={<div>page not found</div>} />
+        </Routes>
+      </BrowserRouter >
     </>
   )
 }
