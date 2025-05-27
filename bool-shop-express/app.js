@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors')
 //routers
 const routers = require('./routers/shopRouters');
 
@@ -9,7 +9,11 @@ const notFound = require('./middlewares/notFound');
 
 const app = express();
 
-const { PORT } = process.env;
+const { PORT, FE_PATH } = process.env;
+app.use(cors({
+    origin: FE_PATH
+
+}))
 
 const port = PORT || 4000;
 
