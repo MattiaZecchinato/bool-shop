@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 
 function HomePage() {
 
+    const { VITE_BE_PATH } = import.meta.env;
+
     const [data, setData] = useState('');
-    const url = 'http://127.0.0.1:3000/shop';
+    const url = `${VITE_BE_PATH}/shop`;
 
     function getData() {
         axios.get(url)
