@@ -22,7 +22,7 @@ function HomePage() {
 
     return (
         <>
-            <div id="carouselExampleAutoplaying" className="carousel slide w-50 img-fluid m-auto" data-bs-ride="carousel" data-bs-interval="2000">
+            <div id="carouselExampleAutoplaying" className="carousel carousel-container slide img-fluid m-auto" data-bs-ride="carousel" data-bs-interval="2000">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src="./src/assets/carosello-giochi.jpg" className="d-block w-100 carousel-img" alt="giochi-da-tavolo" />
@@ -46,15 +46,15 @@ function HomePage() {
 
             <h2>Gli ultimi arrivi:</h2>
 
-            <ul>
+            <ul className="list-unstyled row">
                 {data && data
                     .filter(element => {
                         const rifDate = new Date('2024-01-01');
                         const createdDate = new Date(element.created_at);
                         return createdDate > rifDate;
                     })
-                    .map(element => <li key={element.id}>
-                        <div className="card col-3">
+                    .map(element => <li key={element.id} className="col-md-4 mb-4">
+                        <div className="card">
                             <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{element.name}</h5>
@@ -68,15 +68,15 @@ function HomePage() {
 
             <h2>In promozione:</h2>
 
-            <ul className="list-unstyled">
+            <ul className="list-unstyled row">
                 {data && data
                     .filter(element => {
                         const discountAmount = element.discount_amount;
 
                         return discountAmount >= 15.00 & discountAmount <= 25.00;
                     })
-                    .map(element => <li key={element.id}>
-                        <div className="card col-3">
+                    .map(element => <li key={element.id} className="col-md-4 mb-4">
+                        <div className="card">
                             <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{element.name}</h5>
