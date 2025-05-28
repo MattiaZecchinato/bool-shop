@@ -1,3 +1,7 @@
+.carousel-img {
+    height: 500px;
+    object-fit: cover;
+}
 .footer-box {
 
     background-image: url(./assets/background-footer.png);

@@ -3,22 +3,27 @@ import HomePage from "./pages/HomePage"
 import SearchPage from "./pages/SearchPage"
 import MainLayout from "./layouts/MainLayout"
 import TestPage from "./pages/TestPage"
+import { CartProvider } from "./components/CartContext";
+import CartPage from "./pages/CartPage";
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/test" element={<TestPage />} />
-            <Route path="/search/:slug/:type" element={<SearchPage />} />
-            <Route path="*" element={<div>page not found</div>} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      {/*<CartProvider>*/}
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/test" element={<TestPage />} />
+              <Route path="/search/:slug/:type" element={<SearchPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="*" element={<div>page not found</div>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      {/*</CartProvider>*/}
     </>
   )
 }
