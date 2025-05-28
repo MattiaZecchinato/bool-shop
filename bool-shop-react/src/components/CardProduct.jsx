@@ -1,7 +1,7 @@
 function CardProduct({ data }) {
 
     const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
-    console.log(categories)
+
     const { VITE_BE_PATH } = import.meta.env;
 
     return <>
