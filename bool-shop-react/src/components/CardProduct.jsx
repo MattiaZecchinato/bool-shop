@@ -1,7 +1,7 @@
 function CardProduct({ data }) {
 
-    const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount } = data
-
+    const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
+    console.log(categories)
     const { VITE_BE_PATH } = import.meta.env;
 
     return <>
@@ -16,6 +16,11 @@ function CardProduct({ data }) {
                     <li className="list-group-item">{price}€</li>
                     <li className="list-group-item">{game_type}</li>
                     <li className="list-group-item">{target_age}</li>
+                    <li className="list-group-item">
+                        {categories && categories.length > 0
+                            ? categories.map(c => c.category_name).join(', ')
+                            : 'Nessuna'}
+                    </li>
                 </ul>
             </div>
         </div>
