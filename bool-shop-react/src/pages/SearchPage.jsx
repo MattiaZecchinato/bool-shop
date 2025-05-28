@@ -3,14 +3,11 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardProduct from "../components/CardProduct";
 import { useParams } from "react-router-dom";
-import slugify from "slugify";
 
 
 function SearchPage() {
 
     const { slug, type } = useParams();
-
-    console.log(slug)
     const { VITE_BE_PATH } = import.meta.env;
 
     const [found, setFound] = useState({})
@@ -33,8 +30,6 @@ function SearchPage() {
             ...prev,
             [name]: value
         }));
-
-        console.log(value)
     }
 
 
@@ -62,7 +57,6 @@ function SearchPage() {
                 if (currentChoice === "created_at") {
                     data.reverse();
                 }
-                console.log(data);
                 setFound(data);
             })
             .catch(err => {
