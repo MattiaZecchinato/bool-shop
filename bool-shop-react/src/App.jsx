@@ -14,6 +14,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/test" element={<TestPage />} />
+            <Route path="/search/:slug/:type" element={<SearchPage />} />
             <Route path="*" element={<div>page not found</div>} />
           </Route>
         </Routes>

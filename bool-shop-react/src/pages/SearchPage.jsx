@@ -1,22 +1,28 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardProduct from "../components/CardProduct";
+import { useParams } from "react-router-dom";
+import slugify from "slugify";
+
 
 function SearchPage() {
 
+    const { slug, type } = useParams();
+
+    console.log(slug)
     const { VITE_BE_PATH } = import.meta.env;
 
     const [found, setFound] = useState({})
 
     const resetFormSearch = {
 
-        search: '',
-        choice: 'name'
+        search: slug,
+        choice: type
     }
 
     const [formSearch, setFormSearch] = useState(resetFormSearch)
 
-    const uri = `${VITE_BE_PATH}/shop/search?search=${formSearch.search}&choice=${formSearch.choice}`
 
     function handleData(e) {
 
@@ -31,43 +37,43 @@ function SearchPage() {
         console.log(value)
     }
 
-    function sendForm(e) {
-
-        e.preventDefault();
-
-        console.log(uri)
-
-        console.log(formSearch)
-
-        callEndPoint()
-    }
 
     useEffect(() => {
 
         callEndPoint()
-    }, [])
+    }, [slug, type])
 
     function callEndPoint() {
+        let currentSearch = formSearch.search.trim();
+        let currentChoice = formSearch.choice;
 
-        axios.get(uri)
+
+        let finalUri;
+        if (currentSearch === "") {
+
+            finalUri = `${VITE_BE_PATH}/shop/search?search=%20&choice=${currentChoice}`;
+        } else {
+            finalUri = `${VITE_BE_PATH}/shop/search?search=${currentSearch}&choice=${currentChoice}`;
+        }
+
+        axios.get(finalUri)
             .then(res => {
-                if (formSearch.choice === "created_at") {
-                    console.log('sono qui')
-                    res.data.reverse()
+                let data = res.data;
+                if (currentChoice === "created_at") {
+                    data.reverse();
                 }
-                console.log(res.data)
-                setFound(res.data)
+                console.log(data);
+                setFound(data);
             })
-            .catch(err => console.log(err.message))
-
-
-
-
+            .catch(err => {
+                setFound([])
+                console.log(err.message)
+            });
     }
 
 
     return <>
-        <form className="row g-3" onSubmit={sendForm}>
+        <form className="row g-3" >
             <div className="col-md-6">
                 <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
                 <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData} />
@@ -81,7 +87,9 @@ function SearchPage() {
                 </select>
             </div>
             <div className="col-12">
-                <button type="submit" className="btn btn-primary">Cerca</button>
+                {/* <button type="submit" className="btn btn-primary">Cerca</button> */}
+
+                <Link className="btn btn-primary" to={`/search/${formSearch.search || '%20'}/${formSearch.choice}`} > cerca</Link>
             </div>
         </form>
 
