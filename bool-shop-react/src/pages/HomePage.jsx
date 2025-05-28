@@ -66,6 +66,30 @@ function HomePage() {
 
             </ul >
 
+            <h2>In promozione:</h2>
+
+            <ul className="list-unstyled">
+                {data && data
+                    .filter(element => {
+                        const discountAmount = element.discount_amount;
+
+                        return discountAmount >= 15.00 & discountAmount <= 25.00;
+                    })
+                    .map(element => <li key={element.id}>
+                        <div className="card col-3">
+                            <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
+                            <div className="card-body">
+                                <h5 className="card-title">{element.name}</h5>
+                                <p className="card-text">{element.description}</p>
+                                <p>Categoria: <em>{element.categories.map(cat => ` ${cat.category_name}`)}</em></p>
+                                <p>In promozione al {parseInt(element.discount_amount)}%</p>
+                                <a href="#" className="btn btn-primary">Acquista ora</a>
+                            </div>
+                        </div>
+                    </li>)}
+            </ul>
+
+
         </>)
 }
 
