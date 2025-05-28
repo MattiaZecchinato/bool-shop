@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDigitalTachograph, faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import CardProductList from "../components/CardProductList";
 import CardProduct from "../components/CardProduct";
@@ -95,7 +95,7 @@ function TestPage() {
         </div>
 
         <div className={display ? 'd-flex flex-wrap' : ''}>
-            {dataDemo.map((elem, i) => display ? <CardProduct key={i} data={elem}/> : <CardProductList key={i} data={elem}/>)}
+            {dataDemo.map((elem, i) => display ? <CardProduct key={i} data={elem} /> : <CardProductList key={i} data={elem} />)}
         </div>
     </>
 }

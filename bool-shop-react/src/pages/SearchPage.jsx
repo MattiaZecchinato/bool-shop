@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardProduct from "../components/CardProduct";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
+import CardProductList from "../components/CardProductList";
+
 
 
 function SearchPage() {
 
+
+    const [display, setDisplay] = useState(true)
     const { slug, type } = useParams();
     const { VITE_BE_PATH } = import.meta.env;
 
@@ -67,6 +73,7 @@ function SearchPage() {
 
 
     return <>
+
         <form className="row g-3" >
             <div className="col-md-6">
                 <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
@@ -86,11 +93,17 @@ function SearchPage() {
                 <Link className="btn btn-primary" to={`/search/${formSearch.search || '%20'}/${formSearch.choice}`} > cerca</Link>
             </div>
         </form>
+        <div className="btn-group" role="group" aria-label="btn-group">
+            <button type="button" className="btn btn-primary" value="grid" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
+            <button type="button" className="btn btn-primary" value="list" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
+        </div>
 
-        <div className="container row">
-            {found.length > 0 ? found.map(elem => <CardProduct key={elem.id} data={elem} />) : <h3>Nessun Elemento Trovato</h3>}
+        <div className={display ? 'd-flex flex-wrap' : ''}>
+            {found.length > 0 ? found.map(elem => display ? <CardProduct key={elem.id} data={elem} /> : <CardProductList key={elem.id} data={elem} />) : <h3>Nessun Elemento Trovato</h3>}
         </div>
     </>
 }
 
 export default SearchPage;
+
+
