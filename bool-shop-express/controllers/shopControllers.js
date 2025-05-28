@@ -13,18 +13,38 @@ function calculatedProduct(product) {
 //Funzione Index per visualizzare tutti i prodotti dentro il db
 function index(req, res) {
     //Query per visualizzare i prodotti
-
-    const sql = `SELECT * FROM products`;
+    const sql = ` SELECT 
+            p.*, 
+            c.id AS category_id,
+            c.genre AS category_name
+        FROM products p
+        LEFT JOIN category_product pc ON p.id = pc.product_id
+        LEFT JOIN categories c ON pc.category_id = c.id`;
     conn.query(sql, (err, results) => {
         if (err) {
             console.error('Query error:', err);
             return res.status(500).json({ error: 'Internal server error' });
         }
-        const productDiscounted = results.map(p => ({
-            ...p,
-            final_price: parseFloat(calculatedProduct(p)).toFixed(2)
-        }))
-        res.json(productDiscounted)
+        const productMap = {};
+        const finalProducts = [];
+        results.forEach(p => {
+            if (!productMap[p.id]) {
+                const product = {
+                    ...p,
+                    final_price: parseFloat(calculatedProduct(p)).toFixed(2),
+                    categories: []
+                }
+                productMap[p.id] = product
+                finalProducts.push(product)
+            }
+                if(p.category_id){
+                    productMap[p.id].categories.push({
+                        id:p.category_id,
+                        category_name: p.category_name
+                    })
+                }
+        })
+        res.json(finalProducts)
     });
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
