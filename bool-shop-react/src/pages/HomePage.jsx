@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 
 
 function HomePage() {
@@ -55,6 +57,7 @@ function HomePage() {
                     })
                     .map(element => <li key={element.id} className="col-md-4 mb-4">
                         <div className="card">
+                            <FontAwesomeIcon icon={solidHeart} />
                             <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{element.name}</h5>
@@ -77,6 +80,7 @@ function HomePage() {
                     })
                     .map(element => <li key={element.id} className="col-md-4 mb-4">
                         <div className="card">
+                            <FontAwesomeIcon icon={solidHeart} />
                             <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{element.name}</h5>
