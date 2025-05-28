@@ -1,0 +1,11 @@
+.footer-box {
+
+    background-image: url(./assets/background-footer.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.footer-box li {
+
+    list-style-type: none;
+}
