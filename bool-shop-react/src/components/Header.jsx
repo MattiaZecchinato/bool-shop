@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom"
-
+import { useCart } from "../components/CartContext";
 function Header() {
-
+    //const { cartItems } = useCart();
+    //const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -19,6 +20,9 @@ function Header() {
                         <li className="nav-item">
                             <NavLink className="nav-link" to='/search/%20/price'>Search Product</NavLink>
                         </li>
+                        {/*<NavLink to="/cart" className="btn btn-outline-primary ms-auto">
+                            Carrello ({totalQuantity})
+                        </NavLink>*/}
                     </ul>
                 </div>
             </div>

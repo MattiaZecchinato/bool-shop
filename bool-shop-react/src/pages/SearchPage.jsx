@@ -8,7 +8,6 @@ import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
 
 
-
 function SearchPage() {
 
 
