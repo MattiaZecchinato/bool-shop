@@ -81,7 +81,7 @@ export function CartProvider({ children }) {
 
     // Valori e funzioni forniti dal contesto
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, prefercolor, isPrefer }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, prefercolor, isPrefer, prefer }}>
             {children}
         </CartContext.Provider>
     );

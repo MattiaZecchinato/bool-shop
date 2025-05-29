@@ -8,6 +8,7 @@ import CartPage from "./pages/CartPage";
 import BoardgamesPage from "./pages/BoardgamesPage";
 import PuzzlesPage from "./pages/PuzzlesPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import WishListPage from "./pages/WishListPage"
 
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
               <Route path="/test" element={<TestPage />} />
               <Route path="/search/:slug/:type" element={<SearchPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/wish-list" element={<WishListPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/boardgames" element={<BoardgamesPage />} />
               <Route path="/puzzles" element={<PuzzlesPage />} />
               <Route path="*" element={<div>page not found</div>} />
