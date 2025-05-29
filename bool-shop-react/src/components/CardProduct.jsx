@@ -33,20 +33,6 @@ function CardProduct({ data }) {
                         ? categories.map(c => c.category_name).join(', ')
                         : 'Nessuna'}
                 </p>
-                <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                    <p className="card-text">{description}</p>
-                </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item">{price}€</li>
-                    <li className="list-group-item">{game_type}</li>
-                    <li className="list-group-item">{target_age}</li>
-                    <li className="list-group-item">
-                        {categories && categories.length > 0
-                            ? categories.map(c => c.category_name).join(', ')
-                            : 'Nessuna'}
-                    </li>
-                </ul>
                 <button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
             </div>
         </div>
