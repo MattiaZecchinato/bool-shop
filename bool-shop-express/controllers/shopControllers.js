@@ -1,4 +1,6 @@
 const conn = require('../data/dbShop')
+const nodemailer = require('nodemailer');
+const path = require('path');
 function calculatedProduct(product) {
     const { price, discount_type, discount_amount } = product;
     if (discount_type === 'fixed') {
@@ -37,12 +39,12 @@ function index(req, res) {
                 productMap[p.id] = product
                 finalProducts.push(product)
             }
-                if(p.category_id){
-                    productMap[p.id].categories.push({
-                        id:p.category_id,
-                        category_name: p.category_name
-                    })
-                }
+            if (p.category_id) {
+                productMap[p.id].categories.push({
+                    id: p.category_id,
+                    category_name: p.category_name
+                })
+            }
         })
         res.json(finalProducts)
     });
@@ -84,12 +86,12 @@ function indexSearchOrder(req, res) {
                 productMap[p.id] = product
                 finalProducts.push(product)
             }
-                if(p.category_id){
-                    productMap[p.id].categories.push({
-                        id:p.category_id,
-                        category_name: p.category_name
-                    })
-                }
+            if (p.category_id) {
+                productMap[p.id].categories.push({
+                    id: p.category_id,
+                    category_name: p.category_name
+                })
+            }
         })
         res.json(finalProducts);
     });
@@ -128,8 +130,6 @@ function checkout(req, res) {
         now,
         now
     ];
-    
-    console.log(orderValues)
     conn.query(orderQuery, orderValues, (err, result) => {
         if (err) return res.status(500).json({ error: "Insert Order Failed" })
         //Prendo l'id del ordine appena creato
@@ -139,7 +139,6 @@ function checkout(req, res) {
         if (!products || products.length === 0) {
             return res.status(400).json({ error: "Order not found" })
         }
-        console.log(products)
         products.forEach((p) => {
             console.log(p)
             //Inserisco dentro product_order l'ordine appena creato
@@ -150,6 +149,7 @@ function checkout(req, res) {
                 if (err2) console.error("Error product order:", err2);
                 insertCount++;
                 if (insertCount === products.length) {
+                    fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, user_last_name, user_address, user_phone, total_order);
                     res.status(201).json({ message: "Order added", orderId })
                 }
             })
@@ -157,6 +157,101 @@ function checkout(req, res) {
         });
     })
 }
+function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, user_last_name, user_address, user_phone, total_order) {
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+            user: 'natalie.dubuque28@ethereal.email',
+            pass: 'dpzZkbDPEymm71AZku'
+        }
+    });
+
+    const query = `
+      SELECT p.name, p.image, po.quantity, po.tot_price
+      FROM product_order po
+      JOIN products p ON p.id = po.product_id
+      WHERE po.order_id = ?
+    `;
+
+    conn.query(query, [orderId], (err, results) => {
+        if (err) {
+            console.error("Errore durante il recupero dei prodotti:", err);
+            return;
+        }
+
+        // Costruzione dinamica delle righe della tabella e degli allegati
+        const attachments = [];
+        const productRows = results.map((p, index) => {
+            const cid = `img${index}`; // es: img0, img1, img2...
+            attachments.push({
+                filename: p.image,
+                path: path.join(__dirname, '../public/img', p.image),
+                cid: cid
+            });
+
+            return `
+              <tr>
+                <td><img src="cid:${cid}" alt="${p.name}" width="60" height="60"></td>
+                <td>${p.name}</td>
+                <td>${p.quantity}</td>
+                <td>€${p.tot_price}</td>
+              </tr>
+            `;
+        }).join('');
+
+        const mailOptions = {
+            from: 'natalie.dubuque28@ethereal.email',
+            to: `${user_email}, natalie.dubuque28@ethereal.email`,
+            subject: `Conferma Ordine BoolShop - Ordine n°${orderId}`,
+            html: `
+              <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+                <h2 style="color: #4CAF50;">Grazie per il tuo ordine, ${user_first_name}!</h2>
+                <p>Abbiamo ricevuto il tuo ordine n°<strong>${orderId}</strong>.</p>
+
+                <h3 style="margin-top: 30px;">📦 Prodotti acquistati:</h3>
+                <table style="width:100%; border-collapse: collapse;">
+                  <thead>
+                    <tr style="background-color: #f2f2f2;">
+                      <th>Immagine</th>
+                      <th>Nome</th>
+                      <th>Quantità</th>
+                      <th>Totale</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${productRows}
+                  </tbody>
+                </table>
+
+                <h3 style="margin-top: 30px;">👤 Dati cliente:</h3>
+                <p>
+                  <strong>Nome:</strong> ${user_first_name} ${user_last_name}<br>
+                  <strong>Email:</strong> ${user_email}<br>
+                  <strong>Indirizzo:</strong> ${user_address}<br>
+                  <strong>Telefono:</strong> ${user_phone}
+                </p>
+
+                <h3 style="margin-top: 30px;">💰 Totale Ordine: €${total_order}</h3>
+                <p style="font-size: 0.9em; color: #666;">Stato ordine: pending</p>
+
+                <p style="margin-top: 40px;">Riceverai un'altra email quando l’ordine sarà spedito.</p>
+                <p style="color: #aaa; font-size: 0.8em;">BoolShop &copy; ${new Date().getFullYear()}</p>
+              </div>
+            `,
+            attachments: attachments
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.error("Errore invio email:", error);
+            }
+            console.log("Email inviata:", info.response);
+        });
+    });
+}
+
+
 //Funzione per controllare lo specifico prodotto
 function productDetails(req, res) {
     const { slug } = req.params;
