@@ -107,17 +107,18 @@ function checkout(req, res) {
         user_phone,
         products
     } = req.body;
-
     const now = new Date().toISOString().slice(0, 19).replace("T", " ");
     const status = "pending";
+    const freeshipping = total_order > 50 ? 1 : 0;
     //Inserisce l'ordine nella tabella orders del db
     const orderQuery = `
-    INSERT INTO orders (total_order, status, user_first_name, user_last_name, user_email, user_address, user_phone, created_at, updated_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO orders (total_order,free_shipping, status, user_first_name, user_last_name, user_email, user_address, user_phone, created_at, updated_at)
+    VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
     //Creo un array 
     const orderValues = [
         total_order,
+        freeshipping,
         status,
         user_first_name,
         user_last_name,
@@ -127,6 +128,8 @@ function checkout(req, res) {
         now,
         now
     ];
+    
+    console.log(orderValues)
     conn.query(orderQuery, orderValues, (err, result) => {
         if (err) return res.status(500).json({ error: "Insert Order Failed" })
         //Prendo l'id del ordine appena creato
@@ -136,7 +139,9 @@ function checkout(req, res) {
         if (!products || products.length === 0) {
             return res.status(400).json({ error: "Order not found" })
         }
+        console.log(products)
         products.forEach((p) => {
+            console.log(p)
             //Inserisco dentro product_order l'ordine appena creato
             const productQuery = `INSERT INTO product_order(product_id, order_id,quantity, tot_price) VALUES (?,?,?,?)`;
             conn.query(productQuery, [p.product_id, orderId, p.quantity,
