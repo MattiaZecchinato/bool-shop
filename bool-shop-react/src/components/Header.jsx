@@ -17,9 +17,9 @@ function Header() {
                         <li className="nav-item">
                             <NavLink className="nav-link active" aria-current="page" to='/'>Home</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to='/search/%20/price'>Search Product</NavLink>
-                        </li>
+                        {/* <li className="nav-item">
+                            <NavLink className="nav-link" to='/cart'>Search Product</NavLink>
+                        </li> */}
                         {/*<NavLink to="/cart" className="btn btn-outline-primary ms-auto">
                             Carrello ({totalQuantity})
                         </NavLink>*/}
@@ -30,4 +30,4 @@ function Header() {
     </>
 }
 
-export default Header
+export default Header;
