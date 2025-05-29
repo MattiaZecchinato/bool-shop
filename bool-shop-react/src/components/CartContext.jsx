@@ -2,7 +2,7 @@
 import { createContext, useState, useContext } from "react";
 
 // Crea un context per il carrello
-const CartContext = createContext();
+export const CartContext = createContext();
 
 // Un hook per accedere facilmente al context del carrello
 export const useCart = () => useContext(CartContext);
@@ -50,10 +50,38 @@ export function CartProvider({ children }) {
     const clearCart = () => {
         setCartItems([]);
     };
+    // preferiti
+    const [prefer, usePrefer] = useState([])
+    // funzione che aggiunge i preferiti 
+    function isPrefer(element) {
+        const checkEle = prefer.filter(p => p.id === element.id);
+
+        if (checkEle.length === 0) {
+            usePrefer([...prefer, element])
+        } else {
+            const newArray = []
+            prefer.forEach(e => {
+                if (e.id !== element.id) {
+                    newArray.push(e)
+                }
+                usePrefer(newArray)
+            });
+
+        }
+    }
+    // funzione per il colore dei preferiti
+    function prefercolor(element) {
+        const checkEle = prefer.filter(p => p.id === element.id);
+        if (checkEle.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     // Valori e funzioni forniti dal contesto
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, prefercolor, isPrefer }}>
             {children}
         </CartContext.Provider>
     );
