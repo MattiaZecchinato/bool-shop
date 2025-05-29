@@ -1,9 +1,12 @@
 //import { useCart } from "../components/CartContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from "../components/CartContext"
+import { useContext } from "react";
+
 
 function CardProduct({ data }) {
-
+    const { prefercolor, isPrefer } = useContext(CartContext)
     const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
     //const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
@@ -11,7 +14,7 @@ function CardProduct({ data }) {
     return <>
 
         <div className="card">
-            <FontAwesomeIcon icon={solidHeart} />
+            <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
             <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>
