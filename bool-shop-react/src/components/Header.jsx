@@ -18,9 +18,16 @@ function Header() {
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to='/'>Home</NavLink>
                             </li>
-                            <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
-                            Carrello ({totalQuantity})
-                        </NavLink>
+                            <li>
+                                <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
+                                    Carrello ({totalQuantity})
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/wish-list" className="btn btn-outline-primary ms-auto">
+                                    Wish List
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                 </div>
