@@ -13,10 +13,12 @@ function CardProduct({ data }) {
 
     return <>
 
-        <div className="card">
+        <div className="card d-flex flex-column h-100">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
-            <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
-            <div className="card-body">
+            <figure className='image-container'>
+                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
+            </figure>
+            <div className="card-body flex-grow-1 d-flex flex-column">
                 <h5 className="card-title">{name}</h5>
                 <p className="card-text">{description}</p>
             </div>
