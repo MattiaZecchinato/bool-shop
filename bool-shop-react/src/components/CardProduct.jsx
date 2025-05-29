@@ -1,8 +1,8 @@
-//import { useCart } from "../components/CartContext"
+import { useCart } from "../components/CartContext"
 function CardProduct({ data }) {
 
     const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
-    //const { addToCart } = useCart();
+    const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
 
     return <>
@@ -23,7 +23,7 @@ function CardProduct({ data }) {
                             : 'Nessuna'}
                     </li>
                 </ul>
-                {/*<button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>*/}
+                <button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
             </div>
         </div>
     </>

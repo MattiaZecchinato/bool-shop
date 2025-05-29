@@ -120,8 +120,8 @@ function checkCheckout(conn) {
 
                             let checktotalproduct = unitPriceFromDb * product.quantity;
                             checktotal += checktotalproduct;
-
-                            if (checktotalproduct !== product.tot_price) {
+                            const priceDifference = Math.abs(checktotalproduct - product.tot_price);
+                            if (priceDifference > 0.01) {
                                 error++;
                                 errorMessage += `, error on total of product with ID:${productId}`;
                             }
@@ -144,8 +144,7 @@ function checkCheckout(conn) {
         function checkIfAllQueriesDone() {
 
             if (dbQueriesCompleted === dbQueriesToComplete) {
-
-                if (total_order !== checktotal) {
+                if (parseFloat(total_order).toFixed(2) !== parseFloat(checktotal).toFixed(2)) {
                     error++;
                     errorMessage += `, error on total about final products`;
                 }
