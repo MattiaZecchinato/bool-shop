@@ -49,3 +49,22 @@
     max-height: 100%;
     object-fit: contain;
 }
+
+.discount-price {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: purple;
+    color: white;
+    padding: 5px;
+
+}
+
+.discount-price-list {
+    position: absolute;
+    top: 10px;
+    left: 100px;
+    background-color: purple;
+    color: white;
+    padding: 2px;
+}

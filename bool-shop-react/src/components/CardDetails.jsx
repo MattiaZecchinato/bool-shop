@@ -5,17 +5,12 @@ import { CartContext } from "../components/CartContext"
 import { useContext } from "react";
 import { useCart } from "../components/CartContext";
 
-function CardProduct({ data }) {
+function CardDetails() {
 
     const { prefercolor, isPrefer } = useContext(CartContext)
     const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
     const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
-
-    const discountAmountParsed = parseFloat(discount_amount);
-    const priceParsed = parseFloat(price);
-    const hasDiscount = discountAmountParsed > 0;
-    const discountPrice = hasDiscount ? (priceParsed - (priceParsed * discountAmountParsed / 100)).toFixed(2) : priceParsed.toFixed(2);
 
     return <>
 
@@ -26,10 +21,13 @@ function CardProduct({ data }) {
             </figure>
             <div className="card-body flex-grow-1 d-flex flex-column">
                 <h5 className="card-title">{name}</h5>
+                <p className="card-text">{description}</p>
             </div>
             <div className="card-body">
-                {hasDiscount ? (<div>Prezzo: <span className='text-decoration-line-through me-2'>{priceParsed.toFixed(2)}€</span>
-                    <span className='fw-bold'>{discountPrice}€</span><span className='discount-price fw-bold'> - {discountAmountParsed}%</span></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
+                <span>Prezzo: {price}€</span>
+                {parseInt(discount_amount) !== 0 ? <span className="d-inline-block ms-2"> - <strong>{parseInt(discount_amount)}%</strong></span> : ''}
+                <p className="card-text">Tipologia: {game_type}</p>
+                <p> Anni: {target_age}+</p>
                 <p>
                     Categoria: {categories && categories.length > 0
                         ? categories.map(c => c.category_name).join(', ')
@@ -38,8 +36,6 @@ function CardProduct({ data }) {
                 <button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
             </div>
         </div>
+
     </>
 }
-
-export default CardProduct
-
