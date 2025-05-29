@@ -1,4 +1,5 @@
 import { useCart } from "../components/CartContext";
+import { Link } from "react-router-dom";
 
 function CartPage() {
     const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
@@ -61,6 +62,9 @@ function CartPage() {
                         <button className="btn btn-danger mt-2" onClick={clearCart}>
                             Svuota carrello
                         </button>
+                        <Link to="/checkout" className="btn btn-success mt-2">
+                            Procedi al checkout
+                        </Link>
                     </div>
                 </>
             )}
