@@ -49,7 +49,6 @@ function CardProduct({ data }) {
                 </ul>
                 <button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
             </div>
-            {/*<button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>*/}
         </div>
 
     </>
