@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import CardProduct from "../components/CardProduct";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -55,42 +56,20 @@ function HomePage() {
                         const createdDate = new Date(element.created_at);
                         return createdDate > rifDate;
                     })
-                    .map(element => <li key={element.id} className="col-md-4 mb-4">
-                        <div className="card">
-                            <FontAwesomeIcon icon={solidHeart} />
-                            <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
-                            <div className="card-body">
-                                <h5 className="card-title">{element.name}</h5>
-                                <p className="card-text">{element.description}</p>
-                                <a href="#" className="btn btn-primary">Acquista ora</a>
-                            </div>
-                        </div>
-                    </li>)}
-
+                    .map(element => <li key={element.id} className="col-lg-3 col-md-6 mb-4"><CardProduct data={element} /></li>)}
             </ul >
 
             <h2>In promozione:</h2>
+
 
             <ul className="list-unstyled row">
                 {data && data
                     .filter(element => {
                         const discountAmount = element.discount_amount;
 
-                        return discountAmount >= 15.00 & discountAmount <= 25.00;
+                        return discountAmount >= 15.00 && discountAmount <= 25.00;
                     })
-                    .map(element => <li key={element.id} className="col-md-4 mb-4">
-                        <div className="card">
-                            <FontAwesomeIcon icon={solidHeart} />
-                            <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
-                            <div className="card-body">
-                                <h5 className="card-title">{element.name}</h5>
-                                <p className="card-text">{element.description}</p>
-                                <p>Categoria: <em>{element.categories.map(cat => ` ${cat.category_name}`)}</em></p>
-                                <p>In promozione al {parseInt(element.discount_amount)}%</p>
-                                <a href="#" className="btn btn-primary">Acquista ora</a>
-                            </div>
-                        </div>
-                    </li>)}
+                    .map(element => <li key={element.id} className="col-lg-3 col-md-4 mb-4"> <CardProduct data={element} /></li>)}
             </ul>
 
 
@@ -98,3 +77,13 @@ function HomePage() {
 }
 
 export default HomePage;
+
+//  <div className="card">
+//                             <FontAwesomeIcon icon={solidHeart} />
+//                             <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
+//                             <div className="card-body">
+//                                 <h5 className="card-title">{element.name}</h5>
+//                                 <p className="card-text">{element.description}</p>
+//                                 <a href="#" className="btn btn-primary">Acquista ora</a>
+//                             </div>
+//                         </div>

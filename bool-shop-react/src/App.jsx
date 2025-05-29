@@ -20,6 +20,22 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/test" element={<TestPage />} />
+              <Route path="/search/:slug/:type" element={<SearchPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/boardgames" element={<BoardgamesPage />} />
+              <Route path="/puzzles" element={<PuzzlesPage />} />
+              <Route path="*" element={<div>page not found</div>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/search" element={<SearchPage />} />
               {/*<Route path="/test" element={<TestPage />} />*/}
               <Route path="/search/:slug/:type" element={<SearchPage />} />
               <Route path="/cart" element={<CartPage />} />

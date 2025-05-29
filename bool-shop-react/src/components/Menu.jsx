@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 function Menu() {
 
     return (
-        <nav>
-            <ul className="list-unstyled">
+        <nav className="container">
+            <ul className="list-unstyled d-flex justify-content-center gap-3">
                 <li>
                     <NavLink className="nav-link" to='/search/%20/price'>Il Nostro Catalogo</NavLink>
                 </li>
