@@ -40,7 +40,7 @@ function Footer() {
                         </li>
                         <li>
                             <a href="https://www.instagram.com/">
-                                <FontAwesomeIcon icon={faSquareInstagram } size="2x" color="#E4405F" />
+                                <FontAwesomeIcon icon={faSquareInstagram} size="2x" color="#E4405F" />
                             </a>
                         </li>
                         <li>
@@ -53,10 +53,9 @@ function Footer() {
             </div>
             <div className="row">
                 <div className="col">
-                    <a href="https://www.privacypolicies.com/live/9b2ff770-5d29-4d00-92be-23e8454efeea">Privacy Policy</a>
-                    <a href="https://www.privacypolicies.com/live/6335734a-012b-4f49-889e-747143e69919">Term Of Service</a>
-                    <a href="https://www.privacypolicies.com/live/8c95263d-18fa-4a84-8133-515cd93875c8">Cookie Policy</a>
-                </div>                
+                    <NavLink to="/privacy-policy">Privacy Policy</NavLink>
+                    <NavLink to="/term-of-service">Term Of Service</NavLink>
+                </div>
                 <div className="col">
                     © 2025 BoolShop – Tutti i diritti riservati
                 </div>
