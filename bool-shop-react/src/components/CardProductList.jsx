@@ -1,10 +1,12 @@
 import { CartContext } from "../components/CartContext"
 import { useContext } from "react";
+import { useCart } from "../components/CartContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 
 function CardProductList({ data }) {
     const { prefercolor, isPrefer } = useContext(CartContext)
+    const { addToCart } = useCart();
 
     const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
 
