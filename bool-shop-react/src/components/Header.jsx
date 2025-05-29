@@ -18,9 +18,9 @@ function Header() {
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to='/'>Home</NavLink>
                             </li>
-                            {/*<NavLink to="/cart" className="btn btn-outline-primary ms-auto">
+                            <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
                             Carrello ({totalQuantity})
-                        </NavLink>*/}
+                        </NavLink>
                         </ul>
                     </div>
                 </div>
