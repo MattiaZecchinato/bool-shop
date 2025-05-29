@@ -71,12 +71,13 @@ function HomePage() {
 
             <h2>In promozione:</h2>
 
+
             <ul className="list-unstyled row">
                 {data && data
                     .filter(element => {
                         const discountAmount = element.discount_amount;
 
-                        return discountAmount >= 15.00 & discountAmount <= 25.00;
+                        return discountAmount >= 15.00 && discountAmount <= 25.00;
                     })
                     .map(element => <li key={element.id} className="col-md-4 mb-4">
                         <div className="card">
