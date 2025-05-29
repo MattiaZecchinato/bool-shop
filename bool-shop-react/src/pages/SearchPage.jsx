@@ -73,12 +73,12 @@ function SearchPage() {
 
     return <>
 
-        <form className="row g-3" >
-            <div className="col-md-6">
+        <form className="d-flex gap-3 align-items-end mb-5" >
+            <div className="col-md-4">
                 <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
                 <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData} />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
                 <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
                 <select id="inputOrder" className="form-select" name="choice" value={formSearch.choice} onChange={handleData}>
                     <option value="name">Nome</option>
@@ -86,19 +86,17 @@ function SearchPage() {
                     <option value="created_at">Recenti</option>
                 </select>
             </div>
-            <div className="col-12">
+            <div className="col-md-4">
                 {/* <button type="submit" className="btn btn-primary">Cerca</button> */}
-
                 <Link className="btn btn-primary" to={`/search/${formSearch.search || '%20'}/${formSearch.choice}`} > cerca</Link>
             </div>
         </form>
-        <div className="btn-group" role="group" aria-label="btn-group">
+        <div className="d-flex justify-content-end mb-4 gap-2" role="group" aria-label="btn-group">
             <button type="button" className="btn btn-primary" value="grid" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
             <button type="button" className="btn btn-primary" value="list" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
         </div>
 
         <div className={display ? 'row' : ''}>
-
             {found.length > 0 ? found.map(elem => display ? <div key={elem.id} className='col-md-4 mb-4'> <CardProduct data={elem} /></div> : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>) : <h3>Nessun Elemento Trovato</h3>}
         </div>
     </>

@@ -10,6 +10,11 @@ function CardProductList({ data }) {
 
     const { VITE_BE_PATH } = import.meta.env;
 
+    const discountAmountParsed = parseFloat(discount_amount);
+    const priceParsed = parseFloat(price);
+    const hasDiscount = discountAmountParsed > 0;
+    const discountPrice = hasDiscount ? (priceParsed - (priceParsed * discountAmountParsed / 100)).toFixed(2) : priceParsed.toFixed(2);
+
     return <>
         <div className="card mb-3 w-50">
             <div className="row">
@@ -20,9 +25,10 @@ function CardProductList({ data }) {
                 <div className="col-md-6">
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                        <p className="card-text">Prezzo: {price}€</p>
+                        {hasDiscount ? (<div>Prezzo: <span className='text-decoration-line-through me-2'>{priceParsed.toFixed(2)}€</span>
+                            <span className='fw-bold'>{discountPrice}€</span><span className='discount-price-list fw-bold ms-2'> - {discountAmountParsed}%</span></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
                     </div>
-                    <button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                    <button className="btn btn-success btn-sm mb-2" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
                 </div>
             </div>
 
