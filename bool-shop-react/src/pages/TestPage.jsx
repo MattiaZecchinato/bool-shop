@@ -1,103 +1,109 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import CardProductList from "../components/CardProductList";
-import CardProduct from "../components/CardProduct";
+import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from "../components/CartContext"
+
+
 
 function TestPage() {
+    const { prefercolor, isPrefer } = useContext(CartContext)
 
-    const [display, setDisplay] = useState(true)
 
-    const dataDemo = [
-        {
-            name: "Adventure Quest",
-            description: "Un gioco di avventura pieno di missioni e scoperte.",
-            price: 29.99,
-            game_type: "Avventura",
-            target_age: "12+"
-        },
-        {
-            name: "Space Racers",
-            description: "Corse futuristiche tra le stelle con veicoli spaziali.",
-            price: 24.99,
-            game_type: "Corsa",
-            target_age: "10+"
-        },
-        {
-            name: "Math Mania",
-            description: "Sfide matematiche per allenare la mente divertendosi.",
-            price: 14.99,
-            game_type: "Educativo",
-            target_age: "8+"
-        },
-        {
-            name: "Zombie Survival",
-            description: "Sopravvivi all’apocalisse zombie con il tuo team.",
-            price: 39.99,
-            game_type: "Azione",
-            target_age: "16+"
-        },
-        {
-            name: "Puzzle World",
-            description: "Un mondo di enigmi e rompicapi da risolvere.",
-            price: 19.99,
-            game_type: "Puzzle",
-            target_age: "10+"
-        },
-        {
-            name: "Kingdom Builder",
-            description: "Costruisci il tuo regno e conquista nuovi territori.",
-            price: 34.99,
-            game_type: "Strategia",
-            target_age: "13+"
-        },
-        {
-            name: "Pet Simulator",
-            description: "Alleva, cura e gioca con animali virtuali adorabili.",
-            price: 17.99,
-            game_type: "Simulazione",
-            target_age: "6+"
-        },
-        {
-            name: "Fantasy Battle",
-            description: "Combattimenti epici in un mondo fantasy magico.",
-            price: 44.99,
-            game_type: "GDR",
-            target_age: "14+"
-        },
-        {
-            name: "City Planner",
-            description: "Progetta e gestisci la tua città ideale.",
-            price: 27.99,
-            game_type: "Simulazione",
-            target_age: "12+"
-        },
-        {
-            name: "Alien Invasion",
-            description: "Difendi la Terra da un’invasione aliena imminente.",
-            price: 31.99,
-            game_type: "Sparatutto",
-            target_age: "15+"
-        },
-        {
-            name: "Word Wizard",
-            description: "Gioco di parole per migliorare il vocabolario divertendosi.",
-            price: 11.99,
-            game_type: "Educativo",
-            target_age: "7+"
-        }
-    ]
+    const { VITE_BE_PATH } = import.meta.env;
 
-    return <>
-        <div className="btn-group" role="group" aria-label="btn-group">
-            <button type="button" className="btn btn-primary" value="grid" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
-            <button type="button" className="btn btn-primary" value="list" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
-        </div>
+    const [data, setData] = useState([]);
+    const url = `${VITE_BE_PATH}/shop`;
 
-        <div className={display ? 'd-flex flex-wrap' : ''}>
-            {dataDemo.map((elem, i) => display ? <CardProduct key={i} data={elem} /> : <CardProductList key={i} data={elem} />)}
-        </div>
-    </>
+    function getData() {
+        axios.get(url)
+            .then(res => {
+
+                setData(res.data);
+            })
+            .catch(err => console.log(err))
+    }
+
+
+
+
+    useEffect(getData, []);
+
+    return (
+        <>
+            <div id="carouselExampleAutoplaying" className="carousel carousel-container slide img-fluid m-auto" data-bs-ride="carousel" data-bs-interval="2000">
+                <div className="carousel-inner">
+                    <div className="carousel-item active">
+                        <img src="./src/assets/carosello-giochi.jpg" className="d-block w-100 carousel-img" alt="giochi-da-tavolo" />
+                    </div>
+                    <div className="carousel-item">
+                        <img src="./src/assets/carosello-puzzle.jpg" className="d-block w-100 carousel-img" alt="puzzle" />
+                    </div>
+                    <div className="carousel-item">
+                        <img src="./src/assets/spedizione-gratuita.jpg" className="d-block w-100 carousel-img" alt="spedizione-gratuita" />
+                    </div>
+                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <h2>Gli ultimi arrivi:</h2>
+
+            <ul className="list-unstyled row">
+                {data && data
+                    .filter(element => {
+                        const rifDate = new Date('2024-01-01');
+                        const createdDate = new Date(element.created_at);
+                        return createdDate > rifDate;
+                    })
+                    .map(element => <li key={element.id} className="col-md-4 mb-4">
+                        <div className="card">
+                            <FontAwesomeIcon icon={solidHeart} className={prefercolor(element) ? "text-danger" : ''} onClick={() => isPrefer(element)} />
+                            <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
+                            <div className="card-body">
+                                <h5 className="card-title">{element.name}</h5>
+                                <p className="card-text">{element.description}</p>
+                                <a href="#" className="btn btn-primary">Acquista ora</a>
+                            </div>
+                        </div>
+                    </li>)}
+
+            </ul >
+
+            <h2>In promozione:</h2>
+
+            <ul className="list-unstyled row">
+                {data && data
+                    .filter(element => {
+                        const discountAmount = element.discount_amount;
+
+                        return discountAmount >= 15.00 & discountAmount <= 25.00;
+                    })
+                    .map(element => <li key={element.id} className="col-md-4 mb-4">
+                        <div className="card">
+                            <FontAwesomeIcon icon={solidHeart} />
+                            <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
+                            <div className="card-body">
+                                <h5 className="card-title">{element.name}</h5>
+                                <p className="card-text">{element.description}</p>
+                                <p>Categoria: <em>{element.categories.map(cat => ` ${cat.category_name}`)}</em></p>
+                                <p>In promozione al {parseInt(element.discount_amount)}%</p>
+                                <a href="#" className="btn btn-primary">Acquista ora</a>
+                            </div>
+                        </div>
+                    </li>)}
+            </ul>
+
+
+        </>)
 }
 
-export default TestPage
+export default TestPage;
+
+
