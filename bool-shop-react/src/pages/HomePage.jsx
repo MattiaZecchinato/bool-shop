@@ -56,7 +56,7 @@ function HomePage() {
                         const createdDate = new Date(element.created_at);
                         return createdDate > rifDate;
                     })
-                    .map(element => <li key={element.id} className="col-md-4 mb-4"><CardProduct data={element} /></li>)}
+                    .map(element => <li key={element.id} className="col-lg-3 col-md-6 mb-4"><CardProduct data={element} /></li>)}
             </ul >
 
             <h2>In promozione:</h2>
@@ -69,7 +69,7 @@ function HomePage() {
 
                         return discountAmount >= 15.00 && discountAmount <= 25.00;
                     })
-                    .map(element => <li key={element.id} className="col-md-4 mb-4"> <CardProduct data={element} /></li>)}
+                    .map(element => <li key={element.id} className="col-lg-3 col-md-4 mb-4"> <CardProduct data={element} /></li>)}
             </ul>
 
 
