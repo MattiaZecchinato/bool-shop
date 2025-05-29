@@ -115,12 +115,13 @@ function checkCheckout(conn) {
                                 unitPriceFromDb = unitPriceFromDb - parseFloat(dbProductData.discount_amount)
                             } else if (dbProductData.discount_type === "percentage") {
                                 unitPriceFromDb = unitPriceFromDb - parseFloat((unitPriceFromDb * (dbProductData.discount_amount / 100)))
-                                unitPriceFromDb = unitPriceFromDb.toFixed(2)
+                                unitPriceFromDb = parseFloat(unitPriceFromDb.toFixed(2));
                             }
 
                             let checktotalproduct = unitPriceFromDb * product.quantity;
                             checktotal += checktotalproduct;
                             const priceDifference = Math.abs(checktotalproduct - product.tot_price);
+                            console.log(priceDifference > 0.01)
                             if (priceDifference > 0.01) {
                                 error++;
                                 errorMessage += `, error on total of product with ID:${productId}`;
@@ -144,7 +145,9 @@ function checkCheckout(conn) {
         function checkIfAllQueriesDone() {
 
             if (dbQueriesCompleted === dbQueriesToComplete) {
-                if (parseFloat(total_order).toFixed(2) !== parseFloat(checktotal).toFixed(2)) {
+                const orderTotalFloat = parseFloat(total_order);
+                const difference = Math.abs(orderTotalFloat - checktotal);
+                if (difference > 0.05) { // tolleranza aumentata per decimali
                     error++;
                     errorMessage += `, error on total about final products`;
                 }
