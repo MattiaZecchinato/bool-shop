@@ -85,8 +85,8 @@ function HomePage() {
                             <img src={`${VITE_BE_PATH}/img/${element.image}`} className="card-img-top" alt={element.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{element.name}</h5>
-                                <p className="card-text">{element.description}</p>
-                                <p>Categoria: <em>{element.categories.map(cat => ` ${cat.category_name}`)}</em></p>
+                                {/* <p className="card-text">{element.description}</p> */}
+                                {/* <p>Categoria: <em>{element.categories.map(cat => ` ${cat.category_name}`)}</em></p> */}
                                 <p>In promozione al {parseInt(element.discount_amount)}%</p>
                                 <a href="#" className="btn btn-primary">Acquista ora</a>
                             </div>

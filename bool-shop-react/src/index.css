@@ -33,3 +33,10 @@
 .card svg:hover {
     color: red;
 }
+
+/* dimensione immagine card */
+
+.card img {
+    height: 450px;
+    object-fit: contain;
+}
