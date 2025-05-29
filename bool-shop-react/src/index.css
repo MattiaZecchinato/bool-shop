@@ -23,10 +23,9 @@
 
 .card svg {
     position: absolute;
-    top: 50px;
+    top: 0px;
     right: 0;
     padding: 10px;
-    background-color: rgb(194, 194, 194);
     font-size: x-large;
 }
 

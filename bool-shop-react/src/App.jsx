@@ -25,6 +25,7 @@ function App() {
               <Route path="/search/:slug/:type" element={<SearchPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/wish-list" element={<WishListPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/boardgames" element={<BoardgamesPage />} />
               <Route path="/puzzles" element={<PuzzlesPage />} />
               <Route path="*" element={<div>page not found</div>} />
