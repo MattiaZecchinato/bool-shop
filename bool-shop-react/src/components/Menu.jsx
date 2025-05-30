@@ -6,7 +6,7 @@ function Menu() {
         <nav className="container">
             <ul className="list-unstyled d-flex justify-content-center gap-3">
                 <li>
-                    <NavLink className="nav-link" to='/search/%20/price'>Il Nostro Catalogo</NavLink>
+                    <NavLink className="nav-link" to='/search'>Il Nostro Catalogo</NavLink>
                 </li>
                 <li>
                     <NavLink className="nav-link" to='/boardgames'>Giochi da tavolo</NavLink>

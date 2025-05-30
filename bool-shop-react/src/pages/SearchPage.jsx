@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardProduct from "../components/CardProduct";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
@@ -12,15 +12,22 @@ function SearchPage() {
 
 
     const [display, setDisplay] = useState(true)
-    const { slug, type } = useParams();
+    const [searchParams, setSearchParams] = useSearchParams()
     const { VITE_BE_PATH } = import.meta.env;
 
     const [found, setFound] = useState({})
+    const searchpara = searchParams.get("search") || ""
+    console.log(searchpara)
+    const choicepara = searchParams.get("choice") || "name"
+    console.log(choicepara)
+    const orderpara = searchParams.get("order") || "asc"
+    console.log(orderpara)
 
     const resetFormSearch = {
+        choice: choicepara,
+        search: searchpara,
+        order: orderpara
 
-        search: slug,
-        choice: type
     }
 
     const [formSearch, setFormSearch] = useState(resetFormSearch)
@@ -41,28 +48,26 @@ function SearchPage() {
     useEffect(() => {
 
         callEndPoint()
-    }, [slug, type])
+    }, [searchParams])
 
     function callEndPoint() {
-        let currentSearch = formSearch.search.trim();
-        let currentChoice = formSearch.choice;
 
-
-        let finalUri;
-        if (currentSearch === "") {
-
-            finalUri = `${VITE_BE_PATH}/shop/search?search=%20&choice=${currentChoice}`;
+        let finalUri = `${VITE_BE_PATH}/shop/search?`;
+        if (searchpara) {
+            const currentsearch = searchpara.trim().replace(/ /g, "%20")
+            finalUri += `search=${currentsearch}`
         } else {
-            finalUri = `${VITE_BE_PATH}/shop/search?search=${currentSearch}&choice=${currentChoice}`;
+            finalUri += `search=%20`
         }
+        finalUri += `&choice=${choicepara}&order=${orderpara}`
 
+
+        console.log(finalUri)
         axios.get(finalUri)
             .then(res => {
                 let data = res.data;
-                if (currentChoice === "created_at") {
-                    data.reverse();
-                }
                 setFound(data);
+                console.log(data)
             })
             .catch(err => {
                 setFound([])
@@ -73,7 +78,7 @@ function SearchPage() {
 
     return <>
 
-        <form className="d-flex gap-3 align-items-end mb-5" >
+        <div className="d-flex gap-3 align-items-end mb-5" >
             <div className="col-md-4">
                 <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
                 <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData} />
@@ -87,10 +92,22 @@ function SearchPage() {
                 </select>
             </div>
             <div className="col-md-4">
-                {/* <button type="submit" className="btn btn-primary">Cerca</button> */}
-                <Link className="btn btn-primary" to={`/search/${formSearch.search || '%20'}/${formSearch.choice}`} > cerca</Link>
+                <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
+                <select id="inputOrder" className="form-select" name="order" value={formSearch.order} onChange={handleData}>
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
+                </select>
             </div>
-        </form>
+            <div className="col-md-4">
+                <Link
+                    className="btn btn-primary"
+                    to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}`}
+                >
+                    cerca
+                </Link>
+                {/* <Link className="btn btn-primary" to={`/search?${formSearch.search.replace(/ /g, "%20")`&choice=${choice}&order=asc` || `search=%20&choice=${choice}&order=asc`}`} > cerca</Link> */}
+            </div>
+        </div>
         <div className="d-flex justify-content-end mb-4 gap-2" role="group" aria-label="btn-group">
             <button type="button" className="btn btn-primary" value="grid" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
             <button type="button" className="btn btn-primary" value="list" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>

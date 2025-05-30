@@ -24,7 +24,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/test" element={<TestPage />} />
-              <Route path="/search/:slug/:type" element={<SearchPage />} />
+              <Route path="/search" element={<SearchPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/wish-list" element={<WishListPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
