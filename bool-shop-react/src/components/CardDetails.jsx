@@ -13,21 +13,34 @@ function CardDetails({ data }) {
     const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
 
+    const discountAmountParsed = parseFloat(discount_amount);
+    const priceParsed = parseFloat(price);
+    const hasDiscount = discountAmountParsed > 0;
+    const discountPrice = hasDiscount ? (priceParsed - (priceParsed * discountAmountParsed / 100)).toFixed(2) : priceParsed.toFixed(2);
+
+    const dateFormatStart = new Date(discount_start).toLocaleDateString('it-IT');
+    const dateFormatEnd = new Date(discount_end).toLocaleDateString('it-IT');
+
     return <>
 
-        <div className="card d-flex flex-column h-100 p-3">
+        <div className="">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
             <figure className='image-container'>
                 <Link to={`/detail/${slug}`}><img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} /></Link>
             </figure>
-            <div className="card-body flex-grow-1 d-flex flex-column">
-                <h5 className="card-title">{name}</h5>
-                <p className="card-text">{description}</p>
+            <div className="">
+                <h5 className="">{name}</h5>
+                <p className="">{description}</p>
             </div>
-            <div className="card-body">
-                <span>Prezzo: {price}€</span>
-                {parseInt(discount_amount) !== 0 ? <span className="d-inline-block ms-2"> - <strong>{parseInt(discount_amount)}%</strong></span> : ''}
-                <p className="card-text">Tipologia: {game_type}</p>
+            <div className="">
+                {hasDiscount ? (<div>Prezzo: <span className='text-decoration-line-through me-2'>{priceParsed.toFixed(2)}€</span>
+                    <span className='fw-bold'>{discountPrice}€</span><span className='discount-price fw-bold'> - {discountAmountParsed}%</span>
+                    <p>A partire dal <strong>{dateFormatStart}</strong> fino al <strong>{dateFormatEnd}</strong></p></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
+
+                <p className="">Tipologia: {game_type}</p>
+
+                {game_type === 'puzzle' ? '' : <p>Giocatori: {min_player} - {max_player}</p>}
+
                 <p> Anni: {target_age}+</p>
                 <p>
                     Categoria: {categories && categories.length > 0
