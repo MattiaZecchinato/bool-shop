@@ -162,8 +162,8 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'natalie.dubuque28@ethereal.email',
-            pass: 'dpzZkbDPEymm71AZku'
+            user: 'hillard98@ethereal.email',
+            pass: 'ZC1GYsyf8FSsXz4vMk'
         }
     });
 
@@ -201,8 +201,8 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
         }).join('');
 
         const mailOptions = {
-            from: 'natalie.dubuque28@ethereal.email',
-            to: `${user_email}, natalie.dubuque28@ethereal.email`,
+            from: 'hillard98@ethereal.email',
+            to: `${user_email}, hillard98@ethereal.email`,
             subject: `Conferma Ordine BoolShop - Ordine n°${orderId}`,
             html: `
               <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
