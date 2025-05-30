@@ -51,8 +51,14 @@ function index(req, res) {
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    const { search, choice } = req.query;
-    const searchParams = `%${search}%`;
+    let { search, choice, order } = req.query;
+
+    const allowedChoices = ["name", "price", "created_at"];
+    const sortBy = allowedChoices.includes(choice) ? choice : "name";
+    const allowedOrders = ["asc", "desc"];
+    const sortOrder = allowedOrders.includes(order?.toLowerCase()) ? order.toUpperCase() : "ASC";
+    const searchParams = search ? `%${search}%` : `%`;
+
     const sql = `
         SELECT 
             p.*, 
@@ -62,7 +68,7 @@ function indexSearchOrder(req, res) {
         LEFT JOIN category_product pc ON p.id = pc.product_id
         LEFT JOIN categories c ON pc.category_id = c.id
         WHERE p.name LIKE ?
-        ORDER BY p.${choice}
+        ORDER BY p.${sortBy} ${sortOrder}
     `;
 
     conn.query(sql, [searchParams], (err, results) => {
@@ -70,32 +76,36 @@ function indexSearchOrder(req, res) {
             console.error('Query error:', err);
             return res.status(500).json({ error: 'Internal server error' });
         }
+
         if (!results || results.length === 0) {
-            return res.status(400).json({ error: "Product not found" });
+            return res.status(404).json({ error: "No products found" });
         }
 
         const productMap = {};
         const finalProducts = [];
+
         results.forEach(p => {
             if (!productMap[p.id]) {
                 const product = {
                     ...p,
                     final_price: parseFloat(calculatedProduct(p)).toFixed(2),
                     categories: []
-                }
-                productMap[p.id] = product
-                finalProducts.push(product)
+                };
+                productMap[p.id] = product;
+                finalProducts.push(product);
             }
             if (p.category_id) {
                 productMap[p.id].categories.push({
                     id: p.category_id,
                     category_name: p.category_name
-                })
+                });
             }
-        })
+        });
+
         res.json(finalProducts);
     });
 }
+
 
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {
