@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 import { useCart } from "../components/CartContext"
 function Header() {
-    const { cartItems, prefer } = useCart()
+    const { cartItems, removeFromCart, addToCart, prefer } = useCart()
 
     const { VITE_BE_PATH } = import.meta.env;
 
@@ -9,7 +9,7 @@ function Header() {
     const totalQuantityWishList = prefer.reduce((acc, item) => acc + item.quantity, 0)
     return <>
         <header className="bg-secondary">
-            <nav className="container navbar navbar-expand-lg ">
+            <nav className="container navbar navbar-expand-lg">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to='/'>
                         <img src="/bool-shop-logo.png" alt="Logo" width="70" height="70" />
