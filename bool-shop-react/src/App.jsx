@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import WishListPage from "./pages/WishListPage"
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
 import TermOfServicePage from "./pages/TermOfServicePage"
+import ProductDetailPage from "./pages/ProductDetailPage"
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/boardgames" element={<BoardgamesPage />} />
               <Route path="/puzzles" element={<PuzzlesPage />} />
+              <Route path="/detail/:slug" element={<ProductDetailPage />} />
               <Route path="*" element={<div>page not found</div>} />
             </Route>
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
