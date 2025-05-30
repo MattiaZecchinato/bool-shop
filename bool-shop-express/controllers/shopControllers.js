@@ -59,7 +59,7 @@ function indexSearchOrder(req, res) {
     const allowedOrders = ["asc", "desc"];
     const sortOrder = allowedOrders.includes(order?.toLowerCase()) ? order.toUpperCase() : "ASC";
 
-    limit = parseInt(limit) || 5;
+    limit = parseInt(limit) || 6;
     page = parseInt(page) || 1;
     const offset = (page - 1) * limit;
 
