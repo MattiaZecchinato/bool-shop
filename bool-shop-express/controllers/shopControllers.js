@@ -51,92 +51,85 @@ function index(req, res) {
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    // Estraggo i parametri dalla query string: ricerca testuale, campo per ordinare, ordine, limite e pagina
-    let { search, choice, order, limit, page } = req.query;
+    let { search, choice, order, limit, page, type } = req.query;
 
-    // Definisco i campi consentiti per l'ordinamento, per sicurezza
     const allowedChoices = ["name", "price", "created_at"];
-    const sortBy = allowedChoices.includes(choice) ? choice : "name";  // se choice non è valido, ordino per "name"
+    const sortBy = allowedChoices.includes(choice) ? choice : "name";
 
-    // Definisco gli ordini consentiti (ascendente o discendente)
     const allowedOrders = ["asc", "desc"];
     const sortOrder = allowedOrders.includes(order?.toLowerCase()) ? order.toUpperCase() : "ASC";
 
-    // Converto limit e page in numeri interi, assegno valori di default se mancanti
     limit = parseInt(limit) || 5;
     page = parseInt(page) || 1;
-
-    // Calcolo offset per la paginazione: quanti prodotti saltare
     const offset = (page - 1) * limit;
 
-    // Preparo il pattern per la ricerca con LIKE, con wildcard %
     const searchParam = search ? `%${search}%` : `%`;
 
-    // Prima query: conto il totale dei prodotti che corrispondono alla ricerca, senza limit
+    // Costruzione della clausola WHERE dinamica
+    let whereClause = "WHERE p.name LIKE ?";
+    const queryParams = [searchParam];
+
+    if (type) {
+        whereClause += " AND p.game_type = ?";
+        queryParams.push(type);
+    }
+
+    // Query per contare i prodotti totali
     const countSql = `
-    SELECT COUNT(*) AS total
-    FROM products p
-    WHERE p.name LIKE ?
-  `;
-
-    conn.query(countSql, [searchParam], (err, countResult) => {
-        if (err) {
-            console.error('Count query error:', err);
-            return res.status(500).json({ error: 'Internal server error' });
-        }
-
-        // Estraggo il totale dei prodotti trovati
-        const totalProducts = countResult[0].total;
-
-        // Calcolo il numero totale di pagine disponibili
-        const totalPages = Math.ceil(totalProducts / limit);
-
-        // Seconda query: prendo i prodotti effettivi, con limit e offset, ordinati come richiesto
-        const productSql = `
-      SELECT *
-      FROM products
-      WHERE name LIKE ?
-      ORDER BY ${sortBy} ${sortOrder}
-      LIMIT ? OFFSET ?
+        SELECT COUNT(*) AS total
+        FROM products p
+        ${whereClause}
     `;
 
-        conn.query(productSql, [searchParam, limit, offset], (err, products) => {
+    conn.query(countSql, queryParams, (err, countResult) => {
+        if (err) {
+            console.error('Errore nella query di conteggio:', err);
+            return res.status(500).json({ error: 'Errore interno del server' });
+        }
+
+        const totalProducts = countResult[0].total;
+        const totalPages = Math.ceil(totalProducts / limit);
+
+        // Query per ottenere i prodotti con paginazione e ordinamento
+        const productSql = `
+            SELECT *
+            FROM products p
+            ${whereClause}
+            ORDER BY ${sortBy} ${sortOrder}
+            LIMIT ? OFFSET ?
+        `;
+
+        conn.query(productSql, [...queryParams, limit, offset], (err, products) => {
             if (err) {
-                console.error('Product query error:', err);
-                return res.status(500).json({ error: 'Internal server error' });
+                console.error('Errore nella query dei prodotti:', err);
+                return res.status(500).json({ error: 'Errore interno del server' });
             }
 
-            // Se non ci sono prodotti, restituisco 404
             if (!products.length) {
-                return res.status(404).json({ error: "No products found" });
+                return res.status(404).json({ error: "Nessun prodotto trovato" });
             }
 
-            // Preparo un array con gli ID dei prodotti ottenuti
             const productIds = products.map(p => p.id);
 
-            // Se per qualche motivo l'array è vuoto, restituisco un risultato vuoto
             if (productIds.length === 0) {
                 return res.json({ products: [], totalProducts, totalPages, currentPage: page });
             }
 
-            // Terza query: prendo tutte le categorie associate ai prodotti trovati
             const categoriesSql = `
-        SELECT pc.product_id, c.id AS category_id, c.genre AS category_name
-        FROM category_product pc
-        JOIN categories c ON pc.category_id = c.id
-        WHERE pc.product_id IN (?)
-      `;
+                SELECT pc.product_id, c.id AS category_id, c.genre AS category_name
+                FROM category_product pc
+                JOIN categories c ON pc.category_id = c.id
+                WHERE pc.product_id IN (?)
+            `;
 
             conn.query(categoriesSql, [productIds], (err, categories) => {
                 if (err) {
-                    console.error('Categories query error:', err);
-                    return res.status(500).json({ error: 'Internal server error' });
+                    console.error('Errore nella query delle categorie:', err);
+                    return res.status(500).json({ error: 'Errore interno del server' });
                 }
 
-                // Creo una mappa di prodotti per assemblare i dati con le categorie
                 const productMap = {};
 
-                // Per ogni prodotto costruisco l'oggetto prodotto con il prezzo calcolato e un array categorie vuoto
                 products.forEach(p => {
                     productMap[p.id] = {
                         ...p,
@@ -145,7 +138,6 @@ function indexSearchOrder(req, res) {
                     };
                 });
 
-                // Aggiungo le categorie corrispondenti a ogni prodotto nella mappa
                 categories.forEach(cat => {
                     if (productMap[cat.product_id]) {
                         productMap[cat.product_id].categories.push({
@@ -155,9 +147,8 @@ function indexSearchOrder(req, res) {
                     }
                 });
 
-                // Invio la risposta con prodotti, numero totale, pagine e pagina corrente
                 res.json({
-                    products: Object.values(productMap),  // trasformo la mappa in array
+                    products: Object.values(productMap),
                     totalProducts,
                     totalPages,
                     currentPage: page
@@ -166,6 +157,7 @@ function indexSearchOrder(req, res) {
         });
     });
 }
+
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {
     //Prendo i vari dati che mi arrivano dal req.body
