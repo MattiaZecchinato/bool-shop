@@ -159,11 +159,11 @@ function checkout(req, res) {
 }
 function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, user_last_name, user_address, user_phone, total_order) {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        service: 'gmail',
         port: 587,
         auth: {
-            user: 'natalie.dubuque28@ethereal.email',
-            pass: 'dpzZkbDPEymm71AZku'
+            user: 'boolshop0@gmail.com',
+            pass: 'nvjd ouvu vifv nxse '
         }
     });
 
@@ -201,8 +201,8 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
         }).join('');
 
         const mailOptions = {
-            from: 'natalie.dubuque28@ethereal.email',
-            to: `${user_email}, natalie.dubuque28@ethereal.email`,
+            from: 'boolshop0@gmail.com',
+            to: `${user_email}, boolshop0@gmail.com`,
             subject: `Conferma Ordine BoolShop - Ordine n°${orderId}`,
             html: `
               <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
