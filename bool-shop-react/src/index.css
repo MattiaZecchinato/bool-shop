@@ -105,3 +105,11 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+#root {
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}

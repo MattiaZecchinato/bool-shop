@@ -9,7 +9,7 @@ function MainLayout() {
     return <>
         <Header />
         <Menu />
-        <main className="container">
+        <main className="container flex-grow-1">
             <Outlet />
         </main>
         <Footer />
