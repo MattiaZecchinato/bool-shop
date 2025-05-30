@@ -68,3 +68,9 @@
     color: white;
     padding: 2px;
 }
+
+/* HomePage */
+.home-container {
+
+    display: flex;
+}
