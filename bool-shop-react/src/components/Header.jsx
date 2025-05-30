@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom"
-import { useCart } from "../components/CartContext";
+import { useCart } from "../components/CartContext"
 function Header() {
-    const { cartItems } = useCart();
-    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    const { cartItems, prefer } = useCart()
+    const totalQuantityCart = cartItems.reduce((acc, item) => acc + item.quantity, 0)
+    const totalQuantityWishList = prefer.reduce((acc, item) => acc + item.quantity, 0)
     return <>
         <header className="bg-secondary">
             <nav className="container navbar navbar-expand-lg ">
@@ -20,12 +21,12 @@ function Header() {
                             </li>
                             <li>
                                 <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
-                                    Carrello ({totalQuantity})
+                                    Carrello ({totalQuantityCart})
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="/wish-list" className="btn btn-outline-primary ms-auto">
-                                    Wish List
+                                    Wish List ({totalQuantityWishList})
                                 </NavLink>
                             </li>
                         </ul>
@@ -38,4 +39,4 @@ function Header() {
     </>
 }
 
-export default Header;
+export default Header
