@@ -4,11 +4,12 @@ import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from "../components/CartContext"
 import { useContext } from "react";
 import { useCart } from "../components/CartContext";
+import { Link } from 'react-router-dom';
 
 function CardProduct({ data }) {
 
-    const { prefercolor, isPrefer } = useContext(CartContext)
-    const { name, description, price, game_type, target_age, min_player, max_palyer, image, discount_type, discount_amount, categories } = data
+    const { prefercolor, isPrefer } = useContext(CartContext);
+    const { name, price, image, discount_amount, categories, slug } = data;
     const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
 
@@ -22,7 +23,9 @@ function CardProduct({ data }) {
         <div className="card d-flex flex-column h-100 p-3">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
             <figure className='image-container'>
-                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
+                <Link to={`/detail/${slug}`}>
+                    <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
+                </Link>
             </figure>
             <div className="card-body flex-grow-1 d-flex flex-column">
                 <h5 className="card-title">{name}</h5>
