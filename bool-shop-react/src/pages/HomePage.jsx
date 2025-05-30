@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CardProduct from "../components/CardProduct";
-
-
+import SideCart from "../components/SideCart";
 
 function HomePage() {
 
@@ -23,56 +22,62 @@ function HomePage() {
     useEffect(getData, []);
 
     return (
-        <>
-            <div id="carouselExampleAutoplaying" className="carousel carousel-container slide img-fluid m-auto" data-bs-ride="carousel" data-bs-interval="2000">
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img src="./src/assets/carosello-giochi.jpg" className="d-block w-100 carousel-img" alt="giochi-da-tavolo" />
+        <div className="home-container">
+
+            <div className="content-box">
+                <div id="carouselExampleAutoplaying" className="carousel carousel-container slide img-fluid m-auto" data-bs-ride="carousel" data-bs-interval="2000">
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src="./src/assets/carosello-giochi.jpg" className="d-block w-100 carousel-img" alt="giochi-da-tavolo" />
+                        </div>
+                        <div className="carousel-item">
+                            <img src="./src/assets/carosello-puzzle.jpg" className="d-block w-100 carousel-img" alt="puzzle" />
+                        </div>
+                        <div className="carousel-item">
+                            <img src="./src/assets/spedizione-gratuita.jpg" className="d-block w-100 carousel-img" alt="spedizione-gratuita" />
+                        </div>
                     </div>
-                    <div className="carousel-item">
-                        <img src="./src/assets/carosello-puzzle.jpg" className="d-block w-100 carousel-img" alt="puzzle" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="./src/assets/spedizione-gratuita.jpg" className="d-block w-100 carousel-img" alt="spedizione-gratuita" />
-                    </div>
+                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
+
+                <h2>Gli ultimi arrivi:</h2>
+
+                <ul className="list-unstyled row">
+                    {data && data
+                        .filter(element => {
+                            const secondRifDate = new Date('2023-01-01')
+                            const createdDate = new Date(element.created_at);
+                            return createdDate > secondRifDate;
+                        })
+                        .map(element => <li key={element.id} className="col-lg-3 col-md-6 mb-4"><CardProduct data={element} /></li>)}
+                </ul>
+
+                <h2>In promozione:</h2>
+
+
+                <ul className="list-unstyled row">
+                    {data && data
+                        .filter(element => {
+                            const discountAmount = element.discount_amount;
+
+                            return discountAmount >= 15.00 && discountAmount <= 25.00;
+                        })
+                        .map(element => <li key={element.id} className="col-lg-3 col-md-4 mb-4"> <CardProduct data={element} /></li>)}
+                </ul>
+
             </div>
 
-            <h2>Gli ultimi arrivi:</h2>
-
-            <ul className="list-unstyled row">
-                {data && data
-                    .filter(element => {
-                        const secondRifDate = new Date('2023-01-01')
-                        const createdDate = new Date(element.created_at);
-                        return createdDate > secondRifDate;
-                    })
-                    .map(element => <li key={element.id} className="col-lg-3 col-md-6 mb-4"><CardProduct data={element} /></li>)}
-            </ul>
-
-            <h2>In promozione:</h2>
-
-
-            <ul className="list-unstyled row">
-                {data && data
-                    .filter(element => {
-                        const discountAmount = element.discount_amount;
-
-                        return discountAmount >= 15.00 && discountAmount <= 25.00;
-                    })
-                    .map(element => <li key={element.id} className="col-lg-3 col-md-4 mb-4"> <CardProduct data={element} /></li>)}
-            </ul>
-
-
-        </>)
+            <div className="cart-box">
+                <SideCart />
+            </div>
+        </div>)
 }
 
 export default HomePage;
