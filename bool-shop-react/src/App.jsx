@@ -9,6 +9,8 @@ import BoardgamesPage from "./pages/BoardgamesPage";
 import PuzzlesPage from "./pages/PuzzlesPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import WishListPage from "./pages/WishListPage"
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
+import TermOfServicePage from "./pages/TermOfServicePage"
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
               <Route path="/puzzles" element={<PuzzlesPage />} />
               <Route path="*" element={<div>page not found</div>} />
             </Route>
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/term-of-service" element={<TermOfServicePage />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>

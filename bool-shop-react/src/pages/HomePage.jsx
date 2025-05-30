@@ -51,12 +51,12 @@ function HomePage() {
             <ul className="list-unstyled row">
                 {data && data
                     .filter(element => {
-                        const rifDate = new Date('2024-01-01');
+                        const secondRifDate = new Date('2023-01-01')
                         const createdDate = new Date(element.created_at);
-                        return createdDate > rifDate;
+                        return createdDate > secondRifDate;
                     })
                     .map(element => <li key={element.id} className="col-lg-3 col-md-6 mb-4"><CardProduct data={element} /></li>)}
-            </ul >
+            </ul>
 
             <h2>In promozione:</h2>
 
