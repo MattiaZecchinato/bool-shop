@@ -28,7 +28,7 @@ function Header() {
                                 <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
                                     Carrello ({totalQuantityCart})
                                 </NavLink>
-                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButtonHover">
+                                {cartItems.length > 0 && <ul className="dropdown-menu" aria-labelledby="dropdownMenuButtonHover">
                                     {cartItems.map(item => {
 
                                         return <li key={item.id}>
@@ -43,7 +43,7 @@ function Header() {
                                             </button>
                                         </li>
                                     })}
-                                </ul>
+                                </ul>}
                             </li>
                             <li>
                                 <NavLink to="/wish-list" className="btn btn-outline-primary ms-auto">
