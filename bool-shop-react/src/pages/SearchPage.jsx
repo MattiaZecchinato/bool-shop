@@ -7,81 +7,78 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
 
-
 function SearchPage() {
-
-
-    const [display, setDisplay] = useState(true)
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [display, setDisplay] = useState(true);
+    const [searchParams, setSearchParams] = useSearchParams();
     const { VITE_BE_PATH } = import.meta.env;
 
-    const [found, setFound] = useState({})
-    const searchpara = searchParams.get("search") || ""
-    console.log(searchpara)
-    const choicepara = searchParams.get("choice") || "name"
-    console.log(choicepara)
-    const orderpara = searchParams.get("order") || "asc"
-    console.log(orderpara)
+    const [found, setFound] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
+    const searchpara = searchParams.get("search") || "";
+    const choicepara = searchParams.get("choice") || "name";
+    const orderpara = searchParams.get("order") || "asc";
 
     const resetFormSearch = {
         choice: choicepara,
         search: searchpara,
         order: orderpara
+    };
 
-    }
-
-    const [formSearch, setFormSearch] = useState(resetFormSearch)
-
+    const [formSearch, setFormSearch] = useState(resetFormSearch);
 
     function handleData(e) {
-
         const { name, value } = e.target;
-
         setFormSearch(prev => ({
-
             ...prev,
             [name]: value
         }));
     }
 
-
     useEffect(() => {
-
-        callEndPoint()
-    }, [searchParams])
+        callEndPoint();
+    }, [searchParams, currentPage]);
 
     function callEndPoint() {
-
         let finalUri = `${VITE_BE_PATH}/shop/search?`;
         if (searchpara) {
-            const currentsearch = searchpara.trim().replace(/ /g, "%20")
-            finalUri += `search=${currentsearch}`
+            const currentsearch = searchpara.trim().replace(/ /g, "%20");
+            finalUri += `search=${currentsearch}`;
         } else {
-            finalUri += `search=%20`
+            finalUri += `search=%20`;
         }
-        finalUri += `&choice=${choicepara}&order=${orderpara}`
+        finalUri += `&choice=${choicepara}&order=${orderpara}`;
+        finalUri += `&limit=6&page=${currentPage}`;
 
 
-        console.log(finalUri)
         axios.get(finalUri)
             .then(res => {
-                let data = res.data;
-                setFound(data);
-                console.log(data)
+                console.log(res.data)
+                const data = res.data;
+                setFound(data.products || []);
+                setTotalPages(data.totalPages || 1);
+                setCurrentPage(data.currentPage || 1);
             })
             .catch(err => {
-                setFound([])
-                console.log(err.message)
+                setFound([]);
+                setTotalPages(1);
+                setCurrentPage(1);
             });
     }
 
+    function goToPage(newPage) {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
+    }
 
     return <>
-
-        <div className="d-flex gap-3 align-items-end mb-5" >
+        <div className="d-flex gap-3 align-items-end mb-5">
             <div className="col-md-4">
                 <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
-                <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData} />
+                <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData}
+                />
             </div>
             <div className="col-md-4">
                 <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
@@ -102,23 +99,39 @@ function SearchPage() {
                 <Link
                     className="btn btn-primary"
                     to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}`}
+                    onClick={() => setCurrentPage(1)}
                 >
-                    cerca
+                    Cerca
                 </Link>
-                {/* <Link className="btn btn-primary" to={`/search?${formSearch.search.replace(/ /g, "%20")`&choice=${choice}&order=asc` || `search=%20&choice=${choice}&order=asc`}`} > cerca</Link> */}
             </div>
         </div>
+
         <div className="d-flex justify-content-end mb-4 gap-2" role="group" aria-label="btn-group">
-            <button type="button" className="btn btn-primary" value="grid" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
-            <button type="button" className="btn btn-primary" value="list" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
+            <button type="button" className="btn btn-primary" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
+            <button type="button" className="btn btn-primary" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
         </div>
 
         <div className={display ? 'row' : ''}>
-            {found.length > 0 ? found.map(elem => display ? <div key={elem.id} className='col-md-4 mb-4'> <CardProduct data={elem} /></div> : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>) : <h3>Nessun Elemento Trovato</h3>}
+            {found.length > 0
+                ? found.map(elem =>
+                    display
+                        ? <div key={elem.id} className='col-md-4 mb-4'><CardProduct data={elem} /></div>
+                        : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
+                )
+                : <h3>Nessun Elemento Trovato</h3>
+            }
+        </div>
+
+        <div className="d-flex justify-content-center my-4 gap-3">
+            <button className="btn btn-outline-primary" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
+                ← Precedente
+            </button>
+            <span>Pagina {currentPage} di {totalPages}</span>
+            <button className="btn btn-outline-primary" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
+                Successiva →
+            </button>
         </div>
     </>
 }
 
 export default SearchPage;
-
-
