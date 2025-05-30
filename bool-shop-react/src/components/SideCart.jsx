@@ -14,8 +14,8 @@ function SideCart() {
             </p>
             <NavLink to="/cart">Vai al carrello</NavLink>
             <div className="mt-3">
-                {cartItems.length === 0 ? (<p>carrello vuoto</p>) : (<>{cartItems.map(item => {
-                    return <div className="border-bottom mb-2 p-2 ">
+                {(<>{cartItems.map(item => {
+                    return <div key={item.id} className="border-bottom mb-2 p-2 ">
                         <img src={`${VITE_BE_PATH}/img/${item.image}`} alt={item.name} style={{ width: '100px' }} />
                         <p>{item.price}€</p>
                         <button className="btn btn-outline-secondary" onClick={() => removeFromCart(item.id, 1)}>

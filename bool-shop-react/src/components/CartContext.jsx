@@ -1,5 +1,5 @@
 // Import delle funzioni React
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 // Crea un context per il carrello
 export const CartContext = createContext();
@@ -9,7 +9,15 @@ export const useCart = () => useContext(CartContext);
 
 export function CartProvider({ children }) {
     // Stato per memorizzare gli articoli nel carrello
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        const storedCartItems = localStorage.getItem('cart')
+        return storedCartItems ? JSON.parse(storedCartItems) : []
+    });
+
+    useEffect(() => {
+        //salva sul local storage
+        localStorage.setItem('cart', JSON.stringify(cartItems))
+    }, [cartItems])
 
     // Funzione per aggiungere un prodotto al carrello
     const addToCart = (product) => {
@@ -51,13 +59,27 @@ export function CartProvider({ children }) {
         setCartItems([]);
     };
     // preferiti
-    const [prefer, usePrefer] = useState([])
+    const [prefer, usePrefer] = useState(() => {
+        const storedWishListItems = localStorage.getItem('wishlist')
+        return storedWishListItems ? JSON.parse(storedWishListItems) : []
+    })
+
+    useEffect(() => {
+        //salva sul local storage
+        localStorage.setItem('wishlist', JSON.stringify(prefer))
+    }, [prefer])
+
     // funzione che aggiunge i preferiti 
     function isPrefer(element) {
         const checkEle = prefer.filter(p => p.id === element.id);
 
         if (checkEle.length === 0) {
-            usePrefer([...prefer, element])
+
+            const newElem = {
+                ...element,
+                quantity: 1
+            }
+            usePrefer([...prefer, newElem])
         } else {
             const newArray = []
             prefer.forEach(e => {
