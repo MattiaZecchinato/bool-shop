@@ -23,8 +23,7 @@ function HomePage() {
 
     return (
         <div className="home-container">
-
-            <div className="content-box">
+            <div className="content-box w-100 carousel-container">
                 <div id="carouselExampleAutoplaying" className="carousel carousel-container slide img-fluid m-auto" data-bs-ride="carousel" data-bs-interval="2000">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
@@ -56,7 +55,7 @@ function HomePage() {
                             const createdDate = new Date(element.created_at);
                             return createdDate > secondRifDate;
                         })
-                        .map(element => <li key={element.id} className="col-lg-3 col-md-6 mb-4"><CardProduct data={element} /></li>)}
+                        .map(element => <li key={element.id} className="col-lg-3 col-md-6 col-sm-12 mb-4"><CardProduct data={element} /></li>)}
                 </ul>
 
                 <h2>In promozione:</h2>
@@ -69,7 +68,7 @@ function HomePage() {
 
                             return discountAmount >= 15.00 && discountAmount <= 25.00;
                         })
-                        .map(element => <li key={element.id} className="col-lg-3 col-md-4 mb-4"> <CardProduct data={element} /></li>)}
+                        .map(element => <li key={element.id} className="col-lg-3 col-md-6 col-sm-12 mb-4"> <CardProduct data={element} /></li>)}
                 </ul>
 
             </div>

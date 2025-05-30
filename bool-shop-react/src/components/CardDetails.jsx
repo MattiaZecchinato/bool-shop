@@ -23,31 +23,36 @@ function CardDetails({ data }) {
 
     return <>
 
-        <div className="">
+        <div className="d-flex">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
-            <figure className='image-container'>
-                <Link to={`/detail/${slug}`}><img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} /></Link>
+            <figure className='d-flex details-img'>
+                <Link to={`/detail/${slug}`}>
+                    <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
+                </Link>
             </figure>
-            <div className="">
-                <h5 className="">{name}</h5>
-                <p className="">{description}</p>
-            </div>
-            <div className="">
-                {hasDiscount ? (<div>Prezzo: <span className='text-decoration-line-through me-2'>{priceParsed.toFixed(2)}€</span>
-                    <span className='fw-bold'>{discountPrice}€</span><span className='discount-price fw-bold'> - {discountAmountParsed}%</span>
-                    <p>A partire dal <strong>{dateFormatStart}</strong> fino al <strong>{dateFormatEnd}</strong></p></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
+            <div className="d-flex flex-column ms-5">
+                <h5 className="text-center fw-bold fs-3 mb-4">{name}</h5>
+                <p className="fst-italic fs-4">{description}</p>
+                {hasDiscount ? (
+                    <div>
+                        <div className='mb-3'>
+                            Prezzo:
+                            <span className='text-decoration-line-through me-2 '>{priceParsed.toFixed(2)}€</span>
 
-                <p className="">Tipologia: {game_type}</p>
-
+                            <span className='fw-bold'>{discountPrice}€</span><span className='fw-bold'> - {discountAmountParsed}%</span>
+                        </div>
+                        <p >A partire dal <strong>{dateFormatStart}</strong> fino al <strong>{dateFormatEnd}</strong></p></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
+                {/* <p className="">Tipologia: {game_type}</p> */}
                 {game_type === 'puzzle' ? '' : <p>Giocatori: {min_player} - {max_player}</p>}
-
-                <p> Anni: {target_age}+</p>
+                <p> Età: {target_age}+</p>
                 <p>
                     Categoria: {categories && categories.length > 0
                         ? categories.map(c => c.category_name).join(', ')
                         : 'Nessuna'}
                 </p>
-                <button className="btn btn-success" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                <div className="text-center">
+                    <button className="btn btn-success w-25" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                </div>
             </div>
         </div>
 

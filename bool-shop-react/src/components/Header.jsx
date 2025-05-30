@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom"
 import { useCart } from "../components/CartContext"
 function Header() {
+
     const { cartItems, prefer } = useCart()
     const totalQuantityCart = cartItems.reduce((acc, item) => acc + item.quantity, 0)
     const totalQuantityWishList = prefer.reduce((acc, item) => acc + item.quantity, 0)
     return <>
+
         <header className="bg-secondary">
             <nav className="container navbar navbar-expand-lg ">
                 <div className="container-fluid">

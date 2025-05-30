@@ -1,22 +1,12 @@
+/* Carosello */
+
 .carousel-img {
     object-fit: cover;
     height: 550px;
 }
 
 .carousel-container {
-    width: 1000px;
-}
-
-.footer-box {
-
-    background-image: url(./assets/background-footer.png);
-    background-size: cover;
-    background-position: center;
-}
-
-.footer-box li {
-
-    list-style-type: none;
+    width: 70%;
 }
 
 /* stile cuore */
@@ -36,7 +26,7 @@
 /* card */
 
 .image-container {
-    height: 400px;
+    height: 300px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -69,8 +59,27 @@
     padding: 2px;
 }
 
-/* HomePage */
-.home-container {
+/* Card dettaglio */
 
+.details-img {
+    width: 40%;
+}
+
+/* HomePage */
+
+.home-container {
     display: flex;
+}
+
+/* Footer */
+
+.footer-box {
+    background-image: url(./assets/background-footer.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.footer-box li {
+
+    list-style-type: none;
 }
