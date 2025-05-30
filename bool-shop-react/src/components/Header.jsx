@@ -28,7 +28,7 @@ function Header() {
                                 <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
                                     Carrello ({totalQuantityCart})
                                 </NavLink>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonHover">
+                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButtonHover">
                                     {cartItems.map(item => {
 
                                         return <li key={item.id}>
