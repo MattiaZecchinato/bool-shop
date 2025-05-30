@@ -49,6 +49,7 @@ function index(req, res) {
         res.json(finalProducts)
     });
 }
+
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
     let { search, choice, order, limit, page, type } = req.query;
@@ -316,10 +317,35 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
 //Funzione per controllare lo specifico prodotto
 function productDetails(req, res) {
     const { slug } = req.params;
-    const sql = `SELECT * from products WHERE products.slug = ?`
-    conn.query(sql, [slug], (err, result) => {
+    const sql = `SELECT  p.*, 
+            c.id AS category_id,
+            c.genre AS category_name
+            FROM products p
+            JOIN category_product pc ON p.id = pc.product_id
+            JOIN categories c ON pc.category_id = c.id
+            WHERE p.slug = ?`
+    conn.query(sql, [slug], (err, results) => {
         if (err) res.status(400).json({ error: "Product not found" })
-        res.json(result)
+        const productMap = {};
+        const finalProducts = [];
+        results.forEach(p => {
+            if (!productMap[p.id]) {
+                const product = {
+                    ...p,
+                    final_price: parseFloat(calculatedProduct(p)).toFixed(2),
+                    categories: []
+                }
+                productMap[p.id] = product
+                finalProducts.push(product)
+            }
+            if (p.category_id) {
+                productMap[p.id].categories.push({
+                    id: p.category_id,
+                    category_name: p.category_name
+                })
+            }
+        })
+        res.json(finalProducts)
     })
 }
 
