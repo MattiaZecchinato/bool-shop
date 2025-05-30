@@ -83,3 +83,25 @@
 
     list-style-type: none;
 }
+
+/* drop down cart */
+.dropdown-menu {
+    display: none;
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+}

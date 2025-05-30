@@ -73,9 +73,9 @@ function HomePage() {
 
             </div>
 
-            <div className="cart-box">
+            {/* <div className="cart-box">
                 <SideCart />
-            </div>
+            </div> */}
         </div>)
 }
 
