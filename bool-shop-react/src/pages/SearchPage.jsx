@@ -54,8 +54,8 @@ function SearchPage() {
 
         axios.get(finalUri)
             .then(res => {
-                console.log(res.data)
                 const data = res.data;
+                console.log(data.products)
                 setFound(data.products || []);
                 setTotalPages(data.totalPages || 1);
                 setCurrentPage(data.currentPage || 1);
@@ -66,7 +66,7 @@ function SearchPage() {
                 setCurrentPage(1);
             });
     }
-
+    
     function goToPage(newPage) {
         if (newPage >= 1 && newPage <= totalPages) {
             setCurrentPage(newPage);
