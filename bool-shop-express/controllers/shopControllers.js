@@ -49,7 +49,6 @@ function index(req, res) {
         res.json(finalProducts)
     });
 }
-
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
     let { search, choice, order, limit, page, type } = req.query;
@@ -146,7 +145,7 @@ function indexSearchOrder(req, res) {
                 }));
 
                 res.json({
-                    products: finalProducts, // <-- Ora usiamo l'array ordinato `finalProducts`
+                    products: finalProducts,
                     totalProducts,
                     totalPages,
                     currentPage: page
@@ -155,7 +154,6 @@ function indexSearchOrder(req, res) {
         });
     });
 }
-
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {
     //Prendo i vari dati che mi arrivano dal req.body
@@ -309,8 +307,6 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
         });
     });
 }
-
-
 //Funzione per controllare lo specifico prodotto
 function productDetails(req, res) {
     const { slug } = req.params;
@@ -345,5 +341,83 @@ function productDetails(req, res) {
         res.json(finalProducts)
     })
 }
+function categoryProduct(req, res) {
+    const { category_id } = req.body;
 
-module.exports = { index, indexSearchOrder, checkout, productDetails };
+    if (!category_id) {
+        return res.status(400).json({ error: "category_id è obbligatorio nel body" });
+    }
+
+    const sql = `
+        SELECT p.*
+        FROM products p
+        JOIN category_product cp ON p.id = cp.product_id
+        WHERE cp.category_id = ?
+    `;
+
+    conn.query(sql, [category_id], (err, products) => {
+        if (err) {
+            console.error('Errore nella query dei prodotti per categoria:', err);
+            return res.status(500).json({ error: 'Errore interno del server' });
+        }
+
+        if (!products.length) {
+            return res.status(404).json({ error: "Nessun prodotto trovato per questa categoria" });
+        }
+
+        const productIds = products.map(p => p.id);
+
+        const categoriesSql = `
+            SELECT pc.product_id, c.id AS category_id, c.genre AS category_name
+            FROM category_product pc
+            JOIN categories c ON pc.category_id = c.id
+            WHERE pc.product_id IN (?)
+        `;
+
+        conn.query(categoriesSql, [productIds], (err, categories) => {
+            if (err) {
+                console.error('Errore nella query delle categorie:', err);
+                return res.status(500).json({ error: 'Errore interno del server' });
+            }
+
+            const productMap = {};
+
+            products.forEach(p => {
+                const price = parseFloat(p.price);
+                const discountAmount = parseFloat(p.discount_amount);
+                let finalPrice = price;
+
+                if (p.discount_type === 'percentage' && !isNaN(discountAmount)) {
+                    finalPrice = price - (price * discountAmount / 100);
+                }
+
+                productMap[p.id] = {
+                    ...p,
+                    final_price: parseFloat(finalPrice.toFixed(2)),
+                    categories: []
+                };
+            });
+
+
+            categories.forEach(cat => {
+                if (productMap[cat.product_id]) {
+                    productMap[cat.product_id].categories.push({
+                        id: cat.category_id,
+                        category_name: cat.category_name
+                    });
+                }
+            });
+
+            const finalProducts = Object.values(productMap);
+
+            res.json({
+                products: finalProducts,
+                totalProducts: finalProducts.length
+            });
+        });
+    });
+}
+
+
+
+module.exports = { index, indexSearchOrder, checkout, productDetails, categoryProduct };

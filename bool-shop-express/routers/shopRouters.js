@@ -20,4 +20,5 @@ router.post('/checkout', checkCheckout(conn), shopControllers.checkout);
 // product details (slug deve essere per ultimo)
 router.get('/:slug', shopControllers.productDetails);
 
+router.post('/category', shopControllers.categoryProduct)
 module.exports = router;
