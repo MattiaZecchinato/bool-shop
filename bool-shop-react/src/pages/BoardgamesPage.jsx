@@ -8,6 +8,7 @@ import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
 
 function BoardgamesPage() {
+
     const [display, setDisplay] = useState(true);
     const { VITE_BE_PATH } = import.meta.env;
 
@@ -15,19 +16,13 @@ function BoardgamesPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-
-
-
-
-
     useEffect(() => {
         callEndPoint();
     }, [currentPage]);
 
     function callEndPoint() {
+
         let finalUri = `${VITE_BE_PATH}/shop/search?type=board_game&page=${currentPage}`;
-
-
 
         axios.get(finalUri)
             .then(res => {

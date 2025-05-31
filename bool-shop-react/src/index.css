@@ -23,6 +23,22 @@
     color: red;
 }
 
+.card-detail {
+    position: relative
+}
+
+.card-detail svg {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    font-size: 30px;
+}
+
+
+.card-detail svg:hover {
+    color: red;
+}
+
 /* card */
 
 .image-container {
@@ -39,6 +55,8 @@
     max-height: 100%;
     object-fit: contain;
 }
+
+/* sconti */
 
 .discount-price {
     position: absolute;
@@ -57,6 +75,11 @@
     background-color: purple;
     color: white;
     padding: 2px;
+}
+
+.card-detail-discount {
+    background-color: purple;
+    color: white;
 }
 
 /* Card dettaglio */
