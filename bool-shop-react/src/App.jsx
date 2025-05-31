@@ -12,7 +12,7 @@ import WishListPage from "./pages/WishListPage"
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
 import TermOfServicePage from "./pages/TermOfServicePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
-import Category from "./pages/Category"
+import Category from "./pages/Category" 
 
 
 function App() {

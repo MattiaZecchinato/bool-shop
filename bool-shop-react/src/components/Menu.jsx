@@ -16,7 +16,7 @@ function Menu() {
                 </li>
                 <li>
                     <div className="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown button
                         </button>
                         <ul className="dropdown-menu">
