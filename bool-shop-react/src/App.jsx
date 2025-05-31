@@ -12,6 +12,7 @@ import WishListPage from "./pages/WishListPage"
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
 import TermOfServicePage from "./pages/TermOfServicePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
+import Category from "./pages/Category"
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/boardgames" element={<BoardgamesPage />} />
               <Route path="/puzzles" element={<PuzzlesPage />} />
               <Route path="/detail/:slug" element={<ProductDetailPage />} />
+              <Route path="/category/:slug" element={<Category />} />
               <Route path="*" element={<div>page not found</div>} />
             </Route>
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
