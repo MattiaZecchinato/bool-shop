@@ -66,7 +66,6 @@ function indexSearchOrder(req, res) {
 
     const searchParam = search ? `%${search}%` : `%`;
 
-    // Costruzione della clausola WHERE dinamica
     let whereClause = "WHERE p.name LIKE ?";
     const queryParams = [searchParam];
 
@@ -75,7 +74,6 @@ function indexSearchOrder(req, res) {
         queryParams.push(type);
     }
 
-    // Query per contare i prodotti totali
     const countSql = `
         SELECT COUNT(*) AS total
         FROM products p
@@ -91,7 +89,6 @@ function indexSearchOrder(req, res) {
         const totalProducts = countResult[0].total;
         const totalPages = Math.ceil(totalProducts / limit);
 
-        // Query per ottenere i prodotti con paginazione e ordinamento
         const productSql = `
             SELECT *
             FROM products p
@@ -129,27 +126,27 @@ function indexSearchOrder(req, res) {
                     return res.status(500).json({ error: 'Errore interno del server' });
                 }
 
-                const productMap = {};
-
-                products.forEach(p => {
-                    productMap[p.id] = {
-                        ...p,
-                        final_price: parseFloat(calculatedProduct(p)).toFixed(2),
-                        categories: []
-                    };
-                });
-
+                // Creiamo una mappa per accedere facilmente alle categorie per product_id
+                const categoriesMap = {};
                 categories.forEach(cat => {
-                    if (productMap[cat.product_id]) {
-                        productMap[cat.product_id].categories.push({
-                            id: cat.category_id,
-                            category_name: cat.category_name
-                        });
+                    if (!categoriesMap[cat.product_id]) {
+                        categoriesMap[cat.product_id] = [];
                     }
+                    categoriesMap[cat.product_id].push({
+                        id: cat.category_id,
+                        category_name: cat.category_name
+                    });
                 });
+
+                // Creiamo l'array finale dei prodotti mantenendo l'ordine originale di `products`
+                const finalProducts = products.map(p => ({
+                    ...p,
+                    final_price: parseFloat(calculatedProduct(p)).toFixed(2),
+                    categories: categoriesMap[p.id] || [] // Aggiungi le categorie dal categoriesMap
+                }));
 
                 res.json({
-                    products: Object.values(productMap),
+                    products: finalProducts, // <-- Ora usiamo l'array ordinato `finalProducts`
                     totalProducts,
                     totalPages,
                     currentPage: page
