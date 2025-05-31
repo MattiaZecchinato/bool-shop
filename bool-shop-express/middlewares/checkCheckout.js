@@ -12,10 +12,8 @@ function checkCheckout(conn) {
 
         let error = 0;
         let errorMessage = `The following errors occurred:`;
-        let controllTotal = parseInt(total_order);
+        let controllTotal = parseFloat(total_order);
         const notAllowedSymbols = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '{', '}', '[', ']', '|', '\\', ';', ':', '\'', '"', ',', '<', '>', '/', '?', '`', '~'];
-
-
 
         if (total_order === '' || !total_order) {
             error++;
@@ -40,12 +38,11 @@ function checkCheckout(conn) {
             error++;
             errorMessage += `, email must contain an "@" symbol`;
         } else {
-            let email = user_email
-            let checkmail = email.split('')
-            let controlmail = 0
+            let checkmail = user_email.split('');
+            let controlmail = 0;
             checkmail.forEach(element => {
-                if (element.includes('@')) {
-                    controlmail++
+                if (element === '@') {
+                    controlmail++;
                 }
             });
             if (controlmail > 1) {
@@ -53,16 +50,19 @@ function checkCheckout(conn) {
                 errorMessage += `, email cannot contain more than 1 "@" symbol`;
             }
         }
+
         notAllowedSymbols.forEach(element => {
             if (user_email.includes(element)) {
                 error++;
-                errorMessage += `, email must contain an "${element}" symbol`;
+                errorMessage += `, email must not contain "${element}"`;
             }
         });
-        if (user_address === '' || !user_email) {
+
+        if (user_address === '' || !user_address) {
             error++;
             errorMessage += `, address cannot be empty or do not exist`;
         }
+
         if (user_phone === '' || !user_phone) {
             error++;
             errorMessage += `, phone number cannot be empty or do not exist`;
@@ -75,8 +75,7 @@ function checkCheckout(conn) {
         if (!products || products.length === 0) {
             error++;
             errorMessage += `, order must contain at least one product`;
-            checkIfAllQueriesDone();
-            return;
+            return res.status(400).json({ status: '400', error: errorMessage });
         } else {
             dbQueriesToComplete = products.length;
         }
@@ -84,50 +83,43 @@ function checkCheckout(conn) {
         products.forEach(product => {
             const productId = parseInt(product.product_id);
 
-            if (!product.product_id) {
-                error++;
-                errorMessage += `, not valid ID`;
-                dbQueriesCompleted++;
-                checkIfAllQueriesDone();
-                return;
-            } else if (isNaN(productId)) {
+            if (!product.product_id || isNaN(productId)) {
                 error++;
                 errorMessage += `, not valid ID`;
                 dbQueriesCompleted++;
                 checkIfAllQueriesDone();
                 return;
             } else {
-                const sql = `SELECT price , discount_type, discount_amount from products WHERE products.id = ?`;
+                const sql = `SELECT price, discount_type, discount_amount FROM products WHERE products.id = ?`;
                 conn.query(sql, [productId], (err, result) => {
                     dbQueriesCompleted++;
 
                     if (err) {
                         error++;
                         errorMessage += `, error on database for ID: ${productId}`;
+                    } else if (result.length === 0) {
+                        error++;
+                        errorMessage += `, product with ID: ${productId} not found`;
                     } else {
-                        if (result.length === 0) {
-                            error++;
-                            errorMessage += `, product with ID: ${productId} not found`;
-                        } else {
-                            let dbProductData = result[0];
-                            let unitPriceFromDb = parseFloat(dbProductData.price);
-                            if (dbProductData.discount_type === "fixed") {
-                                unitPriceFromDb = unitPriceFromDb - parseFloat(dbProductData.discount_amount)
-                            } else if (dbProductData.discount_type === "percentage") {
-                                unitPriceFromDb = unitPriceFromDb - parseFloat((unitPriceFromDb * (dbProductData.discount_amount / 100)))
-                                unitPriceFromDb = parseFloat(unitPriceFromDb.toFixed(2));
-                            }
+                        let dbProductData = result[0];
+                        let unitPriceFromDb = parseFloat(dbProductData.price);
+                        if (dbProductData.discount_type === "fixed") {
+                            unitPriceFromDb -= parseFloat(dbProductData.discount_amount);
+                        } else if (dbProductData.discount_type === "percentage") {
+                            unitPriceFromDb -= unitPriceFromDb * (parseFloat(dbProductData.discount_amount) / 100);
+                            unitPriceFromDb = parseFloat(unitPriceFromDb.toFixed(2));
+                        }
 
-                            let checktotalproduct = unitPriceFromDb * product.quantity;
-                            checktotal += checktotalproduct;
-                            const priceDifference = Math.abs(checktotalproduct - product.tot_price);
-                            console.log(priceDifference > 0.01)
-                            if (priceDifference > 0.01) {
-                                error++;
-                                errorMessage += `, error on total of product with ID:${productId}`;
-                            }
+                        let checktotalproduct = unitPriceFromDb * product.quantity;
+                        checktotal += checktotalproduct;
+
+                        const priceDifference = Math.abs(checktotalproduct - product.tot_price);
+                        if (priceDifference > 0.01) {
+                            error++;
+                            errorMessage += `, error on total of product with ID:${productId}`;
                         }
                     }
+
                     checkIfAllQueriesDone();
                 });
             }
@@ -136,6 +128,7 @@ function checkCheckout(conn) {
                 error++;
                 errorMessage += `, product quantity ${product.product_id || 'unknown'} can't be 0`;
             }
+
             if (product.tot_price <= 0) {
                 error++;
                 errorMessage += `, product price ${product.product_id || 'unknown'} can't be 0`;
@@ -143,25 +136,35 @@ function checkCheckout(conn) {
         });
 
         function checkIfAllQueriesDone() {
+    if (dbQueriesCompleted === dbQueriesToComplete) {
+        const orderTotalFloat = parseFloat(total_order);
+        const expectedShipping = checktotal < 50 ? 4.99 : 0;
+        const expectedTotal = checktotal + expectedShipping;
 
-            if (dbQueriesCompleted === dbQueriesToComplete) {
-                const orderTotalFloat = parseFloat(total_order);
-                const difference = Math.abs(orderTotalFloat - checktotal);
-                if (difference > 0.05) { // tolleranza aumentata per decimali
-                    error++;
-                    errorMessage += `, error on total about final products`;
-                }
+        const difference = Math.abs(orderTotalFloat - expectedTotal);
 
-                if (error > 0) {
-                    res.status(400).json({
-                        status: '400',
-                        error: `${errorMessage}`,
-                    });
-                } else {
-                    next();
-                }
-            }
+        console.log("Totale prodotti:", checktotal.toFixed(2));
+        console.log("Spedizione prevista:", expectedShipping.toFixed(2));
+        console.log("Totale atteso:", expectedTotal.toFixed(2));
+        console.log("Totale ricevuto:", orderTotalFloat.toFixed(2));
+        console.log("Differenza:", difference.toFixed(2));
+
+        if (difference > 0.05) {
+            error++;
+            errorMessage += `, total mismatch: expected ${expectedTotal.toFixed(2)}, received ${orderTotalFloat.toFixed(2)}`;
         }
+
+        if (error > 0) {
+            res.status(400).json({
+                status: '400',
+                error: `${errorMessage}`,
+            });
+        } else {
+            next();
+        }
+    }
+}
+
     };
 }
 

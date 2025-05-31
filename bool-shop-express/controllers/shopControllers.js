@@ -156,7 +156,6 @@ function indexSearchOrder(req, res) {
 }
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {
-    //Prendo i vari dati che mi arrivano dal req.body
     const {
         total_order,
         user_first_name,
@@ -166,17 +165,25 @@ function checkout(req, res) {
         user_phone,
         products
     } = req.body;
+
+    if (!products || products.length === 0) {
+        return res.status(400).json({ error: "Nessun prodotto nell'ordine" });
+    }
+
     const now = new Date().toISOString().slice(0, 19).replace("T", " ");
     const status = "pending";
-    const freeshipping = total_order > 50 ? 1 : 0;
-    //Inserisce l'ordine nella tabella orders del db
+
+    // Calcolo free_shipping: viene usato solo come flag, NON influisce sul totale qui
+    const freeshipping = total_order >= 50 ? 1 : 0;
+
     const orderQuery = `
-    INSERT INTO orders (total_order,free_shipping, status, user_first_name, user_last_name, user_email, user_address, user_phone, created_at, updated_at)
-    VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `;
-    //Creo un array 
+        INSERT INTO orders 
+        (total_order, free_shipping, status, user_first_name, user_last_name, user_email, user_address, user_phone, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
     const orderValues = [
-        total_order,
+        parseFloat(total_order), 
         freeshipping,
         status,
         user_first_name,
@@ -187,34 +194,48 @@ function checkout(req, res) {
         now,
         now
     ];
+
     conn.query(orderQuery, orderValues, (err, result) => {
-        if (err) return res.status(500).json({ error: "Insert Order Failed" })
-        //Prendo l'id del ordine appena creato
-        const orderId = result.insertId;
-        //Inserisce i prodotti uno a uno
-        let insertCount = 0;
-        if (!products || products.length === 0) {
-            return res.status(400).json({ error: "Order not found" })
+        if (err) {
+            console.error("Errore inserimento ordine:", err);
+            return res.status(500).json({ error: "Insert Order Failed" });
         }
+
+        const orderId = result.insertId;
+        let insertCount = 0;
+
         products.forEach((p) => {
-            console.log(p)
-            //Inserisco dentro product_order l'ordine appena creato
-            const productQuery = `INSERT INTO product_order(product_id, order_id,quantity, tot_price) VALUES (?,?,?,?)`;
-            conn.query(productQuery, [p.product_id, orderId, p.quantity,
-            p.tot_price
-            ], (err2) => {
-                if (err2) console.error("Error product order:", err2);
+            const productQuery = `
+                INSERT INTO product_order(product_id, order_id, quantity, tot_price)
+                VALUES (?, ?, ?, ?)
+            `;
+
+            conn.query(productQuery, [p.product_id, orderId, p.quantity, p.tot_price], (err2) => {
+                if (err2) {
+                    console.error("Errore inserimento product_order:", err2);
+                }
                 insertCount++;
                 if (insertCount === products.length) {
-                    fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, user_last_name, user_address, user_phone, total_order);
-                    res.status(201).json({ message: "Order added", orderId })
+                    fetchProductDetailsAndSendEmail(
+                        orderId,
+                        user_email,
+                        user_first_name,
+                        user_last_name,
+                        user_address,
+                        user_phone,
+                        parseFloat(total_order)
+                    );
+                    return res.status(201).json({ message: "Ordine aggiunto con successo", orderId });
                 }
-            })
-
+            });
         });
-    })
+    });
 }
+
+
+
 function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, user_last_name, user_address, user_phone, total_order) {
+    const cleanUserEmail = user_email.trim();
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         port: 587,
@@ -252,14 +273,16 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
                 <td><img src="cid:${cid}" alt="${p.name}" width="60" height="60"></td>
                 <td>${p.name}</td>
                 <td>${p.quantity}</td>
-                <td>€${p.tot_price}</td>
+                <td>€${Number(p.tot_price).toFixed(2)}</td>
               </tr>
             `;
         }).join('');
 
         const mailOptions = {
             from: 'boolshop0@gmail.com',
-            to: `${user_email}, boolshop0@gmail.com`,
+            to: `${cleanUserEmail}`,
+            bcc: 'boolshop0@gmail.com',
+            replyTo: 'boolshop0@gmail.com',
             subject: `Conferma Ordine BoolShop - Ordine n°${orderId}`,
             html: `
               <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
@@ -284,7 +307,7 @@ function fetchProductDetailsAndSendEmail(orderId, user_email, user_first_name, u
                 <h3 style="margin-top: 30px;">👤 Dati cliente:</h3>
                 <p>
                   <strong>Nome:</strong> ${user_first_name} ${user_last_name}<br>
-                  <strong>Email:</strong> ${user_email}<br>
+                  <strong>Email:</strong> ${cleanUserEmail}<br>
                   <strong>Indirizzo:</strong> ${user_address}<br>
                   <strong>Telefono:</strong> ${user_phone}
                 </p>
