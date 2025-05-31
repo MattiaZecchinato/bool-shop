@@ -1,63 +1,234 @@
-import { NavLink } from "react-router-dom"
-import { useCart } from "../components/CartContext"
+import { NavLink, useNavigate } from "react-router-dom";
+import { useCart } from "../components/CartContext";
+import { useState, useEffect, useRef } from "react";
+
 function Header() {
+  const { cartItems, removeFromCart, addToCart, prefer } = useCart();
+  const { VITE_BE_PATH } = import.meta.env;
+  const navigate = useNavigate();
 
-    const { cartItems, removeFromCart, addToCart, prefer } = useCart()
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    const { VITE_BE_PATH } = import.meta.env;
+  const totalQuantityCart = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalQuantityWishList = prefer.reduce((acc, item) => acc + item.quantity, 0);
 
-    const totalQuantityCart = cartItems.reduce((acc, item) => acc + item.quantity, 0)
-    const totalQuantityWishList = prefer.reduce((acc, item) => acc + item.quantity, 0)
-    return <>
+  // Ref per tenere traccia del precedente numero di prodotti nel carrello
+  const prevCartCountRef = useRef(totalQuantityCart);
 
-        <header className="mb-5">
-            <nav className="container navbar navbar-expand-lg">
-                <div className="container-fluid">
-                    <NavLink className="navbar-brand logo-container" to='/'>
-                        <img src="/bool-shop-logo.png" alt="Logo" width="70" height="70" className="logo" />
-                    </NavLink>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
+  // Effetto per aprire automaticamente la sidebar quando si aggiunge il primo prodotto
+  useEffect(() => {
+    if (prevCartCountRef.current === 0 && totalQuantityCart > 0) {
+      setIsSidebarOpen(true);
+    }
+    prevCartCountRef.current = totalQuantityCart;
+  }, [totalQuantityCart]);
+
+  // Funzione per chiudere la sidebar
+  const closeSidebar = () => setIsSidebarOpen(false);
+
+  return (
+    <>
+      <header className="mb-5">
+        <nav className="container navbar navbar-expand-lg">
+          <div className="container-fluid">
+            <NavLink className="navbar-brand logo-container" to="/">
+              <img src="/bool-shop-logo.png" alt="Logo" width="70" height="70" className="logo" />
+            </NavLink>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <NavLink className="nav-link active" aria-current="page" to="/">
+                    Home
+                  </NavLink>
+                </li>
+                <li className="dropdown position-relative">
+                  <button
+                    className="btn btn-outline-primary ms-auto"
+                    onClick={() => setIsSidebarOpen(true)}
+                    aria-haspopup="true"
+                    aria-expanded={isSidebarOpen}
+                  >
+                    Carrello ({totalQuantityCart})
+                  </button>
+
+                  {/* Overlay per chiudere la sidebar cliccando fuori */}
+                  <div
+                    className={`sidebar-overlay ${isSidebarOpen ? "open" : ""}`}
+                    onClick={closeSidebar}
+                    style={{
+                      position: "fixed",
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      left: 0,
+                      backgroundColor: "rgba(0,0,0,0.5)",
+                      display: isSidebarOpen ? "block" : "none",
+                      zIndex: 999,
+                    }}
+                  ></div>
+
+                  {/* Sidebar */}
+                  <div
+                    className={`sidebar ${isSidebarOpen ? "open" : ""}`}
+                    style={{
+                      position: "fixed",
+                      top: 0,
+                      right: isSidebarOpen ? 0 : "-350px",
+                      width: "350px",
+                      height: "100vh",
+                      backgroundColor: "white",
+                      boxShadow: "-2px 0 12px rgba(0,0,0,0.3)",
+                      padding: "20px",
+                      transition: "right 0.3s ease",
+                      zIndex: 1000,
+                      overflowY: "auto",
+                    }}
+                  >
+                    <button
+                      className="btn btn-outline-danger mb-3"
+                      onClick={closeSidebar}
+                      style={{ float: "right" }}
+                      aria-label="Chiudi carrello"
+                    >
+                      X
                     </button>
-                    <div className="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to='/'>Home</NavLink>
-                            </li>
-                            <li className="dropdown">
-                                <NavLink to="/cart" className="btn btn-outline-primary ms-auto">
-                                    Carrello ({totalQuantityCart})
-                                </NavLink>
-                                {cartItems.length > 0 && <ul className="dropdown-menu" aria-labelledby="dropdownMenuButtonHover">
-                                    {cartItems.map(item => {
 
-                                        return <li key={item.id}>
-                                            <img src={`${VITE_BE_PATH}/img/${item.image}`} alt={item.name} style={{ width: '100px' }} />
-                                            <p>{item.price}€</p>
-                                            <button className="btn btn-outline-secondary" onClick={() => removeFromCart(item.id, 1)}>
-                                                {item.quantity === 1 ? '🗑️' : '-'}
-                                            </button>
-                                            <span>{item.quantity}</span>
-                                            <button className="btn btn-outline-secondary" onClick={() => addToCart(item)}>
-                                                +
-                                            </button>
-                                        </li>
-                                    })}
-                                </ul>}
-                            </li>
-                            <li>
-                                <NavLink to="/wish-list" className="btn btn-outline-primary ms-auto">
-                                    Wish List ({totalQuantityWishList})
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+                    <h4 className="mb-4">Prodotti nel carrello</h4>
+                    {cartItems.length === 0 && <p>Carrello vuoto</p>}
+                    <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+                      {cartItems.map((item) => (
+                        <li
+                          key={item.id}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginBottom: "20px",
+                            borderBottom: "1px solid #ddd",
+                            paddingBottom: "15px",
+                          }}
+                        >
+                          <img
+                            src={`${VITE_BE_PATH}/img/${item.image}`}
+                            alt={item.name}
+                            style={{
+                              width: "70px",
+                              height: "70px",
+                              objectFit: "cover",
+                              borderRadius: "6px",
+                              marginRight: "15px",
+                              flexShrink: 0,
+                            }}
+                          />
+                          <div style={{ flexGrow: 1 }}>
+                            <h6 style={{ margin: "0 0 6px", fontWeight: "600" }}>{item.name}</h6>
 
-        </header>
+                            <p style={{ margin: "0", fontSize: "0.9rem", color: "#555" }}>
+                              Prezzo:{" "}
+                              {item.discount_type === "percentage" ? (
+                                <>
+                                  <del style={{ color: "gray", fontSize: "0.85rem" }}>
+                                    €{Number(item.price).toFixed(2)}
+                                  </del>{" "}
+                                  <span style={{ color: "black"}}>
+                                    €{Number(item.final_price).toFixed(2)}
+                                  </span>
+                                </>
+                              ) : (
+                                <>€{Number(item.price).toFixed(2)}</>
+                              )}
+                            </p>
+                          </div>
 
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "8px",
+                              marginLeft: "10px",
+                            }}
+                          >
+                            <button
+                              className="btn btn-outline-secondary"
+                              onClick={() => removeFromCart(item.id, 1)}
+                              aria-label={
+                                item.quantity === 1
+                                  ? `Rimuovi ${item.name} dal carrello`
+                                  : `Diminuisci quantità di ${item.name}`
+                              }
+                              style={{ padding: "4px 8px", minWidth: "32px" }}
+                            >
+                              {item.quantity === 1 ? "🗑️" : "-"}
+                            </button>
+                            <span
+                              style={{
+                                minWidth: "20px",
+                                textAlign: "center",
+                                fontWeight: "600",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {item.quantity}
+                            </span>
+                            <button
+                              className="btn btn-outline-secondary"
+                              onClick={() => addToCart(item)}
+                              aria-label={`Aumenta quantità di ${item.name}`}
+                              style={{ padding: "4px 8px", minWidth: "32px" }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {cartItems.length > 0 && (
+                      <div style={{ marginTop: "30px", textAlign: "center" }}>
+                        <button
+                          className="btn btn-primary me-2"
+                          onClick={() => {
+                            closeSidebar();
+                            navigate("/cart");
+                          }}
+                        >
+                          Vai al carrello
+                        </button>
+                        <button
+                          className="btn btn-success"
+                          onClick={() => {
+                            closeSidebar();
+                            navigate("/checkout");
+                          }}
+                        >
+                          Vai al checkout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                <li>
+                  <NavLink to="/wish-list" className="btn btn-outline-primary ms-auto">
+                    Wish List ({totalQuantityWishList})
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
     </>
+  );
 }
 
-export default Header
+export default Header;
