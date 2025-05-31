@@ -29,7 +29,7 @@ function ProductDetailPage() {
     }
 
     function getDataDettail(cat) {
-        console.log(cat.categories);
+
 
         const requests = cat.categories.map(element => {
             const sarch = {
@@ -67,8 +67,6 @@ function ProductDetailPage() {
         }
     });
 
-
-    console.log(arraycheck, "array controllato ");
 
 
 
