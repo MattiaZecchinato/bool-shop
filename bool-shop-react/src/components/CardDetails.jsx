@@ -23,12 +23,10 @@ function CardDetails({ data }) {
 
     return <>
 
-        <div className="d-flex">
+        <div className="card-detail d-flex mb-5">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
             <figure className='d-flex details-img'>
-                <Link to={`/detail/${slug}`}>
-                    <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
-                </Link>
+                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
             </figure>
             <div className="d-flex flex-column ms-5">
                 <h5 className="text-center fw-bold fs-3 mb-4">{name}</h5>
@@ -38,10 +36,9 @@ function CardDetails({ data }) {
                         <div className='mb-3'>
                             Prezzo:
                             <span className='text-decoration-line-through me-2 '>{priceParsed.toFixed(2)}€</span>
-
-                            <span className='fw-bold'>{discountPrice}€</span><span className='fw-bold'> - {discountAmountParsed}%</span>
+                            <span className='fw-bold'>{discountPrice}€</span><span className='fw-bold card-detail-discount ms-2 p-1'> - {discountAmountParsed}%</span>
                         </div>
-                        <p >A partire dal <strong>{dateFormatStart}</strong> fino al <strong>{dateFormatEnd}</strong></p></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
+                        <p >A partire dal <strong>{dateFormatStart}</strong> fino al <strong>{dateFormatEnd}</strong></p></div>) : (<span className='mb-3'>Prezzo: {priceParsed.toFixed(2)}€</span>)}
                 {/* <p className="">Tipologia: {game_type}</p> */}
                 {game_type === 'puzzle' ? '' : <p>Giocatori: {min_player} - {max_player}</p>}
                 <p> Età: {target_age}+</p>

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function Menu() {
 
     return (
-        <nav className="container">
+        <nav className="container mb-5">
             <ul className="list-unstyled d-flex justify-content-center gap-3">
                 <li>
                     <NavLink className="nav-link" to='/search'>Il Nostro Catalogo</NavLink>

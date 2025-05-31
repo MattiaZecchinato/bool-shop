@@ -10,11 +10,11 @@ function Header() {
     const totalQuantityWishList = prefer.reduce((acc, item) => acc + item.quantity, 0)
     return <>
 
-        <header className="bg-secondary">
+        <header className="mb-5">
             <nav className="container navbar navbar-expand-lg">
                 <div className="container-fluid">
-                    <NavLink className="navbar-brand" to='/'>
-                        <img src="/bool-shop-logo.png" alt="Logo" width="70" height="70" />
+                    <NavLink className="navbar-brand logo-container" to='/'>
+                        <img src="/bool-shop-logo.png" alt="Logo" width="70" height="70" className="logo" />
                     </NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
