@@ -5,17 +5,19 @@ import { CartContext } from "../components/CartContext"
 import { useContext } from "react";
 import { useCart } from "../components/CartContext";
 import { Link } from 'react-router-dom';
+import checkDiscount from '../utils/checkDiscount';
 
 function CardProduct({ data }) {
 
     const { prefercolor, isPrefer } = useContext(CartContext);
-    const { name, price, image, discount_amount, categories, slug } = data;
+    const { name, price, image, discount_amount, categories, slug, discount_start, discount_end } = data;
     const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
 
+    const hasDiscount = checkDiscount(name, discount_start, discount_end)
+
     const discountAmountParsed = parseFloat(discount_amount);
     const priceParsed = parseFloat(price);
-    const hasDiscount = discountAmountParsed > 0;
     const discountPrice = hasDiscount ? (priceParsed - (priceParsed * discountAmountParsed / 100)).toFixed(2) : priceParsed.toFixed(2);
 
     return <>
