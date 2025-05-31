@@ -44,17 +44,17 @@ function HomePage() {
 
     return (
         <div className="home-container mb-5">
-            <div className="content-box w-100 carousel-container">
-                <div id="carouselExampleAutoplaying" className="carousel carousel-container slide img-fluid m-auto" data-bs-ride="carousel">
+            <div className="content-box w-100">
+                <div id="carouselExampleAutoplaying" className="carousel carousel-container slide m-auto" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src="./src/assets/carosello-giochi.jpg" className="d-block w-100 carousel-img" alt="giochi-da-tavolo" />
+                            <img src="./src/assets/carosello-giochi-da-tavolo.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" />
                         </div>
                         <div className="carousel-item">
-                            <img src="./src/assets/carosello-puzzle.jpg" className="d-block w-100 carousel-img" alt="puzzle" />
+                            <img src="./src/assets/carosello-puzzle.jpg" className="d-block w-100 carousel-img img-fluid" alt="puzzle" />
                         </div>
                         <div className="carousel-item">
-                            <img src="./src/assets/spedizione-gratuita.jpg" className="d-block w-100 carousel-img" alt="spedizione-gratuita" />
+                            <img src="./src/assets/spedizione-gratuita.jpg" className="d-block w-100 carousel-img img-fluid" alt="spedizione-gratuita" />
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -128,8 +128,6 @@ function HomePage() {
                         <span className="visually-hidden">Next</span>
                     </button>
                 </div>
-
-
 
             </div>
 
