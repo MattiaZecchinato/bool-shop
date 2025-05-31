@@ -18,22 +18,23 @@ function Category() {
 
 
     console.log(slug)
-    const slugPar = {
-        "category_id": slug
-    }
+
 
 
 
     useEffect(() => {
         callEndPoint();
-    }, [currentPage]);
+    }, [currentPage, slug]);
 
     function callEndPoint() {
-        let finalUri = `${VITE_BE_PATH}/shop/category`, slugPar;
+        const slugPar = {
+            "category_id": slug
+        }
+        let finalUri = `${VITE_BE_PATH}/shop/category`;
 
 
 
-        axios.post(finalUri)
+        axios.post(finalUri, slugPar)
             .then(res => {
 
                 const data = res.data;
