@@ -9,6 +9,8 @@ function HomePage() {
     const { VITE_BE_PATH } = import.meta.env;
 
     const [data, setData] = useState([]);
+    const [groupNum, setGroupNum] = useState(3);
+
     const url = `${VITE_BE_PATH}/shop`;
 
     function getData() {
@@ -18,6 +20,17 @@ function HomePage() {
                 setData(res.data);
             })
             .catch(err => console.log(err))
+    }
+
+    function handleResize() {
+        const width = window.innerWidth;
+        if (width <= 576) {
+            return setGroupNum(1);
+        } else if (width <= 768) {
+            return setGroupNum(2);
+        } else {
+            return setGroupNum(3);
+        }
     }
 
     useEffect(() => {
@@ -30,10 +43,14 @@ function HomePage() {
 
             carousel.cycle();
         }
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
 
-    function groupProducts(products, groupNum = 3) {
+    function groupProducts(products) {
         const groups = [];
         for (let i = 0; i < products.length; i += groupNum) {
             groups.push(products.slice(i, i + groupNum));
@@ -41,6 +58,8 @@ function HomePage() {
 
         return groups;
     }
+
+
 
     return (
         <div className="home-container mb-5">
@@ -77,7 +96,7 @@ function HomePage() {
                             <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
                                 <div className="row justify-content-center">
                                     {group.map(product => (
-                                        <div key={product.id} className="col-lg-3 col-md-3 mb-3 d-flex">
+                                        <div key={product.id} className={`mb-3 d-flex col-${12 / groupNum}`}>
                                             <CardProduct data={product} />
                                         </div>
                                     ))}
@@ -110,7 +129,7 @@ function HomePage() {
                             <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
                                 <div className="row justify-content-center">
                                     {group.map(product => (
-                                        <div key={product.id} className="col-lg-3 col-md-3 mb-3 d-flex">
+                                        <div key={product.id} className={`mb-3 d-flex col-${12 / groupNum}`}>
                                             <CardProduct data={product} />
                                         </div>
                                     ))}
