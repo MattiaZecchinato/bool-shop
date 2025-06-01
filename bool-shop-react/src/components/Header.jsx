@@ -1,6 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../components/CartContext";
 import { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 function Header() {
   const { cartItems, removeFromCart, addToCart, prefer } = useCart();
@@ -42,25 +46,26 @@ function Header() {
               aria-controls="navbarNav"
               aria-expanded="false"
               aria-label="Toggle navigation"
-              >
+            >
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse flex-row-reverse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <NavLink className="nav-link active" aria-current="page" to="/">
-                    Home
+                    <FontAwesomeIcon icon={faHome} className="fs-4 text-white" />
                   </NavLink>
                 </li>
                 <li className="dropdown position-relative">
-                  <button
-                    className="btn btn-outline-primary ms-auto"
+                  <Link
+                    className="btn ms-auto position-relative"
                     onClick={() => setIsSidebarOpen(true)}
                     aria-haspopup="true"
                     aria-expanded={isSidebarOpen}
                   >
-                    Carrello ({totalQuantityCart})
-                  </button>
+                    <FontAwesomeIcon icon={faShoppingCart} className="fs-4 text-white nav-icon" />
+                    <div className="position-absolute tot-quantity fw-bold">{totalQuantityCart}</div>
+                  </Link>
 
                   {/* Overlay per chiudere la sidebar cliccando fuori */}
                   <div
@@ -140,7 +145,7 @@ function Header() {
                                   <del style={{ color: "gray", fontSize: "0.85rem" }}>
                                     €{Number(item.price).toFixed(2)}
                                   </del>{" "}
-                                  <span style={{ color: "black"}}>
+                                  <span style={{ color: "black" }}>
                                     €{Number(item.final_price).toFixed(2)}
                                   </span>
                                 </>
@@ -218,8 +223,9 @@ function Header() {
                   </div>
                 </li>
                 <li>
-                  <NavLink to="/wish-list" className="btn btn-outline-primary ms-auto">
-                    Wish List ({totalQuantityWishList})
+                  <NavLink to="/wish-list" className="btn ms-auto position-relative">
+                    <FontAwesomeIcon icon={solidHeart} className="fs-4 text-white nav-icon" />
+                    <div className="position-absolute tot-quantity fw-bold">{totalQuantityWishList}</div>
                   </NavLink>
                 </li>
               </ul>

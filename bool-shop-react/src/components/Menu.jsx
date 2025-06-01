@@ -17,7 +17,7 @@ function Menu() {
                 <li>
                     <div className="dropdown">
                         <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown button
+                            Categorie
                         </button>
                         <ul className="dropdown-menu">
                             <li><NavLink to='/category/1' className="dropdown-item">Strategia</NavLink></li>
