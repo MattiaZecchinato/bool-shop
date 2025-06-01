@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Menu() {
 
@@ -16,9 +17,9 @@ function Menu() {
                 </li>
                 <li>
                     <div className="dropdown">
-                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown button
-                        </button>
+                        <Link className="dropdown-toggle text-decoration-none text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorie
+                        </Link>
                         <ul className="dropdown-menu">
                             <li><NavLink to='/category/1' className="dropdown-item">Strategia</NavLink></li>
                             <li><NavLink to='/category/2' className="dropdown-item">Famiglia</NavLink></li>
