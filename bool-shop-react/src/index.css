@@ -1,3 +1,20 @@
+/* Header */
+
+header {
+    background-color: #2b1045;
+}
+
+.nav-icon {
+    vertical-align: middle;
+}
+
+.tot-quantity {
+    bottom: -5px;
+    right: 0px;
+    width: 20px;
+    color: rgb(230, 218, 56);
+}
+
 /* Carosello */
 
 .carousel-container {
