@@ -59,7 +59,7 @@ function BoardgamesPage() {
             {found.length > 0
                 ? found.map(elem =>
                     display
-                        ? <div key={elem.id} className='col-lg-4 mb-4'><CardProduct data={elem} /></div>
+                        ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4'><CardProduct data={elem} /></div>
                         : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
                 )
                 : <h3>Nessun Elemento Trovato</h3>

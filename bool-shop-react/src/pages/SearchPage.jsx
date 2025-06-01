@@ -66,7 +66,7 @@ function SearchPage() {
                 setCurrentPage(1);
             });
     }
-    
+
     function goToPage(newPage) {
         if (newPage >= 1 && newPage <= totalPages) {
             setCurrentPage(newPage);
@@ -75,12 +75,12 @@ function SearchPage() {
 
     return <>
         <div className="d-flex gap-3 align-items-end mb-5">
-            <div className="col-md-4">
+            <div className="col-md-3">
                 <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
                 <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData}
                 />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-2">
                 <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
                 <select id="inputOrder" className="form-select" name="choice" value={formSearch.choice} onChange={handleData}>
                     <option value="name">Nome</option>
@@ -88,22 +88,22 @@ function SearchPage() {
                     <option value="created_at">Recenti</option>
                 </select>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-2">
                 <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
                 <select id="inputOrder" className="form-select" name="order" value={formSearch.order} onChange={handleData}>
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
             </div>
-            <div className="col-md-4">
-                <Link
-                    className="btn btn-primary"
-                    to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}`}
-                    onClick={() => setCurrentPage(1)}
-                >
-                    Cerca
-                </Link>
-            </div>
+
+            <Link
+                className="btn btn-primary col-lg-1"
+                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}`}
+                onClick={() => setCurrentPage(1)}
+            >
+                Cerca
+            </Link>
+
         </div>
 
         <div className="d-flex justify-content-end mb-4 gap-2" role="group" aria-label="btn-group">
@@ -115,7 +115,7 @@ function SearchPage() {
             {found.length > 0
                 ? found.map(elem =>
                     display
-                        ? <div key={elem.id} className='col-lg-4 mb-4'><CardProduct data={elem} /></div>
+                        ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4'><CardProduct data={elem} /></div>
                         : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
                 )
                 : <h3>Nessun Elemento Trovato</h3>
