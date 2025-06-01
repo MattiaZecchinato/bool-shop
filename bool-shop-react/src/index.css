@@ -37,6 +37,7 @@ header {
 /* stile cuore */
 
 .card svg {
+    z-index: 2;
     position: absolute;
     top: 0px;
     right: 0;
