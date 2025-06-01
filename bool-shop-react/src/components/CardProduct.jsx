@@ -26,7 +26,7 @@ function CardProduct({ data }) {
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
             <figure className='image-container'>
                 <Link to={`/detail/${slug}`}>
-                    <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
+                    <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top w-75 mx-auto d-block" alt={name} />
                 </Link>
             </figure>
             <div className="card-body flex-grow-1 d-flex flex-column">

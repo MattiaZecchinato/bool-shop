@@ -25,10 +25,10 @@ function CardDetails({ data }) {
 
         <div className="card-detail d-flex mb-5">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
-            <figure className='d-flex details-img'>
-                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top" alt={name} />
+            <figure className='d-flex w-100 align-items-center justify-content-center'>
+                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top w-75" alt={name} />
             </figure>
-            <div className="d-flex flex-column ms-5">
+            <div className="d-flex flex-column ms-5 w-100">
                 <h5 className="text-center fw-bold fs-3 mb-4">{name}</h5>
                 <p className="fst-italic fs-4">{description}</p>
                 {hasDiscount ? (
@@ -48,7 +48,7 @@ function CardDetails({ data }) {
                         : 'Nessuna'}
                 </p>
                 <div className="text-center">
-                    <button className="btn btn-success w-25" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                    <button className="btn btn-success w-50" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
                 </div>
             </div>
         </div>
