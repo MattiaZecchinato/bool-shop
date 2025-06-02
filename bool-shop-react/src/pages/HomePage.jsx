@@ -125,7 +125,7 @@ function HomePage() {
                                 const discountAmount = element.discount_amount;
                                 const checkdisc = checkDiscount(element);
 
-                                return discountAmount >= 15.00 && discountAmount <= 25.00 && checkdisc;
+                                return discountAmount >= 15.00 && discountAmount <= 40.00 && checkdisc;
                             })
                         ).map((group, index) => (
                             <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
