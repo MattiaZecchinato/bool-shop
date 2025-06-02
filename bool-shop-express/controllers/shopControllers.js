@@ -1,3 +1,4 @@
+const { count } = require('console');
 const conn = require('../data/dbShop')
 const nodemailer = require('nodemailer');
 const path = require('path');
@@ -51,10 +52,10 @@ function index(req, res) {
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    let { search, choice, order, limit, page, type } = req.query;
+    let { search,choice,order, limit, page, type, discount } = req.query;
 
-    const allowedChoices = ["name", "price", "created_at", "discount_amount"];
-    const sortBy = allowedChoices.includes(choice) ? choice : "name";
+    const allowedSorts = ["name", "price", "created_at", "discount_amount"];
+    const sortColumn = allowedSorts.includes(choice) ? choice : "name";
 
     const allowedOrders = ["asc", "desc"];
     const sortOrder = allowedOrders.includes(order?.toLowerCase()) ? order.toUpperCase() : "ASC";
@@ -65,69 +66,42 @@ function indexSearchOrder(req, res) {
 
     const searchParam = search ? `%${search}%` : `%`;
 
+    // Costruzione where dinamica
     let whereClause = "WHERE p.name LIKE ?";
     const queryParams = [searchParam];
-    console.log(choice)
+
     if (type) {
         whereClause += " AND p.game_type = ?";
         queryParams.push(type);
     }
 
-    let countSql;
-    let productSql;
-    let productQueryParams;
+    if (discount === 'true') {
 
-    if (choice === 'discount_amount') {
-        countSql = `
-            SELECT COUNT(*) AS total
-            FROM products p
-            WHERE
-                p.discount_type = 'percentage'
-                AND p.discount_start <= CURDATE()
-                AND p.discount_end >= CURDATE()
-                AND p.name LIKE ?
+        whereClause += `
+            AND p.discount_type = 'percentage'
+            AND p.discount_start <= CURDATE()
+            AND p.discount_end >= CURDATE()
         `;
-        if (type) {
-            countSql += " AND p.game_type = ?";
-        }
-
-        productSql = `
-            SELECT *
-            FROM products p
-            WHERE
-                p.discount_type = 'percentage'
-                AND p.discount_start <= CURDATE()
-                AND p.discount_end >= CURDATE()
-                AND p.name LIKE ?
-        `;
-        if (type) {
-            productSql += " AND p.game_type = ?";
-        }
-        productSql += `
-            ORDER BY
-                p.discount_amount ${sortOrder}
-            LIMIT ? OFFSET ?
-        `;
-        productQueryParams = [...queryParams, limit, offset];
-
-    } else {
-        countSql = `
-            SELECT COUNT(*) AS total
-            FROM products p
-            ${whereClause}
-        `;
-
-        productSql = `
-            SELECT *
-            FROM products p
-            ${whereClause}
-            ORDER BY p.${sortBy} ${sortOrder}
-            LIMIT ? OFFSET ?
-        `;
-        productQueryParams = [...queryParams, limit, offset];
     }
 
+    const countSql = `
+        SELECT COUNT(*) AS total
+        FROM products p
+        ${whereClause}
+    `;
+
+    const productSql = `
+        SELECT *
+        FROM products p
+        ${whereClause}
+        ORDER BY p.${sortColumn} ${sortOrder}
+        LIMIT ? OFFSET ?
+    `;
+
+    const productQueryParams = [...queryParams, limit, offset];
+    console.log(productQueryParams)
     conn.query(countSql, queryParams, (err, countResult) => {
+        console.log(countResult)
         if (err) {
             console.error('Errore nella query di conteggio:', err);
             return res.status(500).json({ error: 'Errore interno del server' });
@@ -169,7 +143,6 @@ function indexSearchOrder(req, res) {
                     return res.status(500).json({ error: 'Errore interno del server' });
                 }
 
-                // Creiamo una mappa per accedere facilmente alle categorie per product_id
                 const categoriesMap = {};
                 categories.forEach(cat => {
                     if (!categoriesMap[cat.product_id]) {
@@ -181,7 +154,6 @@ function indexSearchOrder(req, res) {
                     });
                 });
 
-                // Creiamo l'array finale dei prodotti mantenendo l'ordine originale di `products`
                 const finalProducts = products.map(p => ({
                     ...p,
                     final_price: parseFloat(calculatedProduct(p)).toFixed(2),
@@ -198,6 +170,7 @@ function indexSearchOrder(req, res) {
         });
     });
 }
+
 
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {

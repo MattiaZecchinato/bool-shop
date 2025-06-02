@@ -19,12 +19,15 @@ function SearchPage() {
     const searchpara = searchParams.get("search") || "";
     let choicepara = searchParams.get("choice") || "name";
     let orderpara = searchParams.get("order") || "asc";
+    let discountpara = searchParams.get('discount') || "false"
+    console.log(discountpara)
 
 
     const resetFormSearch = {
         choice: choicepara,
         search: searchpara,
-        order: orderpara
+        order: orderpara,
+        discount: discountpara
     };
     if (choicepara === "created_at") {
         if (orderpara === "asc") {
@@ -34,14 +37,14 @@ function SearchPage() {
         }
 
     }
-    if (choicepara === "discount_amount") {
-        if (orderpara === "asc") {
-            orderpara = "desc"
-        } else {
-            orderpara = "asc"
-        }
+    // if (choicepara === "discount_amount") {
+    //     if (orderpara === "asc") {
+    //         orderpara = "desc"
+    //     } else {
+    //         orderpara = "asc"
+    //     }
 
-    }
+    // }
 
     const [formSearch, setFormSearch] = useState(resetFormSearch);
 
@@ -66,7 +69,7 @@ function SearchPage() {
             finalUri += `search=%20`;
         }
 
-        finalUri += `&choice=${choicepara}&order=${orderpara}`;
+        finalUri += `&choice=${choicepara}&order=${orderpara}&discount=${discountpara}`;
         finalUri += `&limit=6&page=${currentPage}`;
 
 
@@ -104,7 +107,6 @@ function SearchPage() {
                     <option value="name">Nome</option>
                     <option value="price">Prezzo</option>
                     <option value="created_at">Recenti</option>
-                    <option value="discount_amount">In promozione</option>
                 </select>
             </div>
             <div className="col-md-2">
@@ -114,10 +116,17 @@ function SearchPage() {
                     <option value="desc">Z-A</option>
                 </select>
             </div>
+            <div className="col-md-2">
+                <label htmlFor="inputOrder" className="form-label">solo in scontistica </label>
+                <select id="inputOrder" className="form-select" name="discount" value={formSearch.discount} onChange={handleData}>
+                    <option value="true">si</option>
+                    <option value="false">no</option>
+                </select>
+            </div>
 
             <Link
                 className="btn btn-primary col-lg-1"
-                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}`}
+                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}`}
                 onClick={() => setCurrentPage(1)}
             >
                 Cerca
