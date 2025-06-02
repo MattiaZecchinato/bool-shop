@@ -29,11 +29,11 @@ function CardProductList({ data }) {
                 </div>
                 <div className="col-9 col-sm-9 col-md-9">
                     <div className="card-body">
-                        <h5 className="card-title">{name}</h5>
-                        {hasDiscount ? (<div>Prezzo: <span className='text-decoration-line-through me-2'>{priceParsed.toFixed(2)}€</span>
+                        <h5 className="card-title fw-bold fst-italic">{name}</h5>
+                        {hasDiscount ? (<div><span className='text-decoration-line-through me-2'>{priceParsed.toFixed(2)}€</span>
                             <span className='fw-bold'>{discountPrice}€</span><span className='discount-price-list fw-bold ms-2'> - {discountAmountParsed}%</span></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
                     </div>
-                    <button className="btn btn-success btn-sm mb-2" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                    <button className="btn-card text-white btn-sm mb-2 ms-3" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
                 </div>
             </div>
 

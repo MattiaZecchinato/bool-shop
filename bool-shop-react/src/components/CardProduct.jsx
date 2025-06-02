@@ -43,10 +43,10 @@ function CardProduct({ data }) {
                             ? categories.map(c => c.category_name).join(', ')
                             : 'Nessuna'}
                     </p>
-                    <button className="btn btn-card text-white" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                    <button className="btn-card text-white" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
                 </div>
             </div>
-        </div>
+        </div >
     </>
 }
 

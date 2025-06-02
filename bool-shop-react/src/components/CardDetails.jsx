@@ -65,7 +65,7 @@ function CardDetails({ data }) {
                         : 'Nessuna'}
                 </p>
                 <div className="text-center">
-                    <button className="btn btn-success btn-detail" onClick={() => addToCart(data)}>
+                    <button className="btn-card btn-detail text-white" onClick={() => addToCart(data)}>
                         Aggiungi al carrello
                     </button>
                 </div>
