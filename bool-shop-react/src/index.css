@@ -1,5 +1,14 @@
 /* Header */
 
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #0d001a;
+    z-index: 10;
+}
+
 .nav-icon {
     vertical-align: middle;
 }
@@ -19,6 +28,11 @@
     margin-left: 10px;
     color: white;
     font-size: large;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
 }
 
 /* body  */
@@ -43,6 +57,7 @@ body {
 .menu-list {
     color: white;
     font-size: large;
+    margin-top: 130px;
 }
 
 .dropdown a {
