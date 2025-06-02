@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Menu() {
 
     return (
-        <nav className="container mb-5">
+        <nav className="container mb-5 nav-style">
             <ul className="list-unstyled d-flex justify-content-center gap-3 menu-list">
                 <li>
                     <NavLink className="nav-link" to='/search'>Catalogo</NavLink>
@@ -16,25 +16,29 @@ function Menu() {
                     <NavLink className="nav-link" to='/puzzles'>Puzzle</NavLink>
                 </li>
                 <li>
-                    <div className="dropdown">
-                        <Link className="text-decoration-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div className="cat-style">
+                        <Link type="button" aria-expanded="false">
                             Categorie
                         </Link>
-                        <ul className="dropdown-menu d-flex my-2">
-                            <div>
-                                <li><NavLink to='/category/1' className="dropdown-item">Strategia</NavLink></li>
-                                <li><NavLink to='/category/2' className="dropdown-item">Famiglia</NavLink></li>
-                                <li><NavLink to='/category/3' className="dropdown-item">Party</NavLink></li>
-                                <li><NavLink to='/category/4' className="dropdown-item">Puzzle</NavLink></li>
-                                <li><NavLink to='/category/5' className="dropdown-item">Classici</NavLink></li>
-                            </div>
-                            <div>
-                                <li><NavLink to='/category/6' className="dropdown-item">Bambini</NavLink></li>
-                                <li><NavLink to='/category/7' className="dropdown-item">Educativi</NavLink></li>
-                                <li><NavLink to='/category/8' className="dropdown-item">Avventura</NavLink></li>
-                                <li><NavLink to='/category/9' className="dropdown-item">Carte</NavLink></li>
-                                <li><NavLink to='/category/10' className="dropdown-item">Puzzle 3D</NavLink></li>
-                            </div>
+                        <ul className="d-flex ul-nav-style m-0">
+                            <li>
+                                <ul className="p-0 ul-style-drop">
+                                    <li><NavLink to='/category/1' >Strategia</NavLink></li>
+                                    <li><NavLink to='/category/2' >Famiglia</NavLink></li>
+                                    <li><NavLink to='/category/3' >Party</NavLink></li>
+                                    <li><NavLink to='/category/4' >Puzzle</NavLink></li>
+                                    <li><NavLink to='/category/5' >Classici</NavLink></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul className="p-0 ul-style-drop">
+                                    <li><NavLink to='/category/6' >Bambini</NavLink></li>
+                                    <li><NavLink to='/category/7' >Educativi</NavLink></li>
+                                    <li><NavLink to='/category/8' >Avventura</NavLink></li>
+                                    <li><NavLink to='/category/9' >Carte</NavLink></li>
+                                    <li><NavLink to='/category/10' >Puzzle 3D</NavLink></li>
+                                </ul>
+                            </li>
 
                         </ul>
                     </div>
