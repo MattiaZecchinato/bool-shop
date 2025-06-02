@@ -77,9 +77,9 @@ function Header() {
                                         className="btn ms-auto position-relative"
                                     >
                                         <FontAwesomeIcon icon={solidHeart} className="fs-3 text-white nav-icon" />
-                                        {/* {totalQuantityWishList > 0 && (
-                                            <div className="position-absolute tot-quantity fw-bold">{totalQuantityWishList}</div>
-                                        )} */}
+                                        {totalQuantityWishList > 0 && (
+                                            <div className="position-absolute tot-quantity fw-bold qnt-wish-list">{totalQuantityWishList}</div>
+                                        )}
                                         <span className="span-style-header">WishList</span>
                                     </NavLink>
                                 </li>

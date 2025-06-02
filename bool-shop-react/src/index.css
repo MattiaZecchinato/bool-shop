@@ -30,6 +30,13 @@ header {
     font-size: large;
 }
 
+.qnt-wish-list {
+    background-color: transparent;
+    top: 10px;
+    left: 14px;
+    color: #070007;
+}
+
 .logo {
     width: 70px;
     height: 70px;
@@ -48,31 +55,64 @@ body {
 
 /* Menu */
 
-.dropdown-menu {
-    max-height: 250px;
-    overflow-y: hidden !important;
-    padding: 5px;
-}
-
-.menu-list {
-    color: white;
-    font-size: large;
-    margin-top: 130px;
-}
-
-.dropdown a {
-    color: white;
+.nav-style {
+    padding-top: 130px;
+    color: #fff;
     font-size: large;
 }
 
-.dropdown ul {
-    background-color: #070007;
-    border: transparent;
+.nav-style a {
+    color: #fff;
+    text-decoration: none;
 }
 
-.dropdown ul li {
+li {
+    list-style: none;
+}
 
-    padding: 5px;
+.cat-style {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.ul-nav-style {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    background-color: #361556;
+    width: max-content;
+    visibility: hidden;
+    margin-top: 0;
+    padding: 5px 10px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 999;
+    border-radius: 5px;
+}
+
+.cat-style:hover {
+    cursor: pointer;
+}
+
+.cat-style:hover .ul-nav-style {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.ul-style-drop>li {
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ul-style-drop li:hover {
+    background-color: #fff;
+}
+
+.ul-style-drop li:hover a {
+    color: #0d001a;
+    transition: color 0.3s ease;
 }
 
 /* Carosello */
@@ -529,6 +569,11 @@ body {
         left: 19px;
         font-size: medium;
     }
+
+    .qnt-wish-list {
+        top: 7px;
+        left: 14.5px;
+    }
 }
 
 /* 3. Desktop (>= 992px) */
@@ -553,5 +598,11 @@ body {
         top: -1px;
         left: 20px;
         font-size: medium;
+    }
+
+    .qnt-wish-list {
+        top: 8px;
+        left: 16px;
+        font-size: 18px;
     }
 }
