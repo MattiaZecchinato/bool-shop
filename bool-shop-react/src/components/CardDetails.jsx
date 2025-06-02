@@ -24,57 +24,55 @@ function CardDetails({ data }) {
 
     return <>
 
-        <div className="card-detail d-flex flex-column flex-md-row mb-5 bg-primary p-4">
-            <FontAwesomeIcon
-                icon={solidHeart}
-                className={prefercolor(data) ? 'text-danger' : ''}
-                onClick={() => isPrefer(data)}
-            />
-            <figure className="d-flex w-100 w-md-50 align-items-center justify-content-center mb-3 mb-md-0">
-                <img
-                    src={`${VITE_BE_PATH}/img/${image}`}
-                    className="detail-img img-fluid"
-                    alt={name}
-                    style={{ objectFit: 'contain' }}
+        <div className="gold-gradient-border mb-5">
+            <div className="card-detail card card-style d-flex flex-column flex-md-row">
+                <FontAwesomeIcon
+                    icon={solidHeart}
+                    className={prefercolor(data) ? 'text-danger' : ''}
+                    onClick={() => isPrefer(data)}
                 />
-            </figure>
-            <div className="d-flex flex-column desciption-section ps-0 description-section">
-                <h5 className="text-center fw-bold mb-4 title-detail">{name}</h5>
-                <p className="fst-italic description-text">{description}</p>
-                {hasDiscount ? (
-                    <div>
-                        <div className="mb-3 detail-text">
-                            <span className="text-decoration-line-through me-2 text-danger detail-price">{priceParsed.toFixed(2)}€</span>
-                            <span className="fw-bold text-success detail-price">{discountPrice}€</span>
-                            <span className="fw-bold card-detail-discount ms-2 p-1"> - {discountAmountParsed}%</span>
+                <figure className="d-flex w-100 w-md-50 align-items-center justify-content-center mb-3 mb-md-0">
+                    <img
+                        src={`${VITE_BE_PATH}/img/${image}`}
+                        className="detail-img img-fluid"
+                        alt={name}
+                        style={{ objectFit: 'contain' }}
+                    />
+                </figure>
+                <div className="d-flex flex-column desciption-section ps-0 description-section justify-content-center">
+                    <h5 className="text-center fw-bold mb-4 title-detail">{name}</h5>
+                    <p className="fst-italic description-text">{description}</p>
+                    {hasDiscount ? (
+                        <div>
+                            <div className="mb-3 detail-text">
+                                <span className="text-decoration-line-through me-2 text-danger detail-price">{priceParsed.toFixed(2)}€</span>
+                                <span className="fw-bold text-success detail-price">{discountPrice}€</span>
+                                <span className="fw-bold card-detail-discount ms-2 p-1"> - {discountAmountParsed}%</span>
+                            </div>
+                            <p className='detail-text'>
+                                Dal <strong>{dateFormatStart}</strong> al{' '}
+                                <strong>{dateFormatEnd}</strong>
+                            </p>
                         </div>
-                        <p className='detail-text'>
-                            Dal <strong>{dateFormatStart}</strong> al{' '}
-                            <strong>{dateFormatEnd}</strong>
-                        </p>
+                    ) : (
+                        <span className="mb-3 detail-text">Prezzo: {priceParsed.toFixed(2)}€</span>
+                    )}
+                    {game_type === 'puzzle' ? '' : <p className='detail-text'>Giocatori: {min_player} - {max_player}</p>}
+                    <p className='detail-text'><strong>Età:</strong> {target_age}+</p>
+                    <p className='detail-text mb-4'>
+                        <strong>Categoria:</strong>{' '}
+                        {categories && categories.length > 0
+                            ? categories.map((c) => c.category_name).join(', ')
+                            : 'Nessuna'}
+                    </p>
+                    <div className="text-center">
+                        <button className="btn-card btn-detail text-white" onClick={() => addToCart(data)}>
+                            Aggiungi al carrello
+                        </button>
                     </div>
-                ) : (
-                    <span className="mb-3 detail-text">Prezzo: {priceParsed.toFixed(2)}€</span>
-                )}
-                {game_type === 'puzzle' ? '' : <p className='detail-text'>Giocatori: {min_player} - {max_player}</p>}
-                <p className='detail-text'><strong>Età:</strong> {target_age}+</p>
-                <p className='detail-text'>
-                    <strong>Categoria:</strong>{' '}
-                    {categories && categories.length > 0
-                        ? categories.map((c) => c.category_name).join(', ')
-                        : 'Nessuna'}
-                </p>
-                <div className="text-center">
-                    <button className="btn-card btn-detail text-white" onClick={() => addToCart(data)}>
-                        Aggiungi al carrello
-                    </button>
                 </div>
             </div>
         </div>
-
-
-
-
     </>
 }
 

@@ -21,6 +21,7 @@ function CardProduct({ data }) {
     const discountPrice = hasDiscount ? (priceParsed - (priceParsed * discountAmountParsed / 100)).toFixed(2) : priceParsed.toFixed(2);
 
     return <>
+
         <div className="gold-gradient-border mb-4">
             <div className="card card-style d-flex flex-column h-100 p-2">
                 <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
@@ -30,7 +31,7 @@ function CardProduct({ data }) {
                     </Link>
                 </figure>
                 <div className="card-body flex-grow-1 d-flex flex-column align-items-center">
-                    <h4 className="card-title fw-bold mb-3 fst-italic">{name}</h4>
+                    <h4 className="card-title fw-bold mb-3 fs-3 fst-italic text-center">{name}</h4>
                     {hasDiscount ? (
                         <div className='mb-2'>
                             <span className='text-decoration-line-through me-2 text-danger'>{priceParsed.toFixed(2)}€</span>
