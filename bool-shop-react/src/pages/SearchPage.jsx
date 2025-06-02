@@ -26,6 +26,22 @@ function SearchPage() {
         search: searchpara,
         order: orderpara
     };
+    if (choicepara === "created_at") {
+        if (orderpara === "asc") {
+            orderpara = "desc"
+        } else {
+            orderpara = "asc"
+        }
+
+    }
+    if (choicepara === "discount_amount") {
+        if (orderpara === "asc") {
+            orderpara = "desc"
+        } else {
+            orderpara = "asc"
+        }
+
+    }
 
     const [formSearch, setFormSearch] = useState(resetFormSearch);
 
@@ -49,22 +65,7 @@ function SearchPage() {
         } else {
             finalUri += `search=%20`;
         }
-        if (choicepara === "created_at") {
-            if (orderpara === "asc") {
-                orderpara = "desc"
-            } else {
-                orderpara = "asc"
-            }
 
-        }
-        if (choicepara === "discount_amount") {
-            if (orderpara === "asc") {
-                orderpara = "desc"
-            } else {
-                orderpara = "asc"
-            }
-
-        }
         finalUri += `&choice=${choicepara}&order=${orderpara}`;
         finalUri += `&limit=6&page=${currentPage}`;
 
