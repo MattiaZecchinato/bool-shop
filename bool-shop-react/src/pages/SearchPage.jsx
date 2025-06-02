@@ -20,6 +20,7 @@ function SearchPage() {
     let choicepara = searchParams.get("choice") || "name";
     let orderpara = searchParams.get("order") || "asc";
 
+
     const resetFormSearch = {
         choice: choicepara,
         search: searchpara,
@@ -54,15 +55,23 @@ function SearchPage() {
             } else {
                 orderpara = "asc"
             }
+
+        }
+        if (choicepara === "discount_amount") {
+            if (orderpara === "asc") {
+                orderpara = "desc"
+            } else {
+                orderpara = "asc"
+            }
+
         }
         finalUri += `&choice=${choicepara}&order=${orderpara}`;
         finalUri += `&limit=6&page=${currentPage}`;
 
-
+        console.log(finalUri)
         axios.get(finalUri)
             .then(res => {
                 const data = res.data;
-                console.log(data.products)
                 setFound(data.products || []);
                 setTotalPages(data.totalPages || 1);
                 setCurrentPage(data.currentPage || 1);
@@ -79,6 +88,7 @@ function SearchPage() {
             setCurrentPage(newPage);
         }
     }
+    console.log(found)
 
     return <>
         <div className="d-flex gap-3 align-items-end mb-5">
@@ -93,6 +103,7 @@ function SearchPage() {
                     <option value="name">Nome</option>
                     <option value="price">Prezzo</option>
                     <option value="created_at">Recenti</option>
+                    <option value="discount_amount">scontati</option>
                 </select>
             </div>
             <div className="col-md-2">

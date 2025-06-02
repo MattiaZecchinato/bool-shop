@@ -53,7 +53,7 @@ function index(req, res) {
 function indexSearchOrder(req, res) {
     let { search, choice, order, limit, page, type } = req.query;
 
-    const allowedChoices = ["name", "price", "created_at"];
+    const allowedChoices = ["name", "price", "created_at", "discount_amount"];
     const sortBy = allowedChoices.includes(choice) ? choice : "name";
 
     const allowedOrders = ["asc", "desc"];
@@ -183,7 +183,7 @@ function checkout(req, res) {
     `;
 
     const orderValues = [
-        parseFloat(total_order), 
+        parseFloat(total_order),
         freeshipping,
         status,
         user_first_name,
