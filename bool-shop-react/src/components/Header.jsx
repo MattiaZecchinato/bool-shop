@@ -32,7 +32,7 @@ function Header() {
                 <nav className="container navbar navbar-expand">
                     <div className="container-fluid">
                         <NavLink className="navbar-brand" to="/">
-                            <img src="/bool-shop-logo.png" alt="Logo" width="70" height="70" className="logo" />
+                            <img src="/bool-shop-logo.png" alt="Logo" className="logo" />
                         </NavLink>
                         <button
                             className="navbar-toggler"

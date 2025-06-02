@@ -1,5 +1,14 @@
 /* Header */
 
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #0d001a;
+    z-index: 10;
+}
+
 .nav-icon {
     vertical-align: middle;
 }
@@ -19,6 +28,11 @@
     margin-left: 10px;
     color: white;
     font-size: large;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
 }
 
 /* body  */
@@ -43,6 +57,7 @@ body {
 .menu-list {
     color: white;
     font-size: large;
+    margin-top: 130px;
 }
 
 .dropdown a {
@@ -125,8 +140,19 @@ body {
 
 .card.card-style {
     background-color: rgba(245, 245, 220, 1);
-    border: 5px solid #cda434;
-    box-shadow: 4px 3px 8px black;
+    /* border: 5px solid #cda434; */
+    box-shadow: 4px 6px 8px black;
+    border-radius: 20px;
+}
+
+.gold-gradient-border {
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    padding: 3px;
+    border-radius: 20px;
+}
+
+.btn.btn-card {
+    background-color: #361556;
 }
 
 /* freccia carosello */
