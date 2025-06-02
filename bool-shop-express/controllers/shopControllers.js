@@ -67,17 +67,65 @@ function indexSearchOrder(req, res) {
 
     let whereClause = "WHERE p.name LIKE ?";
     const queryParams = [searchParam];
-
+    console.log(choice)
     if (type) {
         whereClause += " AND p.game_type = ?";
         queryParams.push(type);
     }
 
-    const countSql = `
-        SELECT COUNT(*) AS total
-        FROM products p
-        ${whereClause}
-    `;
+    let countSql;
+    let productSql;
+    let productQueryParams;
+
+    if (choice === 'discount_amount') {
+        countSql = `
+            SELECT COUNT(*) AS total
+            FROM products p
+            WHERE
+                p.discount_type = 'percentage'
+                AND p.discount_start <= CURDATE()
+                AND p.discount_end >= CURDATE()
+                AND p.name LIKE ?
+        `;
+        if (type) {
+            countSql += " AND p.game_type = ?";
+        }
+
+        productSql = `
+            SELECT *
+            FROM products p
+            WHERE
+                p.discount_type = 'percentage'
+                AND p.discount_start <= CURDATE()
+                AND p.discount_end >= CURDATE()
+                AND p.name LIKE ?
+        `;
+        if (type) {
+            productSql += " AND p.game_type = ?";
+        }
+        productSql += `
+            ORDER BY
+                p.discount_amount ${sortOrder}
+            LIMIT ? OFFSET ?
+        `;
+        productQueryParams = [...queryParams, limit, offset];
+
+    } else {
+        countSql = `
+            SELECT COUNT(*) AS total
+            FROM products p
+            ${whereClause}
+        `;
+
+        productSql = `
+            SELECT *
+            FROM products p
+            ${whereClause}
+            ORDER BY p.${sortBy} ${sortOrder}
+            LIMIT ? OFFSET ?
+        `;
+        productQueryParams = [...queryParams, limit, offset];
+    }
 
     conn.query(countSql, queryParams, (err, countResult) => {
         if (err) {
@@ -88,15 +136,11 @@ function indexSearchOrder(req, res) {
         const totalProducts = countResult[0].total;
         const totalPages = Math.ceil(totalProducts / limit);
 
-        const productSql = `
-            SELECT *
-            FROM products p
-            ${whereClause}
-            ORDER BY ${sortBy} ${sortOrder}
-            LIMIT ? OFFSET ?
-        `;
+        if (totalProducts === 0) {
+            return res.json({ products: [], totalProducts: 0, totalPages: 0, currentPage: page });
+        }
 
-        conn.query(productSql, [...queryParams, limit, offset], (err, products) => {
+        conn.query(productSql, productQueryParams, (err, products) => {
             if (err) {
                 console.error('Errore nella query dei prodotti:', err);
                 return res.status(500).json({ error: 'Errore interno del server' });
@@ -141,7 +185,7 @@ function indexSearchOrder(req, res) {
                 const finalProducts = products.map(p => ({
                     ...p,
                     final_price: parseFloat(calculatedProduct(p)).toFixed(2),
-                    categories: categoriesMap[p.id] || [] // Aggiungi le categorie dal categoriesMap
+                    categories: categoriesMap[p.id] || []
                 }));
 
                 res.json({
@@ -154,6 +198,7 @@ function indexSearchOrder(req, res) {
         });
     });
 }
+
 //Funzione Checkout per controllare l'ordine della persona specifica
 function checkout(req, res) {
     const {
