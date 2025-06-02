@@ -55,8 +55,8 @@ header {
 
 .card-detail svg {
     position: absolute;
-    top: 0px;
-    right: 0;
+    top: 5px;
+    right: 5px;
     font-size: 30px;
 }
 
@@ -379,3 +379,74 @@ header {
 }
 
 /*END SIDECART*/
+
+/* MEDIA QUERY */
+
+/* 1. Mobile - default */
+.description-text {
+    font-size: 15px;
+    text-align: center;
+}
+
+.description-section {
+    width: 100%;
+}
+
+.detail-text {
+    text-align: center;
+}
+
+.detail-price {
+    font-size: 20px;
+}
+
+.btn-detail {
+    width: 100%;
+}
+
+.detail-img {
+    width: 100%;
+}
+
+/* 2. Tablet (>= 768px) */
+@media (min-width: 768px) {
+    .description-text {
+        font-size: 18px;
+        text-align: start;
+    }
+
+    .title-detail {
+        font-size: 23px;
+    }
+
+    .detail-text {
+        text-align: start;
+    }
+
+    .btn-detail {
+        width: 75%;
+    }
+
+    .detail-img {
+        width: 80%;
+    }
+
+    .detail-price {
+        font-size: 18px;
+    }
+}
+
+/* 3. Desktop (>= 992px) */
+@media (min-width: 992px) {
+    .description-text {
+        font-size: 25px;
+    }
+
+    .title-detail {
+        font-size: 30px;
+    }
+
+    .detail-price {
+        font-size: 20px;
+    }
+}
