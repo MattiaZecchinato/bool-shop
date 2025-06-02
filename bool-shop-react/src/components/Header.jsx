@@ -49,7 +49,7 @@ function Header() {
                             <ul className="navbar-nav align-items-center">
                                 <li className="nav-item">
                                     <NavLink className="nav-link active" aria-current="page" to="/">
-                                        <FontAwesomeIcon icon={faHome} className="fs-4 text-white" />
+                                        <FontAwesomeIcon icon={faHome} className="fs-3 text-white" />
                                         <span className="span-style-header">Home</span>
                                     </NavLink>
                                 </li>
@@ -62,7 +62,7 @@ function Header() {
                                         aria-label="Mostra carrello"
                                         role="button"
                                     >
-                                        <FontAwesomeIcon icon={faShoppingCart} className="fs-4 text-white nav-icon" />
+                                        <FontAwesomeIcon icon={faShoppingCart} className="fs-3 text-white nav-icon" />
                                         {totalQuantityCart > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold">{totalQuantityCart}</div>
                                         )}
@@ -76,10 +76,10 @@ function Header() {
                                         to="/wish-list"
                                         className="btn ms-auto position-relative"
                                     >
-                                        <FontAwesomeIcon icon={solidHeart} className="fs-4 text-white nav-icon" />
-                                        {totalQuantityWishList > 0 && (
+                                        <FontAwesomeIcon icon={solidHeart} className="fs-3 text-white nav-icon" />
+                                        {/* {totalQuantityWishList > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold">{totalQuantityWishList}</div>
-                                        )}
+                                        )} */}
                                         <span className="span-style-header">WishList</span>
                                     </NavLink>
                                 </li>
