@@ -20,7 +20,7 @@ function Footer() {
                     </div>
                     <div className="col-md-6 text-center col-sm-12">
                         <figure>
-                            <img src="../public/bool-shop-logo.png" alt="logo" className="w-25" />
+                            <img src="../bool-shop-logo.png" alt="logo" className="w-25" />
                         </figure>
                         <h4 className="mb-3 fw-bold">Unisciti al mondo dei giochi da tavolo!</h4>
                         <p className="fst-italic">Resta aggiornato su nuovi arrivi, offerte speciali e consigli di gioco.</p>
