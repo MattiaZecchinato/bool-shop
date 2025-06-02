@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import CardProduct from "../components/CardProduct";
 import SideCart from "../components/SideCart";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import checkDiscount from "../utils/checkDiscount";
 
 function HomePage() {
 
@@ -122,8 +123,9 @@ function HomePage() {
                         {groupProducts(
                             data.filter(element => {
                                 const discountAmount = element.discount_amount;
+                                const checkdisc = checkDiscount(element);
 
-                                return discountAmount >= 15.00 && discountAmount <= 25.00;
+                                return discountAmount >= 15.00 && discountAmount <= 25.00 && checkdisc;
                             })
                         ).map((group, index) => (
                             <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
