@@ -191,8 +191,17 @@ li {
     border-radius: 20px;
 }
 
-.btn.btn-card {
+.btn-card {
+    border: unset;
     background-color: #361556;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.btn-card:hover {
+    color: #fff;
+    background-color: #5d0aca;
+    /* dipende dal tipo di btn */
 }
 
 /* freccia carosello */
