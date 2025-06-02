@@ -1,7 +1,7 @@
 /* Header */
 
 header {
-    background-color: #2b1045;
+    /* background-color: #2b1045; */
 }
 
 .nav-icon {
@@ -13,6 +13,24 @@ header {
     right: 0px;
     width: 20px;
     color: rgb(230, 218, 56);
+}
+
+.span-style-header {
+    display: inline-block;
+    margin-left: 10px;
+    color: white;
+    font-size: large;
+}
+
+/* body  */
+
+body {
+    background: radial-gradient(circle,
+            #b789d6 0%,
+            #8018c4 30%,
+            #0d001a 80%,
+            #070007 100%);
+
 }
 
 /* Menu */
@@ -117,7 +135,7 @@ header {
 /* Footer */
 
 .footer-box {
-    background-image: url(./assets/background-footer.png);
+    /* background-image: url(./assets/background-footer.png); */
     background-size: cover;
     background-position: center;
 }
@@ -408,6 +426,10 @@ header {
     width: 100%;
 }
 
+.span-style-header {
+    display: none;
+}
+
 /* 2. Tablet (>= 768px) */
 @media (min-width: 768px) {
     .description-text {
@@ -448,5 +470,9 @@ header {
 
     .detail-price {
         font-size: 20px;
+    }
+
+    .span-style-header {
+        display: inline-block;
     }
 }
