@@ -104,7 +104,7 @@ function SearchPage() {
                     <option value="name">Nome</option>
                     <option value="price">Prezzo</option>
                     <option value="created_at">Recenti</option>
-                    <option value="discount_amount">scontati</option>
+                    <option value="discount_amount">In promozione</option>
                 </select>
             </div>
             <div className="col-md-2">
