@@ -22,32 +22,71 @@ function CardProduct({ data }) {
 
     return <>
 
-        <div className="gold-gradient-border mb-4">
+        <div className="gold-gradient-border mb-4 h-100">
             <div className="card card-style d-flex flex-column h-100 p-2">
-                <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
-                <figure className='image-container'>
+
+                {/* HEADER: Icona + Immagine */}
+                <div className="d-flex justify-content-between">
+                    <FontAwesomeIcon
+                        icon={solidHeart}
+                        className={prefercolor(data) ? "text-danger" : ""}
+                        onClick={() => isPrefer(data)}
+                    />
+                </div>
+
+                <figure className="image-container mt-2">
                     <Link to={`/detail/${slug}`}>
-                        <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top w-75 mx-auto d-block" alt={name} />
+                        <img
+                            src={`${VITE_BE_PATH}/img/${image}`}
+                            className="card-img-top w-75 mx-auto d-block"
+                            alt={name}
+                        />
                     </Link>
                 </figure>
-                <div className="card-body flex-grow-1 d-flex flex-column align-items-center">
-                    <h4 className="card-title fw-bold mb-3 fs-3 fst-italic text-center">{name}</h4>
-                    {hasDiscount ? (
-                        <div className='mb-2'>
-                            <span className='text-decoration-line-through me-2 text-danger'>{priceParsed.toFixed(2)}€</span>
-                            <span className='fw-bold text-success fs-5'>{discountPrice}€</span>
-                            <span className='discount-price fw-bold'> - {discountAmountParsed}%</span>
-                        </div>)
-                        : (<span className='mb-2 fs-5 fw-bold text-dark'>{priceParsed.toFixed(2)}€</span>)}
-                    <p>
-                        Categoria: {categories && categories.length > 0
-                            ? categories.map(c => c.category_name).join(', ')
-                            : 'Nessuna'}
-                    </p>
-                    <button className="btn-card text-white" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+
+                {/* BODY */}
+                <div className="card-body d-flex flex-column flex-grow-1 align-items-center text-center">
+                    <h4 className="card-title fw-bold mb-3 fs-3 fst-italic">{name}</h4>
+
+                    <div className='mt-auto'>
+                        {hasDiscount ? (
+                            <div className='pb-2'>
+                                <span className="text-decoration-line-through me-2 text-danger">
+                                    {priceParsed.toFixed(2)}€
+                                </span>
+                                <span className="fw-bold text-success fs-5 ">{discountPrice}€</span>
+                                <span className="discount-price fw-bold"> - {discountAmountParsed}%</span>
+                            </div>
+                        ) : (
+                            <div className='pb-2'>
+                                <span className="mb-2 fs-5 fw-bold text-dark pb-2">
+                                    {priceParsed.toFixed(2)}€
+                                </span>
+                            </div>
+
+
+                        )}
+
+                        <p className="mb-4">
+                            <strong>Categoria:</strong>{" "}
+                            {categories && categories.length > 0
+                                ? categories.map((c) => c.category_name).join(", ")
+                                : "Nessuna"}
+                        </p>
+
+                        {/* FOOTER: Bottone spinto in basso */}
+                        <button
+                            className="btn-card text-white"
+                            onClick={() => addToCart(data)}
+                        >
+                            Aggiungi al carrello
+                        </button>
+                    </div>
                 </div>
+
             </div>
         </div >
+
     </>
 }
 

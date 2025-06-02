@@ -87,7 +87,7 @@ function HomePage() {
                     </button>
                 </div>
 
-                <h2 className="mt-5 mb-5">Gli ultimi arrivi:</h2>
+                <h2 className="mt-5 mb-5 text-white">Ultimi arrivi</h2>
 
                 <div id="carouselLatest" className="carousel slide" data-bs-ride="false">
                     <div className="carousel-inner">
@@ -116,7 +116,7 @@ function HomePage() {
                     </button>
                 </div>
 
-                <h2 className="mt-5 mb-5">In promozione:</h2>
+                <h2 className="mt-5 mb-5 text-white">In promozione</h2>
 
                 <div id="carouselPromo" className="carousel slide" data-bs-ride="false">
                     <div className="carousel-inner">
