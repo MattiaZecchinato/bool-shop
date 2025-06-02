@@ -23,35 +23,56 @@ function CardDetails({ data }) {
 
     return <>
 
-        <div className="card-detail d-flex mb-5">
-            <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
-            <figure className='d-flex w-100 align-items-center justify-content-center'>
-                <img src={`${VITE_BE_PATH}/img/${image}`} className="card-img-top w-75" alt={name} />
+        <div className="card-detail d-flex flex-column flex-md-row mb-5 bg-primary p-4">
+            <FontAwesomeIcon
+                icon={solidHeart}
+                className={prefercolor(data) ? 'text-danger' : ''}
+                onClick={() => isPrefer(data)}
+            />
+            <figure className="d-flex w-100 w-md-50 align-items-center justify-content-center mb-3 mb-md-0">
+                <img
+                    src={`${VITE_BE_PATH}/img/${image}`}
+                    className="detail-img img-fluid"
+                    alt={name}
+                    style={{ objectFit: 'contain' }}
+                />
             </figure>
-            <div className="d-flex flex-column ms-5 w-100">
-                <h5 className="text-center fw-bold fs-3 mb-4">{name}</h5>
-                <p className="fst-italic fs-4">{description}</p>
+            <div className="d-flex flex-column desciption-section ps-0 description-section">
+                <h5 className="text-center fw-bold mb-4 title-detail">{name}</h5>
+                <p className="fst-italic description-text">{description}</p>
                 {hasDiscount ? (
                     <div>
-                        <div className='mb-3'>
-                            Prezzo:
-                            <span className='text-decoration-line-through me-2 '>{priceParsed.toFixed(2)}€</span>
-                            <span className='fw-bold'>{discountPrice}€</span><span className='fw-bold card-detail-discount ms-2 p-1'> - {discountAmountParsed}%</span>
+                        <div className="mb-3 detail-text">
+                            <span className="text-decoration-line-through me-2 text-danger detail-price">{priceParsed.toFixed(2)}€</span>
+                            <span className="fw-bold text-success detail-price">{discountPrice}€</span>
+                            <span className="fw-bold card-detail-discount ms-2 p-1"> - {discountAmountParsed}%</span>
                         </div>
-                        <p >A partire dal <strong>{dateFormatStart}</strong> fino al <strong>{dateFormatEnd}</strong></p></div>) : (<span className='mb-3'>Prezzo: {priceParsed.toFixed(2)}€</span>)}
-                {/* <p className="">Tipologia: {game_type}</p> */}
-                {game_type === 'puzzle' ? '' : <p>Giocatori: {min_player} - {max_player}</p>}
-                <p> Età: {target_age}+</p>
-                <p>
-                    Categoria: {categories && categories.length > 0
-                        ? categories.map(c => c.category_name).join(', ')
+                        <p className='detail-text'>
+                            Dal <strong>{dateFormatStart}</strong> al{' '}
+                            <strong>{dateFormatEnd}</strong>
+                        </p>
+                    </div>
+                ) : (
+                    <span className="mb-3 detail-text">Prezzo: {priceParsed.toFixed(2)}€</span>
+                )}
+                {game_type === 'puzzle' ? '' : <p className='detail-text'>Giocatori: {min_player} - {max_player}</p>}
+                <p className='detail-text'><strong>Età:</strong> {target_age}+</p>
+                <p className='detail-text'>
+                    <strong>Categoria:</strong>{' '}
+                    {categories && categories.length > 0
+                        ? categories.map((c) => c.category_name).join(', ')
                         : 'Nessuna'}
                 </p>
                 <div className="text-center">
-                    <button className="btn btn-success w-50" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                    <button className="btn btn-success btn-detail" onClick={() => addToCart(data)}>
+                        Aggiungi al carrello
+                    </button>
                 </div>
             </div>
         </div>
+
+
+
 
     </>
 }
