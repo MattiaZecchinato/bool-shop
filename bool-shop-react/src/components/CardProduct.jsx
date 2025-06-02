@@ -14,7 +14,7 @@ function CardProduct({ data }) {
     const { addToCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
 
-    const hasDiscount = checkDiscount(name, discount_start, discount_end)
+    const hasDiscount = checkDiscount(data)
 
     const discountAmountParsed = parseFloat(discount_amount);
     const priceParsed = parseFloat(price);

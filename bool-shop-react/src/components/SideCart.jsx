@@ -1,5 +1,6 @@
 import { useCart } from "../components/CartContext";
 import { useNavigate } from "react-router-dom";
+import checkDiscount from "../utils/checkDiscount";
 
 function SideCart({ isOpen, onClose }) {
   const { cartItems, removeFromCart, addToCart } = useCart();
@@ -18,32 +19,36 @@ function SideCart({ isOpen, onClose }) {
         {cartItems.length === 0 && <p className="sidecart-empty">Il carrello è vuoto</p>}
 
         <ul className="sidecart-list">
-          {cartItems.map((item) => (
-            <li key={item.id} className="sidecart-item">
-              <img src={`${VITE_BE_PATH}/img/${item.image}`} alt={item.name} className="sidecart-item-img" />
-              <div className="sidecart-item-info">
-                <h5 className="sidecart-item-title">{item.name}</h5>
-                <p className="sidecart-item-price">
-                  Prezzo:{" "}
-                  {item.discount_type === "percentage" ? (
-                    <>
-                      <del className="sidecart-item-old-price">€{Number(item.price).toFixed(2)}</del>
-                      <span>€{Number(item.final_price).toFixed(2)}</span>
-                    </>
-                  ) : (
-                    <>€{Number(item.price).toFixed(2)}</>
-                  )}
-                </p>
-              </div>
-              <div className="sidecart-item-controls">
-                <button onClick={() => removeFromCart(item.id, 1)} className="sidecart-btn-round red">
-                  {item.quantity === 1 ? "🗑️" : "-"}
-                </button>
-                <span className="sidecart-item-qty">{item.quantity}</span>
-                <button onClick={() => addToCart(item)} className="sidecart-btn-round purple">+</button>
-              </div>
-            </li>
-          ))}
+          {cartItems.map((item) => {
+            const checkDisc = checkDiscount(item)
+
+            return (
+              <li key={item.id} className="sidecart-item">
+                <img src={`${VITE_BE_PATH}/img/${item.image}`} alt={item.name} className="sidecart-item-img" />
+                <div className="sidecart-item-info">
+                  <h5 className="sidecart-item-title">{item.name}</h5>
+                  <p className="sidecart-item-price">
+                    Prezzo:{" "}
+                    {item.discount_type === "percentage" && checkDisc ? (
+                      <>
+                        <del className="sidecart-item-old-price">€{Number(item.price).toFixed(2)}</del>
+                        <span>€{Number(item.final_price).toFixed(2)}</span>
+                      </>
+                    ) : (
+                      <>€{Number(item.price).toFixed(2)}</>
+                    )}
+                  </p>
+                </div>
+                <div className="sidecart-item-controls">
+                  <button onClick={() => removeFromCart(item.id, 1)} className="sidecart-btn-round red">
+                    {item.quantity === 1 ? "🗑️" : "-"}
+                  </button>
+                  <span className="sidecart-item-qty">{item.quantity}</span>
+                  <button onClick={() => addToCart(item)} className="sidecart-btn-round purple">+</button>
+                </div>
+              </li>
+            )
+          })}
         </ul>
 
         {cartItems.length > 0 && (
