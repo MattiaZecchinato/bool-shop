@@ -17,8 +17,8 @@ function SearchPage() {
     const [totalPages, setTotalPages] = useState(1);
 
     const searchpara = searchParams.get("search") || "";
-    const choicepara = searchParams.get("choice") || "name";
-    const orderpara = searchParams.get("order") || "asc";
+    let choicepara = searchParams.get("choice") || "name";
+    let orderpara = searchParams.get("order") || "asc";
 
     const resetFormSearch = {
         choice: choicepara,
@@ -47,6 +47,13 @@ function SearchPage() {
             finalUri += `search=${currentsearch}`;
         } else {
             finalUri += `search=%20`;
+        }
+        if (choicepara === "created_at") {
+            if (orderpara === "asc") {
+                orderpara = "desc"
+            } else {
+                orderpara = "asc"
+            }
         }
         finalUri += `&choice=${choicepara}&order=${orderpara}`;
         finalUri += `&limit=6&page=${currentPage}`;
