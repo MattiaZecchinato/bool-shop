@@ -19,8 +19,8 @@ function SearchPage() {
     const searchpara = searchParams.get("search") || "";
     let choicepara = searchParams.get("choice") || "name";
     let orderpara = searchParams.get("order") || "asc";
-    let discountpara = searchParams.get('discount') || false
-
+    let discountpara = searchParams.get('discount') || "false"
+    console.log(discountpara)
 
 
     const resetFormSearch = {

@@ -52,10 +52,10 @@ function index(req, res) {
 }
 //Funzione indexSearchOrder per filtrare i vari ordini a seconda di cosa si cerca
 function indexSearchOrder(req, res) {
-    let { search, sortBy, order, limit, page, type, discount } = req.query;
+    let { search,choice,order, limit, page, type, discount } = req.query;
 
     const allowedSorts = ["name", "price", "created_at", "discount_amount"];
-    const sortColumn = allowedSorts.includes(sortBy) ? sortBy : "name";
+    const sortColumn = allowedSorts.includes(choice) ? choice : "name";
 
     const allowedOrders = ["asc", "desc"];
     const sortOrder = allowedOrders.includes(order?.toLowerCase()) ? order.toUpperCase() : "ASC";
@@ -76,6 +76,7 @@ function indexSearchOrder(req, res) {
     }
 
     if (discount === 'true') {
+
         whereClause += `
             AND p.discount_type = 'percentage'
             AND p.discount_start <= CURDATE()
