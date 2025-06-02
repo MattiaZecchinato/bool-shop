@@ -22,7 +22,7 @@ function CardProduct({ data }) {
 
     return <>
 
-        <div className="card d-flex flex-column h-100 p-3">
+        <div className="card card-style d-flex flex-column h-100 p-3">
             <FontAwesomeIcon icon={solidHeart} className={prefercolor(data) ? "text-danger" : ''} onClick={() => isPrefer(data)} />
             <figure className='image-container'>
                 <Link to={`/detail/${slug}`}>
