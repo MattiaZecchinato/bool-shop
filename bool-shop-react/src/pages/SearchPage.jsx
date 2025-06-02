@@ -68,7 +68,7 @@ function SearchPage() {
         finalUri += `&choice=${choicepara}&order=${orderpara}`;
         finalUri += `&limit=6&page=${currentPage}`;
 
-        console.log(finalUri)
+
         axios.get(finalUri)
             .then(res => {
                 const data = res.data;
@@ -88,7 +88,7 @@ function SearchPage() {
             setCurrentPage(newPage);
         }
     }
-    console.log(found)
+
 
     return <>
         <div className="d-flex gap-3 align-items-end mb-5">
