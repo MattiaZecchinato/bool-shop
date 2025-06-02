@@ -4,6 +4,7 @@ import { useCart } from "../components/CartContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
+import checkDiscount from '../utils/checkDiscount';
 
 function CardProductList({ data }) {
     const { prefercolor, isPrefer } = useContext(CartContext);
@@ -13,9 +14,9 @@ function CardProductList({ data }) {
 
     const { VITE_BE_PATH } = import.meta.env;
 
+    const hasDiscount = checkDiscount(data)
     const discountAmountParsed = parseFloat(discount_amount);
     const priceParsed = parseFloat(price);
-    const hasDiscount = discountAmountParsed > 0;
     const discountPrice = hasDiscount ? (priceParsed - (priceParsed * discountAmountParsed / 100)).toFixed(2) : priceParsed.toFixed(2);
 
     return <>
