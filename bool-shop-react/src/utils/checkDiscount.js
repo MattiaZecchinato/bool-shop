@@ -1,4 +1,6 @@
-function checkDiscount(name, discount_start, discount_end) {
+function checkDiscount(item) {
+
+    const { discount_start, discount_end } = item
 
     const currentDate = new Date()
 
