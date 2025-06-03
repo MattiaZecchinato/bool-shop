@@ -117,9 +117,8 @@ function CheckoutPage() {
                         })}
                         <li className="list-group-item d-flex justify-content-between bg-list-checkout border border-dark">
                             <span>Spedizione</span>
-                            <span className="text-success">{freeshipping ? "GRATIS" : "4.99€"}</span>
+                            <span className="btn-success">{freeshipping ? "GRATIS" : "4.99€"}</span>
                         </li>
-
                         <li className="list-group-item d-flex justify-content-between fw-bold bg-list-checkout border border-dark">
                             <span>Totale finale</span>
                             <span>{(totalOrder + (freeshipping ? 0 : 4.99)).toFixed(2)}€</span>
