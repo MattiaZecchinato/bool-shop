@@ -24,7 +24,7 @@ function CardDetails({ data }) {
 
     return <>
 
-        <div className="gold-gradient-border mb-5">
+        <div className="gold-gradient-border mb-5 card-detail-width">
             <div className="card-detail card card-style d-flex flex-column flex-md-row p-4">
                 <FontAwesomeIcon
                     icon={solidHeart}
@@ -34,14 +34,14 @@ function CardDetails({ data }) {
                 <figure className="d-flex w-100 w-md-50 align-items-center justify-content-center mb-3 mb-md-0">
                     <img
                         src={`${VITE_BE_PATH}/img/${image}`}
-                        className="detail-img img-fluid"
+                        className="detail-img img-fluid image-container"
                         alt={name}
                         style={{ objectFit: 'contain' }}
                     />
                 </figure>
-                <div className="d-flex flex-column desciption-section ps-0 description-section justify-content-center">
+                <div className="d-flex flex-column desciption-section ps-0 m-4 description-section justify-content-center">
                     <h5 className="text-center fw-bold mb-4 title-detail">{name}</h5>
-                    <p className="fst-italic description-text">{description}</p>
+                    <p className="fst-italic fs-5 description-text">{description}</p>
                     {hasDiscount ? (
                         <div>
                             <div className="mb-3 detail-text">

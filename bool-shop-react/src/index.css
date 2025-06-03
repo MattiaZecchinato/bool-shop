@@ -255,6 +255,13 @@ li {
     max-width: 600px;
 }
 
+/* card-dettaglio */
+
+.card-detail-width {
+    max-width: 990px;
+    margin: 0 auto;
+}
+
 /* checkout pagina */
 
 .bg-list-checkout {
@@ -519,6 +526,7 @@ li {
     text-shadow: 0 0 6px #000;
     user-select: none;
 }
+
 /* Layout per le azioni del prodotto */
 .sidecart-item-actions {
     display: flex;
@@ -567,7 +575,7 @@ li {
     .remove-text {
         display: none;
     }
-    
+
     .sidecart-remove-btn {
         padding: 8px;
         border-radius: 50%;
