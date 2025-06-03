@@ -29,7 +29,7 @@ function Header() {
     return (
         <>
             <header className="mb-5 scroll-header">
-                <nav className="container navbar navbar-expand">
+                <nav className="container navbar navbar-expand p-0">
                     <div className="container-fluid">
                         <NavLink className="navbar-brand" to="/">
                             <img src="/bool-shop-logo.png" alt="Logo" className="logo" />
