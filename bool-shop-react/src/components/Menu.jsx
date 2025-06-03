@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Menu() {
 
     return (
-        <nav className="container mb-5 nav-style">
+        <nav className="container mb-5 mt-5 nav-style">
             <ul className="list-unstyled row justify-content-center menu-list align-items-center mt-lg-3">
                 <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
                     <NavLink className="nav-link text-center" to='/search'>Catalogo</NavLink>
