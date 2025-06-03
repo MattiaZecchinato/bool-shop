@@ -121,8 +121,8 @@ function CheckoutPage() {
             {cartItems.length === 0 ? (
                 <p>Il carrello è vuoto.</p>
             ) : (
-                <div className=" p-4 border border-dark bg-light rounded">
-                    <h4 className="mb-3 text-dark">🛒 Riepilogo Carrello</h4>
+                <div className=" p-4 border border-dark bg-light rounded rounded-3">
+                    <h3 className="mb-3 text-dark text-center"><span>📦</span>Riepilogo ordine</h3>
                     <ul className="list-group mb-3">
                         {cartItems.map((item) => {
                             const originalPrice = parseFloat(item.price);
@@ -166,7 +166,7 @@ function CheckoutPage() {
                     </ul>
 
                     <form onSubmit={handleSubmit}>
-                        <h2 className="text-center mt-5 mb-4 text-dark">Inserisci i tuoi dati</h2>
+                        <h4 className="text-center mt-5 mb-4 text-dark">Inserisci i tuoi dati</h4>
                         <div className="row g-3 d-flex justify-content-center">
                             <div className="col-md-6 ">
                                 <label className="form-label text-dark">Nome</label>

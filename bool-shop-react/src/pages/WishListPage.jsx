@@ -13,7 +13,10 @@ function WishListPage() {
                 <h2 className="mb-5">Wishlist</h2>
                 <img src={ball} alt="ball-wish" style={{ width: "50px" }} className="mb-5" />
             </div>
-            {prefer.length > 0 ? prefer.map(elem => <CardWishList key={elem.id} data={elem} />) : <p>La wish list è vuota.</p>}
+            {prefer.length > 0 ? prefer.map(elem => <CardWishList key={elem.id} data={elem} />) :
+                <div className="container bg-light fst-italic p-5 rounded rounded-3" style={{ maxWidth: "600px" }}>
+                    <p className="text-dark fst-italic text-center fs-5">La Wishlist è vuota <span className="fw-normal fst-normal">😔</span></p>
+                </div>}
         </div>
     </>
 }
