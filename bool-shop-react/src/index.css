@@ -295,6 +295,22 @@ li {
     max-width: 200px;
 }
 
+/* recap page  */
+
+.recap-container {
+    position: relative;
+}
+
+.image-recap {
+    max-width: 50px;
+}
+
+.position-image-recap {
+    position: absolute;
+    top: -50px;
+    left: 40px;
+}
+
 /* freccia carosello */
 
 .carousel-control-prev.position-arrow {
