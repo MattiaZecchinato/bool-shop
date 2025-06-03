@@ -80,7 +80,7 @@ function Header() {
                                         {totalQuantityWishList > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold qnt-wish-list">{totalQuantityWishList}</div>
                                         )}
-                                        <span className="span-style-header">WishList</span>
+                                        <span className="span-style-header">Wishlist</span>
                                     </NavLink>
                                 </li>
                             </ul>

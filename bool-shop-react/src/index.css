@@ -255,6 +255,15 @@ li {
     max-width: 600px;
 }
 
+.width-wish-cards {
+    max-width: 350px;
+}
+
+.width-whish-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
 /* card-dettaglio */
 
 .card-detail-width {
