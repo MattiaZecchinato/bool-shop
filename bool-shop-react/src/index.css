@@ -86,6 +86,7 @@ li {
 .cat-style {
     position: relative;
     padding-bottom: 10px;
+    margin-top: 15px;
 }
 
 .ul-nav-style {
@@ -126,6 +127,12 @@ li {
 .ul-style-drop li:hover a {
     color: #0d001a;
     transition: color 0.3s ease;
+}
+
+.menu-list {
+    max-width: 550px;
+    margin: 0 auto;
+    gap: 0;
 }
 
 /* Carosello */
@@ -594,6 +601,10 @@ li {
     .qnt-wish-list {
         top: 7px;
         left: 14.5px;
+    }
+
+    .cat-style {
+        margin-top: 0;
     }
 }
 
