@@ -5,18 +5,18 @@ function Menu() {
 
     return (
         <nav className="container mb-5 nav-style">
-            <ul className="list-unstyled d-flex justify-content-center gap-3 menu-list">
-                <li>
-                    <NavLink className="nav-link" to='/search'>Catalogo</NavLink>
+            <ul className="list-unstyled row justify-content-center menu-list align-items-center">
+                <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
+                    <NavLink className="nav-link text-center" to='/search'>Catalogo</NavLink>
                 </li>
-                <li>
-                    <NavLink className="nav-link" to='/boardgames'>Giochi da tavolo</NavLink>
+                <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
+                    <NavLink className="nav-link text-center" to='/boardgames'>Giochi da tavolo</NavLink>
                 </li>
-                <li>
-                    <NavLink className="nav-link" to='/puzzles'>Puzzle</NavLink>
+                <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
+                    <NavLink className="nav-link text-center" to='/puzzles'>Puzzle</NavLink>
                 </li>
-                <li>
-                    <div className="cat-style">
+                <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
+                    <div className="cat-style text-center p-0">
                         <Link type="button" aria-expanded="false">
                             Categorie
                         </Link>
