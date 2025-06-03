@@ -23,7 +23,7 @@ function CardProduct({ data }) {
     return <>
 
         <div className="gold-gradient-border mb-4 h-100">
-            <div className="card card-style d-flex flex-column h-100 p-2">
+            <div className="card card-style d-flex flex-column h-100 p-2 width-card">
 
                 {/* HEADER: Icona + Immagine */}
                 <div className="d-flex justify-content-between">
