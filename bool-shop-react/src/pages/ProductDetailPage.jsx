@@ -62,12 +62,10 @@ function ProductDetailPage() {
     const finalArray = []
 
     arraycheck.forEach(element => {
-        if (element.id !== data.id) {
+        if (element.id !== data.id && finalArray.length < 5) {
             finalArray.push(element)
         }
     });
-
-
 
 
     return (
