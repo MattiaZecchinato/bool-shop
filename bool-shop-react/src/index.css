@@ -205,6 +205,13 @@ li {
     border-radius: 20px;
 }
 
+.card.card-style.width-card {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin: 0 auto;
+}
+
 .gold-gradient-border {
     background: linear-gradient(135deg, #d4af37, #b8860b);
     padding: 2px;
@@ -226,12 +233,12 @@ li {
 /* freccia carosello */
 
 .carousel-control-prev.position-arrow {
-    left: -60px;
+    left: 20px;
     width: 50px;
 }
 
 .carousel-control-next.position-arrow-next {
-    right: -60px;
+    right: 20px;
     width: 50px;
 }
 
@@ -565,6 +572,7 @@ li {
     display: none;
 }
 
+
 /* 2. Tablet (>= 768px) */
 @media (min-width: 768px) {
     .description-text {
@@ -606,6 +614,16 @@ li {
     .cat-style {
         margin-top: 0;
     }
+
+    .carousel-control-prev.position-arrow {
+        left: -45px;
+        width: 50px;
+    }
+
+    .carousel-control-next.position-arrow-next {
+        right: -45px;
+        width: 50px;
+    }
 }
 
 /* 3. Desktop (>= 992px) */
@@ -636,5 +654,15 @@ li {
         top: 8px;
         left: 16px;
         font-size: 18px;
+    }
+
+    .carousel-control-prev.position-arrow {
+        left: 50px;
+        width: 50px;
+    }
+
+    .carousel-control-next.position-arrow-next {
+        right: 50px;
+        width: 50px;
     }
 }

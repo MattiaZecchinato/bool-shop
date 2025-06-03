@@ -25,12 +25,14 @@ function HomePage() {
 
     function handleResize() {
         const width = window.innerWidth;
-        if (width <= 576) {
-            return setGroupNum(1);
-        } else if (width >= 576 && width < 992) {
-            return setGroupNum(2);
+        if (width < 576) {
+            setGroupNum(1);
+        } else if (width >= 576 && width < 768) {
+            setGroupNum(1);
+        } else if (width >= 768 && width < 992) {
+            setGroupNum(2);
         } else {
-            return setGroupNum(3);
+            setGroupNum(3);
         }
     }
 
@@ -95,9 +97,9 @@ function HomePage() {
                             data.filter(element => new Date(element.created_at) > new Date('2023-01-01'))
                         ).map((group, index) => (
                             <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                                <div className="row">
+                                <div className="row justify-content-center flex-wrap">
                                     {group.map(product => (
-                                        <div key={product.id} className={`mb-3 d-flex ${groupNum === 1 ? 'col-12' : `col-${12 / groupNum}`}`}>
+                                        <div key={product.id} className='mb-3 d-flex justify-content-center col-12 col-md-6 col-lg-3' >
                                             <CardProduct data={product} />
                                         </div>
                                     ))}
@@ -129,14 +131,16 @@ function HomePage() {
                             })
                         ).map((group, index) => (
                             <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                                <div className="row">
+                                <div className="row justify-content-center">
+
                                     {group.map(product => (
-                                        <div key={product.id} className={`mb-3 d-flex ${groupNum === 1 ? 'col-12' : `col-${12 / groupNum}`}`}>
+                                        <div key={product.id} className="mb-3 d-flex justify-content-center col-12 col-md-6 col-lg-3" >
                                             <CardProduct data={product} />
                                         </div>
                                     ))}
                                 </div>
                             </div>
+
                         ))}
                     </div>
 
