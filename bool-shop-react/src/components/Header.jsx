@@ -28,7 +28,7 @@ function Header() {
 
     return (
         <>
-            <header className="mb-5">
+            <header className="mb-5 scroll-header">
                 <nav className="container navbar navbar-expand">
                     <div className="container-fluid">
                         <NavLink className="navbar-brand" to="/">

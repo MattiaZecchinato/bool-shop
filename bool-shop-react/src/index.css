@@ -5,8 +5,13 @@ header {
     top: 0;
     right: 0;
     left: 0;
-    background-color: #0d001a;
+    background-color: #0a000e;
     z-index: 10;
+}
+
+.scroll-header {
+    background-color: rgba(10, 0, 14, 0.7);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nav-icon {
@@ -176,7 +181,7 @@ li {
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 19px;
 }
 
 
@@ -209,7 +214,6 @@ li {
 .btn-card:hover {
     color: #fff;
     background-color: #5d0aca;
-    /* dipende dal tipo di btn */
 }
 
 /* freccia carosello */

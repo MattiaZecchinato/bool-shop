@@ -97,12 +97,12 @@ function SearchPage() {
     return <>
         <div className="d-flex gap-3 align-items-end mb-5">
             <div className="col-md-3">
-                <label htmlFor="inputNameGame" className="form-label">Nome gioco</label>
+                <label htmlFor="inputNameGame" className="form-label text-white">Nome gioco</label>
                 <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData}
                 />
             </div>
             <div className="col-md-2">
-                <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
+                <label htmlFor="inputOrder" className="form-label text-white">Ordina Per</label>
                 <select id="inputOrder" className="form-select" name="choice" value={formSearch.choice} onChange={handleData}>
                     <option value="name">Nome</option>
                     <option value="price">Prezzo</option>
@@ -110,17 +110,17 @@ function SearchPage() {
                 </select>
             </div>
             <div className="col-md-2">
-                <label htmlFor="inputOrder" className="form-label">Ordina Per</label>
+                <label htmlFor="inputOrder" className="form-label text-white">Ordina Per</label>
                 <select id="inputOrder" className="form-select" name="order" value={formSearch.order} onChange={handleData}>
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
             </div>
             <div className="col-md-2">
-                <label htmlFor="inputOrder" className="form-label">solo in scontistica </label>
+                <label htmlFor="inputOrder" className="form-label text-white">Filtra per</label>
                 <select id="inputOrder" className="form-select" name="discount" value={formSearch.discount} onChange={handleData}>
-                    <option value="true">si</option>
-                    <option value="false">no</option>
+                    <option value="true">Giochi in promozione</option>
+                    <option value="false">Tutti i giochi</option>
                 </select>
             </div>
 
@@ -151,11 +151,11 @@ function SearchPage() {
         </div>
 
         <div className="d-flex justify-content-center my-4 gap-3">
-            <button className="btn btn-outline-primary" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
+            <button className="btn btn-outline-light" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
                 ← Precedente
             </button>
-            <span>Pagina {currentPage} di {totalPages}</span>
-            <button className="btn btn-outline-primary" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
+            <span className="text-white">Pagina {currentPage} di {totalPages}</span>
+            <button className="btn btn-outline-light" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
                 Successiva →
             </button>
         </div>
