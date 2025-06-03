@@ -5,7 +5,7 @@ function CartPage() {
     const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
 
     return (
-        <div className="container py-4">
+        <div className="container py-4 text-white">
             <h2>Carrello</h2>
 
             {cartItems.length === 0 ? (

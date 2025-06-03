@@ -74,7 +74,7 @@ function CheckoutPage() {
     };
 
     return (
-        <div className="container mt-4">
+        <div className="container mt-4 text-white">
             <h2>Checkout</h2>
 
             {cartItems.length === 0 ? (
