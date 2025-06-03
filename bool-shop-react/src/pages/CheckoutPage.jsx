@@ -2,10 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { useCart } from "../components/CartContext";
 import checkDiscount from '../utils/checkDiscount'
+import { useNavigate } from "react-router-dom";
 
 function CheckoutPage() {
     const { cartItems, clearCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         user_first_name: "",
@@ -56,7 +58,6 @@ function CheckoutPage() {
         };
         axios.post(`${VITE_BE_PATH}/shop/checkout`, payload)
             .then(() => {
-                alert("Ordine completato con successo!");
                 clearCart();
                 setFormData({
                     user_first_name: "",
@@ -65,6 +66,8 @@ function CheckoutPage() {
                     user_address: "",
                     user_phone: "",
                 });
+                alert("Ordine completato con successo!");
+                navigate('/order-recap', { state: { payload } })
             })
             .catch((err) => {
                 console.error(err.response?.data);
@@ -151,6 +154,8 @@ function CheckoutPage() {
                             </div>
                         </div>
                     </form>
+
+                    { }
                 </>
             )}
         </div>
