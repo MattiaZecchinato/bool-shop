@@ -255,7 +255,12 @@ li {
     max-width: 600px;
 }
 
-/* pagina di ricerca */
+/* checkout pagina */
+
+.bg-list-checkout {
+    background-color: #b292d0;
+}
+
 
 /* freccia carosello */
 
