@@ -277,6 +277,23 @@ li {
     background-color: #b292d0;
 }
 
+.alert-style {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #070007b6;
+    z-index: 9999;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.alert-style img {
+    max-width: 200px;
+}
 
 /* freccia carosello */
 
