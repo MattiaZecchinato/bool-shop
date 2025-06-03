@@ -76,14 +76,13 @@ function CheckoutPage() {
     };
 
     return (
-        <div className="container mt-4 text-white">
-            <h2>Checkout</h2>
 
+        <div className="container mt-4 text-white" style={{ maxWidth: "600px" }}>
             {cartItems.length === 0 ? (
                 <p>Il carrello è vuoto.</p>
             ) : (
-                <>
-                    <h4>Prodotti nel carrello:</h4>
+                <div className=" p-4 border border-dark bg-light rounded">
+                    <h4 className="mb-3 text-dark">🛒 Riepilogo Carrello</h4>
                     <ul className="list-group mb-3">
                         {cartItems.map((item) => {
                             const originalPrice = parseFloat(item.price);
@@ -92,7 +91,7 @@ function CheckoutPage() {
                             const hasDiscount = item.discount_type === "percentage" && item.discount_amount && checkDisc;
 
                             return (
-                                <li className="list-group-item d-flex justify-content-between align-items-center" key={item.id}>
+                                <li className="list-group-item d-flex justify-content-between align-items-center bg-list-checkout text-dark border border-dark" key={item.id} >
                                     <div>
                                         <span>{item.name} (x{item.quantity})</span><br />
                                         {hasDiscount && (
@@ -116,49 +115,51 @@ function CheckoutPage() {
                                 </li>
                             );
                         })}
-                        <li className="list-group-item d-flex justify-content-between">
+                        <li className="list-group-item d-flex justify-content-between bg-list-checkout border border-dark">
                             <span>Spedizione</span>
-                            <span>{freeshipping ? "GRATIS" : "4.99€"}</span>
+                            <span className="text-success">{freeshipping ? "GRATIS" : "4.99€"}</span>
                         </li>
 
-                        <li className="list-group-item d-flex justify-content-between fw-bold">
+                        <li className="list-group-item d-flex justify-content-between fw-bold bg-list-checkout border border-dark">
                             <span>Totale finale</span>
                             <span>{(totalOrder + (freeshipping ? 0 : 4.99)).toFixed(2)}€</span>
                         </li>
                     </ul>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="row g-3">
-                            <div className="col-md-6">
-                                <label className="form-label">Nome</label>
-                                <input type="text" className="form-control" name="user_first_name" value={formData.user_first_name} onChange={handleChange} required />
+                        <h2 className="text-center mt-5 mb-4 text-dark">Inserisci i tuoi dati</h2>
+                        <div className="row g-3 d-flex justify-content-center">
+                            <div className="col-md-6 ">
+                                <label className="form-label text-dark">Nome</label>
+                                <input type="text" className="form-control bg-list-checkout border border-dark" name="user_first_name" value={formData.user_first_name} onChange={handleChange} required />
                             </div>
                             <div className="col-md-6">
-                                <label className="form-label">Cognome</label>
-                                <input type="text" className="form-control" name="user_last_name" value={formData.user_last_name} onChange={handleChange} required />
+                                <label className="form-label text-dark">Cognome</label>
+                                <input type="text" className="form-control bg-list-checkout border border-dark" name="user_last_name" value={formData.user_last_name} onChange={handleChange} required />
                             </div>
                             <div className="col-md-6">
-                                <label className="form-label">Email</label>
-                                <input type="email" className="form-control" name="user_email" value={formData.user_email} onChange={handleChange} required />
+                                <label className="form-label text-dark">Email</label>
+                                <input type="email" className="form-control bg-list-checkout border border-dark" name="user_email" value={formData.user_email} onChange={handleChange} required />
                             </div>
                             <div className="col-md-6">
-                                <label className="form-label">Telefono</label>
-                                <input type="text" className="form-control" name="user_phone" value={formData.user_phone} onChange={handleChange} required />
+                                <label className="form-label text-dark">Telefono</label>
+                                <input type="text" className="form-control bg-list-checkout border border-dark" name="user_phone" value={formData.user_phone} onChange={handleChange} required />
                             </div>
                             <div className="col-12">
-                                <label className="form-label">Indirizzo</label>
-                                <input type="text" className="form-control" name="user_address" value={formData.user_address} onChange={handleChange} required />
+                                <label className="form-label text-dark">Indirizzo</label>
+                                <input type="text" className="form-control bg-list-checkout border border-dark" name="user_address" value={formData.user_address} onChange={handleChange} required />
                             </div>
-                            <div className="col-12">
-                                <button type="submit" className="btn btn-success w-100">Invia Ordine</button>
+                            <div className="col-12 col-md-4">
+                                <button type="submit" className="btn btn-dark w-100">Invia ordine</button>
                             </div>
                         </div>
                     </form>
 
                     { }
-                </>
-            )}
-        </div>
+                </div>
+            )
+            }
+        </div >
     );
 }
 
