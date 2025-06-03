@@ -12,16 +12,18 @@ function OrderRecap() {
     const { user_first_name, user_email, total_order } = dataRecap
 
     return <>
-        <div className="text-white card-detail-width recap-container my-5">
-            <h1 className="mb-4"><img className="image-recap me-2" src={staff} alt="staff" /><img className="image-recap position-image-recap" src={magic} alt="magic" />Ordine completato con successo!</h1>
-            <p>Grazie, <strong>{user_first_name}</strong>, per il tuo acquisto.</p>
-            <p>Una conferma è stata inviata a <strong>{user_email}</strong>.</p>
-            <p>Numero ordine: <strong>#</strong></p> {/* questo e da vedere se si implementa */}
-            <p>Totale: <strong>€{total_order}</strong></p>
-
-            <p className="mb-5">Riceverai una notifica quando il tuo ordine sarà spedito.</p>
-
-            <button className="btn btn-outline-light" onClick={() => { navigate('/') }}>Torna alla HomePage</button>
+        <div className="container py-4 text-white row gap-2 width-whish-container justify-content-center bg-light rounded rounded-3 mt-4 mb-4 border border-dark" style={{ maxWidth: "600px" }}>
+            <h1 className="mb-4 text-dark text-center fst-italic"><img className="image-recap me-2" src={staff} alt="staff" /><img className="image-recap position-image-recap" src={magic} alt="magic" />Ordine completato con successo!</h1>
+            <div className="text-dark text-center">
+                <p className="fs-4">Grazie <strong>{user_first_name}</strong> per il tuo acquisto.</p>
+                <p>Una conferma è stata inviata a <strong>{user_email}</strong>.</p>
+                <p>Numero ordine: <strong>#</strong></p> {/* questo e da vedere se si implementa */}
+                <p>Totale: <strong>€{total_order}</strong></p>
+                <p className="mb-5">Riceverai una notifica quando il tuo ordine sarà spedito.</p>
+            </div>
+        </div>
+        <div className="text-center">
+            <button className="btn btn-outline-light" onClick={() => { navigate('/') }}>Torna alla Homepage</button>
         </div>
     </>
 }
