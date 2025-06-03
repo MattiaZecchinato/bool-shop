@@ -1,13 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useCart } from "../components/CartContext";
 import checkDiscount from '../utils/checkDiscount'
 import { useNavigate } from "react-router-dom";
+import broom from "../assets/magic-broom.png";
+import wizard from "../assets/wizard.png";
 
 function CheckoutPage() {
     const { cartItems, clearCart } = useCart();
     const { VITE_BE_PATH } = import.meta.env;
     const navigate = useNavigate()
+
+    const [checkoutStatus, setCheckoutStatus] = useState(null);
+    const [lastPayload, setLastPayload] = useState(null);
+
+
+    useEffect(() => {
+        if (checkoutStatus === "success") {
+            const timer = setTimeout(() => {
+                navigate('/order-recap', { state: { payload: lastPayload } });
+            }, 3000);
+            return () => clearTimeout(timer);
+        } else if (checkoutStatus === "error") {
+            const timer = setTimeout(() => {
+                setCheckoutStatus(null);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [checkoutStatus]);
+
 
     const [formData, setFormData] = useState({
         user_first_name: "",
@@ -56,6 +77,7 @@ function CheckoutPage() {
             freeshipping,
             products,
         };
+
         axios.post(`${VITE_BE_PATH}/shop/checkout`, payload)
             .then(() => {
                 clearCart();
@@ -66,18 +88,36 @@ function CheckoutPage() {
                     user_address: "",
                     user_phone: "",
                 });
-                alert("Ordine completato con successo!");
-                navigate('/order-recap', { state: { payload } })
+                // alert("Ordine completato con successo!");
+                // navigate('/order-recap', { state: { payload } })
+                setCheckoutStatus("success");
+                setLastPayload(payload);
             })
             .catch((err) => {
                 console.error(err.response?.data);
-                alert("Errore durante il checkout.");
+                // alert("Errore durante il checkout.");
+                setCheckoutStatus("error");
             });
     };
 
     return (
 
         <div className="container mt-4 text-white" style={{ maxWidth: "600px" }}>
+            {(checkoutStatus === "success" || checkoutStatus === "error") && (
+                <div className="alert-style d-flex flex-column justify-content-center align-items-center">
+                    {checkoutStatus === 'success' ? (
+                        <>
+                            <p className="fs-5">Ordine completato! Verrai reindirizzato al riepilogo!</p>
+                            <img src={broom} alt="scopa" />
+                        </>
+                    ) : (
+                        <>
+                            <p className="fs-5">Ops, qualcosa è andato storto, riprova...</p>
+                            <img src={wizard} alt="wizard" />
+                        </>
+                    )}
+                </div>
+            )}
             {cartItems.length === 0 ? (
                 <p>Il carrello è vuoto.</p>
             ) : (
