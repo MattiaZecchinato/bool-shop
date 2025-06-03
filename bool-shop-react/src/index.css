@@ -219,6 +219,13 @@ li {
     max-width: 350px;
 }
 
+.gold-gradient-border-list {
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    padding: 2px;
+    border-radius: 20px;
+    max-width: 600px;
+}
+
 .btn-card {
     border: unset;
     background-color: #361556;
@@ -242,6 +249,10 @@ li {
 .btn-card-search:hover {
     color: #fff;
     background-color: #5d0aca;
+}
+
+.width-card-list {
+    max-width: 600px;
 }
 
 /* pagina di ricerca */
@@ -272,11 +283,11 @@ li {
 
 .discount-price-list {
     position: absolute;
-    top: 10px;
-    left: 100px;
+    top: -10px;
+    left: -10px;
     background-color: purple;
     color: white;
-    padding: 2px;
+    padding: 2.5px;
 }
 
 .card-detail-discount {
