@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 function OrderRecap() {
 
     const location = useLocation()
     const dataRecap = location.state?.payload
-    console.log(dataRecap)
+
+    const navigate = useNavigate()
 
     const { user_first_name, user_email, total_order } = dataRecap
 
@@ -17,6 +18,8 @@ function OrderRecap() {
             <p>Totale: <strong>€{total_order}</strong></p>
 
             <p>Riceverai una notifica quando il tuo ordine sarà spedito.</p>
+
+            <button onClick={() => { navigate('/') }}>Torna alla HomePage</button>
         </div>
     </>
 }
