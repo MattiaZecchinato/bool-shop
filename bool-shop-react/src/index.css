@@ -1,3 +1,9 @@
+/* Reset */
+
+a {
+    all: unset
+}
+
 /* Header */
 
 header {
@@ -222,6 +228,21 @@ li {
     color: #fff;
     background-color: #5d0aca;
 }
+
+.btn-card-search {
+    border: unset;
+    background-color: #361556;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+.btn-card-search:hover {
+    color: #fff;
+    background-color: #5d0aca;
+}
+
+/* pagina di ricerca */
 
 /* freccia carosello */
 
