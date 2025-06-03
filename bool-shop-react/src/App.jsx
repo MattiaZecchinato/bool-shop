@@ -14,6 +14,7 @@ import TermOfServicePage from "./pages/TermOfServicePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
 import Category from "./pages/Category"
 import OrderRecap from "./pages/OrederRecap"
+import NotFoundPage from "./pages/NotFoundPage"
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
               <Route path="/order-recap" element={<OrderRecap />} />
               <Route path="/detail/:slug" element={<ProductDetailPage />} />
               <Route path="/category/:slug" element={<Category />} />
-              <Route path="*" element={<div>page not found</div>} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
