@@ -222,6 +222,7 @@ li {
     background: linear-gradient(135deg, #d4af37, #b8860b);
     padding: 2px;
     border-radius: 20px;
+    max-width: 350px;
 }
 
 .btn-card {
