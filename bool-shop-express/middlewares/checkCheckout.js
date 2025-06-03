@@ -90,7 +90,7 @@ function checkCheckout(conn) {
                 checkIfAllQueriesDone();
                 return;
             } else {
-                const sql = `SELECT price, discount_type, discount_amount FROM products WHERE products.id = ?`;
+                const sql = `SELECT price, discount_type, discount_amount ,discount_start, discount_end FROM products WHERE products.id = ?`;
                 conn.query(sql, [productId], (err, result) => {
                     dbQueriesCompleted++;
 
@@ -103,9 +103,9 @@ function checkCheckout(conn) {
                     } else {
                         let dbProductData = result[0];
                         let unitPriceFromDb = parseFloat(dbProductData.price);
-                        if (dbProductData.discount_type === "fixed") {
-                            unitPriceFromDb -= parseFloat(dbProductData.discount_amount);
-                        } else if (dbProductData.discount_type === "percentage") {
+                        let getDate = new Date()
+                        console.log(getDate)
+                        if (getDate >= dbProductData.discount_start && getDate <= dbProductData.discount_end) {
                             unitPriceFromDb -= unitPriceFromDb * (parseFloat(dbProductData.discount_amount) / 100);
                             unitPriceFromDb = parseFloat(unitPriceFromDb.toFixed(2));
                         }
@@ -136,34 +136,34 @@ function checkCheckout(conn) {
         });
 
         function checkIfAllQueriesDone() {
-    if (dbQueriesCompleted === dbQueriesToComplete) {
-        const orderTotalFloat = parseFloat(total_order);
-        const expectedShipping = checktotal < 50 ? 4.99 : 0;
-        const expectedTotal = checktotal + expectedShipping;
+            if (dbQueriesCompleted === dbQueriesToComplete) {
+                const orderTotalFloat = parseFloat(total_order);
+                const expectedShipping = checktotal < 50 ? 4.99 : 0;
+                const expectedTotal = checktotal + expectedShipping;
 
-        const difference = Math.abs(orderTotalFloat - expectedTotal);
+                const difference = Math.abs(orderTotalFloat - expectedTotal);
 
-        console.log("Totale prodotti:", checktotal.toFixed(2));
-        console.log("Spedizione prevista:", expectedShipping.toFixed(2));
-        console.log("Totale atteso:", expectedTotal.toFixed(2));
-        console.log("Totale ricevuto:", orderTotalFloat.toFixed(2));
-        console.log("Differenza:", difference.toFixed(2));
+                console.log("Totale prodotti:", checktotal.toFixed(2));
+                console.log("Spedizione prevista:", expectedShipping.toFixed(2));
+                console.log("Totale atteso:", expectedTotal.toFixed(2));
+                console.log("Totale ricevuto:", orderTotalFloat.toFixed(2));
+                console.log("Differenza:", difference.toFixed(2));
 
-        if (difference > 0.05) {
-            error++;
-            errorMessage += `, total mismatch: expected ${expectedTotal.toFixed(2)}, received ${orderTotalFloat.toFixed(2)}`;
+                if (difference > 0.05) {
+                    error++;
+                    errorMessage += `, total mismatch: expected ${expectedTotal.toFixed(2)}, received ${orderTotalFloat.toFixed(2)}`;
+                }
+
+                if (error > 0) {
+                    res.status(400).json({
+                        status: '400',
+                        error: `${errorMessage}`,
+                    });
+                } else {
+                    next();
+                }
+            }
         }
-
-        if (error > 0) {
-            res.status(400).json({
-                status: '400',
-                error: `${errorMessage}`,
-            });
-        } else {
-            next();
-        }
-    }
-}
 
     };
 }
