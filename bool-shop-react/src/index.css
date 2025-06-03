@@ -43,8 +43,8 @@ header {
 }
 
 .logo {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
 }
 
 /* body  */
@@ -729,6 +729,11 @@ li {
         right: -45px;
         width: 50px;
     }
+
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 /* 3. Desktop (>= 992px) */
@@ -769,5 +774,10 @@ li {
     .carousel-control-next.position-arrow-next {
         right: 50px;
         width: 50px;
+    }
+
+    .logo {
+        width: 120px;
+        height: 120px;
     }
 }

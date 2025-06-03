@@ -38,8 +38,6 @@ function App() {
               <Route path="/category/:slug" element={<Category />} />
               <Route path="*" element={<div>page not found</div>} />
             </Route>
-            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-            <Route path="/term-of-service" element={<TermOfServicePage />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>
