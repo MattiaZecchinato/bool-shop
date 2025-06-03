@@ -311,6 +311,12 @@ li {
     left: 40px;
 }
 
+/* not-found page  */
+
+.not-found-img {
+    max-width: 300px;
+}
+
 /* freccia carosello */
 
 .carousel-control-prev.position-arrow {
