@@ -50,8 +50,16 @@ body {
             #8018c4 30%,
             #0d001a 80%,
             #070007 100%);
+    background-blend-mode: screen;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    margin: 0;
 
 }
+
 
 /* Menu */
 
