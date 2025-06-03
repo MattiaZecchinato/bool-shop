@@ -60,11 +60,11 @@ function PuzzlesPage() {
             <button type="button" className="btn btn-primary" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
         </div>
 
-        <div className={display ? 'row' : ''}>
+        <div className={display ? 'row justify-content-center' : ''}>
             {found.length > 0
                 ? found.map(elem =>
                     display
-                        ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4'><CardProduct data={elem} /></div>
+                        ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
                         : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
                 )
                 : <h3>Nessun Elemento Trovato</h3>
