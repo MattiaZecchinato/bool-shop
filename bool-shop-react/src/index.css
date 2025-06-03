@@ -519,6 +519,63 @@ li {
     text-shadow: 0 0 6px #000;
     user-select: none;
 }
+/* Layout per le azioni del prodotto */
+.sidecart-item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+}
+
+/* Button per rimuovere completamente il prodotto */
+.sidecart-remove-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #7E2430;
+    border: none;
+    color: #F5F1E9;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px #7E2430;
+    font-family: 'Treasure Map Deadhand', cursive, sans-serif;
+    letter-spacing: 0.03em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.sidecart-remove-btn:hover {
+    background-color: #5B1B22;
+    filter: brightness(1.15);
+}
+
+.remove-icon {
+    font-size: 0.9rem;
+}
+
+.remove-text {
+    font-size: 0.8rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive: su schermi piccoli nascondi il testo */
+@media (max-width: 400px) {
+    .remove-text {
+        display: none;
+    }
+    
+    .sidecart-remove-btn {
+        padding: 8px;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+    }
+}
 
 /* Footer */
 .sidecart-footer {

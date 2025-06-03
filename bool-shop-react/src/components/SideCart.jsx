@@ -39,14 +39,25 @@ function SideCart({ isOpen, onClose }) {
                     )}
                   </p>
                 </div>
-                <div className="sidecart-item-controls">
-                  <button onClick={() => removeFromCart(item.id, 1)} className="sidecart-btn-round red">
-                    {item.quantity === 1 ? "🗑️" : "-"}
+                <div className="sidecart-item-actions">
+                  <div className="sidecart-item-controls">
+                    <button onClick={() => removeFromCart(item.id, 1)} className="sidecart-btn-round red">
+                      {item.quantity === 1 ? "🗑️" : "-"}
+                    </button>
+                    <span className="sidecart-item-qty">{item.quantity}</span>
+                    <button onClick={() => addToCart(item)} className="sidecart-btn-round purple">+</button>
+                  </div>
+                  <button
+                    className="sidecart-remove-btn"
+                    onClick={() => removeFromCart(item.id, item.quantity)}
+                    title="Rimuovi prodotto dal carrello"
+                  >
+                    <span className="remove-icon">🗑️</span>
+                    <span className="remove-text">Rimuovi</span>
                   </button>
-                  <span className="sidecart-item-qty">{item.quantity}</span>
-                  <button onClick={() => addToCart(item)} className="sidecart-btn-round purple">+</button>
                 </div>
               </li>
+
             )
           })}
         </ul>
