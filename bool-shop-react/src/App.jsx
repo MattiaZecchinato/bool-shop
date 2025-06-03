@@ -12,7 +12,8 @@ import WishListPage from "./pages/WishListPage"
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
 import TermOfServicePage from "./pages/TermOfServicePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
-import Category from "./pages/Category" 
+import Category from "./pages/Category"
+import OrderRecap from "./pages/OrederRecap"
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/boardgames" element={<BoardgamesPage />} />
               <Route path="/puzzles" element={<PuzzlesPage />} />
+              <Route path="/order-recap" element={<OrderRecap />} />
               <Route path="/detail/:slug" element={<ProductDetailPage />} />
               <Route path="/category/:slug" element={<Category />} />
               <Route path="*" element={<div>page not found</div>} />
