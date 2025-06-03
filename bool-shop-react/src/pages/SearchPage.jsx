@@ -11,11 +11,10 @@ function SearchPage() {
     const [display, setDisplay] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
     const { VITE_BE_PATH } = import.meta.env;
-
+    const pageParam = parseInt(searchParams.get("page")) || 1;
     const [found, setFound] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(pageParam);
     const [totalPages, setTotalPages] = useState(1);
-
     const searchpara = searchParams.get("search") || "";
     let choicepara = searchParams.get("choice") || "name";
     let orderpara = searchParams.get("order") || "asc";
@@ -89,6 +88,13 @@ function SearchPage() {
 
     function goToPage(newPage) {
         if (newPage >= 1 && newPage <= totalPages) {
+            setSearchParams({
+                search: searchpara,
+                choice: choicepara,
+                order: orderpara,
+                discount: discountpara,
+                page: newPage,
+            });
             setCurrentPage(newPage);
         }
     }
@@ -126,11 +132,12 @@ function SearchPage() {
 
             <Link
                 className="btn btn-primary col-lg-1"
-                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}`}
+                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}&page=1`}
                 onClick={() => setCurrentPage(1)}
             >
                 Cerca
             </Link>
+
 
         </div>
 
