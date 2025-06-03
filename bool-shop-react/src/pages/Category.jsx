@@ -76,11 +76,11 @@ function Category() {
         </div>
 
         <div className="d-flex justify-content-center my-4 gap-3">
-            <button className="btn btn-outline-primary" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
+            <button className="btn btn-outline-light" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
                 ← Precedente
             </button>
-            <span>Pagina {currentPage} di {totalPages}</span>
-            <button className="btn btn-outline-primary" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
+            <span className="text-white">Pagina {currentPage} di {totalPages}</span>
+            <button className="btn btn-outline-light" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
                 Successiva →
             </button>
         </div>
