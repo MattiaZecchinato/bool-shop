@@ -11,23 +11,22 @@ function SearchPage() {
     const [display, setDisplay] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
     const { VITE_BE_PATH } = import.meta.env;
-
+    const pageParam = parseInt(searchParams.get("page")) || 1;
     const [found, setFound] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(pageParam);
     const [totalPages, setTotalPages] = useState(1);
-
     const searchpara = searchParams.get("search") || "";
     let choicepara = searchParams.get("choice") || "name";
     let orderpara = searchParams.get("order") || "asc";
     let discountpara = searchParams.get('discount') || "false"
-    console.log(discountpara)
-
-
+    const limitPara = parseInt(searchParams.get("limit")) || 6;
+    console.log(limitPara)
     const resetFormSearch = {
         choice: choicepara,
         search: searchpara,
         order: orderpara,
-        discount: discountpara
+        discount: discountpara,
+        limit: limitPara
     };
     if (choicepara === "created_at") {
         if (orderpara === "asc") {
@@ -70,7 +69,7 @@ function SearchPage() {
         }
 
         finalUri += `&choice=${choicepara}&order=${orderpara}&discount=${discountpara}`;
-        finalUri += `&limit=6&page=${currentPage}`;
+        finalUri += `&limit=${limitPara}&page=${currentPage}`;
 
 
         axios.get(finalUri)
@@ -89,6 +88,14 @@ function SearchPage() {
 
     function goToPage(newPage) {
         if (newPage >= 1 && newPage <= totalPages) {
+            setSearchParams({
+                search: searchpara,
+                choice: choicepara,
+                order: orderpara,
+                discount: discountpara,
+                page: newPage,
+                limit: limitPara
+            });
             setCurrentPage(newPage);
         }
     }
@@ -126,15 +133,24 @@ function SearchPage() {
 
             <Link
                 className="btn btn-primary col-lg-1"
-                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}`}
+                to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}&limit=${formSearch.limit}&page=1`}
                 onClick={() => setCurrentPage(1)}
             >
                 Cerca
             </Link>
 
+
         </div>
 
         <div className="d-flex justify-content-end mb-4 gap-2" role="group" aria-label="btn-group">
+            <div className="col-md-2">
+
+                <select id="inputOrder" className="form-select" name="limit" value={formSearch.limiPara} onChange={handleData}>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
             <button type="button" className="btn btn-primary" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
             <button type="button" className="btn btn-primary" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
         </div>

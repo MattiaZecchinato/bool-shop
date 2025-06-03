@@ -54,7 +54,6 @@ function CheckoutPage() {
             freeshipping,
             products,
         };
-        console.log(payload)
         axios.post(`${VITE_BE_PATH}/shop/checkout`, payload)
             .then(() => {
                 alert("Ordine completato con successo!");
