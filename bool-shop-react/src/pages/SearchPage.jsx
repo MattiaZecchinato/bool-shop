@@ -178,9 +178,6 @@ function SearchPage() {
                     <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
                     <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
                 </div>}
-            <div className="d-flex justify-content-center">
-                <Link className="btn btn-light col-3 mb-5" to="/search">Torna al Catalogo</Link>
-            </div>
         </div>
 
 

@@ -20,11 +20,11 @@ function Footer() {
                     <div className="col-6 col-lg-4 order-2 order-lg-0 text-center text-lg-start d-flex flex-column align-items-center">
                         <h5 className="fw-bold font-medieval">Link Utili</h5>
                         <ul className="list-unstyled d-flex flex-column align-items-center">
-                            <li><NavLink className="text-decoration-none text-white" to="/">Home</NavLink></li>
-                            <li><NavLink className="text-decoration-none text-white" to="/search">Catalogo</NavLink></li>
-                            <li><NavLink className="text-decoration-none text-white" to="/boardgames">Giochi Da Tavolo</NavLink></li>
-                            <li><NavLink className="text-decoration-none text-white" to="/puzzles">Puzzle</NavLink></li>
-                            <li><NavLink className="text-decoration-none text-white">Contatti</NavLink></li>
+                            <li><NavLink className="text-decoration-none hover-link" to="/">Home</NavLink></li>
+                            <li><NavLink className="text-decoration-none hover-link" to="/search">Catalogo</NavLink></li>
+                            <li><NavLink className="text-decoration-none hover-link" to="/boardgames">Giochi Da Tavolo</NavLink></li>
+                            <li><NavLink className="text-decoration-none hover-link" to="/puzzles">Puzzle</NavLink></li>
+                            <li><NavLink className="text-decoration-none hover-link">Contatti</NavLink></li>
                         </ul>
                     </div>
 
