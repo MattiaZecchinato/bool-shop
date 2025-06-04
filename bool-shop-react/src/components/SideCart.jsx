@@ -29,7 +29,7 @@ function SideCart({ isOpen, onClose }) {
                 </div>
                 <div className="sidecart-item-info">
                   <h5 className="sidecart-item-title">{item.name}</h5>
-                  <p className="sidecart-item-price">
+                  <div className="sidecart-item-price">
                     {" "}
                     {item.discount_type === "percentage" && checkDisc ? (
                       <>
@@ -39,7 +39,7 @@ function SideCart({ isOpen, onClose }) {
                     ) : (
                       <div className="fw-bold">€{Number(item.price).toFixed(2)}</div>
                     )}
-                  </p>
+                  </div>
                 </div>
                 <div className="sidecart-item-actions">
                   <div className="sidecart-item-controls">
