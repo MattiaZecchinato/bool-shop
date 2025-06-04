@@ -201,7 +201,13 @@ li {
 }
 
 .overflow-hidden {
-    overflow: hidden;
+    overflow: hidden !important;
+    position: relative;
+}
+
+.overflow-visible {
+    overflow: visible !important;
+    position: relative;
 }
 
 .margin-bottom {
@@ -377,10 +383,6 @@ a {
 }
 
 /* hover cards  */
-
-.carousel-inner {
-    overflow: visible;
-}
 
 .gold-gradient-border:hover {
     transform: translateY(-10px);

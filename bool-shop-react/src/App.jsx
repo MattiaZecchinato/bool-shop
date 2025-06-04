@@ -22,30 +22,28 @@ function App() {
 
   return (
     <>
-         <StarBackground>
-      <CartProvider>
-        <BrowserRouter>
-   
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/test" element={<TestPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/wish-list" element={<WishListPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/boardgames" element={<BoardgamesPage />} />
-              <Route path="/puzzles" element={<PuzzlesPage />} />
-              <Route path="/order-recap" element={<OrderRecap />} />
-              <Route path="/detail/:slug" element={<ProductDetailPage />} />
-              <Route path="/category/:slug" element={<Category />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        
-        </BrowserRouter>
-      </CartProvider>
+      <StarBackground>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/test" element={<TestPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/wish-list" element={<WishListPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/boardgames" element={<BoardgamesPage />} />
+                <Route path="/puzzles" element={<PuzzlesPage />} />
+                <Route path="/order-recap" element={<OrderRecap />} />
+                <Route path="/detail/:slug" element={<ProductDetailPage />} />
+                <Route path="/category/:slug" element={<Category />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
       </StarBackground>
     </>
   )

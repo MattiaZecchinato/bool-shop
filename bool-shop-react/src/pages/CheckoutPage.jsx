@@ -47,7 +47,6 @@ function CheckoutPage() {
             const price = parseFloat(item.price);
             return price * (1 - discountPercent / 100);
         }
-        return parseFloat(item.price);
     };
 
     // Calcolo totale tenendo conto dello sconto sui singoli prodotti
