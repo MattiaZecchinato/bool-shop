@@ -188,7 +188,7 @@ function CheckoutPage() {
                                 <input type="text" className="form-control bg-list-checkout border border-dark" name="user_address" value={formData.user_address} onChange={handleChange} required />
                             </div>
                             <div className="col-12 col-md-4">
-                                <button type="submit" className="btn btn-success w-100">Invia ordine</button>
+                                <button type="submit" className="btn-cart-success w-100">Invia ordine</button>
                             </div>
                         </div>
                     </form>
