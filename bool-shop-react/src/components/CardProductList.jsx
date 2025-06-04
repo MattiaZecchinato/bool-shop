@@ -31,10 +31,11 @@ function CardProductList({ data }) {
                     <div className="col-10 col-sm-10 col-md-10">
                         <div className="card-body">
                             <h5 className="card-title fw-bold font-medieval">{name}</h5>
-                            {hasDiscount ? (<div><span className='text-decoration-line-through me-2 text-danger'>{priceParsed.toFixed(2)}€</span>
-                                <span className='fw-bold text-success'>{discountPrice}€</span><span className='discount-price-list fw-bold ms-2'> - {discountAmountParsed}%</span></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
+                            {hasDiscount ? (<div><span className='text-decoration-line-through me-2 text-danger red-price'>{priceParsed.toFixed(2)}€</span>
+                                <span className='fw-bold text-success green-price'>{discountPrice}€</span><span className='discount-price-list fw-bold ms-2'> - {discountAmountParsed}%</span></div>)
+                                : (<span className="fixed-price">{priceParsed.toFixed(2)}€</span>)}
                         </div>
-                        <button className="btn-card text-white btn-sm mb-2 ms-3" onClick={() => addToCart(data)}>Aggiungi al carrello</button>
+                        <button className="btn-card text-white btn-sm mb-2 ms-3 " onClick={() => addToCart(data)}>Aggiungi al carrello</button>
                     </div>
                 </div>
             </div>

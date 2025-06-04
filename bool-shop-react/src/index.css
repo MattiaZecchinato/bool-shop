@@ -21,15 +21,6 @@ header {
     font-size: 18px;
 }
 
-.discount-price-list {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    background-color: rgb(37, 4, 63);
-    color: white;
-    padding: 2.5px;
-    border-radius: 5px;
-}
 
 .nav-icon {
     vertical-align: middle;
@@ -478,18 +469,20 @@ button:disabled img {
 
 }
 
-.discount-price-list {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    background-color: #361556;
+.card-detail-discount {
     color: white;
-    padding: 2.5px;
+    background-color: rgb(37, 4, 63);
+    border-radius: 5px;
 }
 
-.card-detail-discount {
-    background-color: purple;
+.discount-price-list {
+    /* position: absolute;
+    top: -10px;
+    left: -10px; */
+    background-color: rgb(37, 4, 63);
     color: white;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 /* HomePage */
