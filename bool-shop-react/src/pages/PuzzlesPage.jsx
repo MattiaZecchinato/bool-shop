@@ -56,8 +56,8 @@ function PuzzlesPage() {
 
 
         <div className="d-flex justify-content-end mb-4 gap-2" role="group" aria-label="btn-group">
-            <button type="button" className="btn btn-primary" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
-            <button type="button" className="btn btn-primary" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
+            <button type="button" className="btn btn-light" onClick={() => setDisplay(true)}><FontAwesomeIcon icon={faGrip} /></button>
+            <button type="button" className="btn btn-light" onClick={() => setDisplay(false)}><FontAwesomeIcon icon={faListUl} /></button>
         </div>
 
         <div className={display ? 'row justify-content-center' : ''}>
