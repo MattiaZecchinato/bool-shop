@@ -4,6 +4,8 @@ import CardProduct from "../components/CardProduct";
 import SideCart from "../components/SideCart";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import checkDiscount from "../utils/checkDiscount";
+import elf from "../assets/christmas-elf.png";
+import unicorn from "../assets/unicorn.png";
 
 function HomePage() {
 
@@ -89,9 +91,12 @@ function HomePage() {
                     </button>
                 </div>
 
-                <h2 className="mt-5 mb-5 text-white">Ultimi arrivi</h2>
+                <div className="d-flex gap-2 align-items-center">
+                    <h2 className="mt-5 mb-5 text-white font-medieval">Ultimi arrivi</h2>
+                    <img src={elf} alt="elf" style={{ width: "50px" }} />
+                </div>
 
-                <div id="carouselLatest" className="carousel slide" data-bs-ride="false">
+                <div id="carouselLatest" className="carousel slide mb-5" data-bs-ride="false">
                     <div className="carousel-inner">
                         {groupProducts(
                             data.filter(element => new Date(element.created_at) > new Date('2023-01-01'))
@@ -118,9 +123,13 @@ function HomePage() {
                     </button>
                 </div>
 
-                <h2 className="mt-5 mb-5 text-white">In promozione</h2>
+                <div className="d-flex gap-2 align-items-center">
+                    <h2 className="mt-5 mb-5 text-white font-medieval">In promozione</h2>
+                    <img src={unicorn} alt="unicorn" style={{ width: "50px" }} />
+                </div>
 
-                <div id="carouselPromo" className="carousel slide" data-bs-ride="false">
+
+                <div id="carouselPromo" className="carousel slide mb-5" data-bs-ride="false">
                     <div className="carousel-inner">
                         {groupProducts(
                             data.filter(element => {

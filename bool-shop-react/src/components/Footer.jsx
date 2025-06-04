@@ -6,7 +6,7 @@ import { faXTwitter, faInstagram, faFacebookF } from '@fortawesome/free-brands-s
 function Footer() {
 
     return (
-        <footer className="text-light p-5 mt-5">
+        <footer className="text-light p-5 mt-5 footer-box">
             <div className="container">
                 <div className="row">
                     <div className="col">
@@ -18,7 +18,7 @@ function Footer() {
                 <div className="row">
                     {/* Link Utili - Sinistra su desktop, sotto a sinistra su mobile/tablet */}
                     <div className="col-6 col-lg-4 order-2 order-lg-0 text-center text-lg-start d-flex flex-column align-items-center">
-                        <h5 className="fw-bold">Link Utili</h5>
+                        <h5 className="fw-bold font-medieval">Link Utili</h5>
                         <ul className="list-unstyled d-flex flex-column align-items-center">
                             <li><NavLink className="text-decoration-none text-white" to="/">Home</NavLink></li>
                             <li><NavLink className="text-decoration-none text-white" to="/search">Catalogo</NavLink></li>
@@ -30,7 +30,7 @@ function Footer() {
 
                     {/* Unisciti - Centrale su desktop, in alto su mobile/tablet */}
                     <div className="col-12 col-lg-4 order-0 order-lg-1 text-center mb-4 mb-lg-0">
-                        <h4 className="mb-3 fw-bold">Unisciti al mondo dei giochi da tavolo!</h4>
+                        <h4 className="mb-3 fw-bold font-medieval">Unisciti al mondo dei giochi da tavolo!</h4>
                         <p className="fst-italic">Resta aggiornato su nuovi arrivi, offerte speciali e consigli di gioco.</p>
                         <ul className="list-unstyled">
                             <li>Via del Gioco, 12 – 00100 Roma</li>
@@ -41,7 +41,7 @@ function Footer() {
 
                     {/* Social - Destra su desktop, sotto a destra su mobile/tablet */}
                     <div className="col-6 col-lg-4 order-3 order-lg-2 text-center text-lg-end d-flex flex-column align-items-center ">
-                        <h5 className="fw-bold">Seguici sui social</h5>
+                        <h5 className="fw-bold font-medieval">Seguici sui social</h5>
                         <ul className="list-unstyled d-flex justify-content-center justify-content-lg-end align-items-center gap-3">
                             <li>
                                 <a href="https://x.com/" style={{

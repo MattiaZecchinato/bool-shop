@@ -30,7 +30,7 @@ function CardProductList({ data }) {
                     </div>
                     <div className="col-10 col-sm-10 col-md-10">
                         <div className="card-body">
-                            <h5 className="card-title fw-bold fst-italic">{name}</h5>
+                            <h5 className="card-title fw-bold font-medieval">{name}</h5>
                             {hasDiscount ? (<div><span className='text-decoration-line-through me-2 text-danger'>{priceParsed.toFixed(2)}€</span>
                                 <span className='fw-bold text-success'>{discountPrice}€</span><span className='discount-price-list fw-bold ms-2'> - {discountAmountParsed}%</span></div>) : (<span>Prezzo: {priceParsed.toFixed(2)}€</span>)}
                         </div>
