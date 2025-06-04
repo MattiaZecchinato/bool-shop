@@ -72,13 +72,13 @@ function HomePage() {
                 <div id="carouselExampleAutoplaying" className="carousel carousel-container slide m-auto" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src="./src/assets/carosello-giochi-da-tavolo.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" />
+                            <img src="./src/assets/img-sho-png.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" />
                         </div>
                         <div className="carousel-item">
-                            <img src="./src/assets/carosello-puzzle.jpg" className="d-block w-100 carousel-img img-fluid" alt="puzzle" />
+                            <img src="./src/assets/catan-png.png" className="d-block w-100 carousel-img img-fluid" alt="puzzle" />
                         </div>
                         <div className="carousel-item">
-                            <img src="./src/assets/spedizione-gratuita.jpg" className="d-block w-100 carousel-img img-fluid" alt="spedizione-gratuita" />
+                            <img src="./src/assets/spedizione-free-png.png" className="d-block w-100 carousel-img img-fluid" alt="spedizione-gratuita" />
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
