@@ -14,14 +14,16 @@ import TermOfServicePage from "./pages/TermOfServicePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
 import Category from "./pages/Category"
 import OrderRecap from "./pages/OrederRecap"
-
+import StarBackground from "./components/StarBackground"
 
 function App() {
 
   return (
     <>
+         <StarBackground>
       <CartProvider>
         <BrowserRouter>
+   
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
@@ -41,8 +43,10 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/term-of-service" element={<TermOfServicePage />} />
           </Routes>
+        
         </BrowserRouter>
       </CartProvider>
+      </StarBackground>
     </>
   )
 }

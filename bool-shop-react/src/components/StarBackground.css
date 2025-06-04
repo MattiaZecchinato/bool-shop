@@ -1,0 +1,46 @@
+/* src/components/StarBackground.css */
+
+.star-background-wrapper {
+  /* Assicura che questo wrapper occupi l'intera viewport */
+  min-height: 100vh; /* Almeno l'altezza della finestra visibile */
+  width: 100vw; /* Tutta la larghezza della finestra visibile */
+  position: relative; /* Importante per posizionare gli elementi figli */
+  overflow: hidden; /* Nasconde le stelle che potrebbero "sporgere" */
+}
+
+/* Container per le stelle: questo è lo sfondo vero e proprio */
+.stars-container {
+  position: fixed; /* Le stelle rimangono fisse rispetto alla viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Mette le stelle dietro a tutto il resto */
+  pointer-events: none; /* Permette ai clic di passare attraverso le stelle */
+  /* Non è necessario impostare background qui, le stelle sono div individuali */
+}
+
+.star {
+  position: absolute; /* Le stelle sono posizionate assolutamente all'interno di .stars-container */
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  /* z-index: -1; qui non è più necessario, è già gestito da .stars-container */
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+/* Il container per il contenuto della tua app */
+.app-content-overlay {
+  position: relative; /* Assicura che il contenuto si posizioni normalmente */
+  z-index: 1; /* Pone il contenuto sopra le stelle */
+  /* Puoi aggiungere padding o margini qui se necessario per il layout del tuo contenuto */
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
