@@ -173,6 +173,10 @@ li {
     display: block;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 /* stile cuore */
 
 .card svg {
