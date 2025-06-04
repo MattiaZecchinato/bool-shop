@@ -71,7 +71,7 @@ function HomePage() {
         <div className="home-container mb-5">
             <div className="content-box w-100">
                 <div id="carouselExampleAutoplaying" className="carousel carousel-container slide m-auto" data-bs-ride="carousel">
-                    <div className="carousel-inner overflow-hidden margin-bottom">
+                    <div className="carousel-inner margin-bottom">
                         <div className="carousel-item active">
                             <Link to={"/boardgames"} ><img src="./src/assets/img-sho-png.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" /></Link>
                         </div>
@@ -98,7 +98,7 @@ function HomePage() {
                 </div>
 
                 <div id="carouselLatest" className="carousel slide mb-5" data-bs-ride="false">
-                    <div className="carousel-inner">
+                    <div className="carousel-inner pt-4">
                         {groupProducts(
                             data.filter(element => new Date(element.created_at) > new Date('2023-01-01'))
                         ).map((group, index) => (
@@ -131,7 +131,7 @@ function HomePage() {
 
 
                 <div id="carouselPromo" className="carousel slide mb-5" data-bs-ride="false">
-                    <div className="carousel-inner">
+                    <div className="carousel-inner pt-4">
                         {groupProducts(
                             data.filter(element => {
                                 const discountAmount = element.discount_amount;
