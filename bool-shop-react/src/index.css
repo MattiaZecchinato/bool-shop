@@ -86,9 +86,8 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: "Forum", serif;
-
+    overflow-x: hidden;
 }
-
 
 /* Menu */
 
@@ -479,7 +478,7 @@ button:disabled img {
     position: absolute;
     top: -10px;
     left: -10px;
-    background-color: purple;
+    background-color: #361556;
     color: white;
     padding: 2.5px;
 }
