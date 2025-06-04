@@ -2,10 +2,10 @@
 import React, { useMemo } from "react";
 import "./StarBackground.css";
 
-const StarBackground = ({ children }) => { 
+const StarBackground = ({ children }) => {
   const stars = useMemo(() => {
     const starElements = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 100; i++) {
       const size = Math.random() * 3.5 + 1;
       const x = Math.random() * window.innerWidth;
       const y = Math.random() * window.innerHeight;
@@ -27,16 +27,16 @@ const StarBackground = ({ children }) => {
     }
 
     return starElements;
-  }, []); 
+  }, []);
 
   return (
-   
-    <div className="star-background-wrapper"> 
 
-      <div className="stars-container"> 
+    <div className="star-background-wrapper">
+
+      <div className="stars-container">
         {stars}
       </div>
-     
+
       <div className="app-content-overlay">
         {children}
       </div>
