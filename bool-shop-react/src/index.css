@@ -68,6 +68,7 @@ body {
     background-position: center;
     min-height: 100vh;
     margin: 0;
+    font-family: "Forum", serif;
 
 }
 
@@ -83,6 +84,7 @@ body {
 .nav-style a {
     color: #fff;
     text-decoration: none;
+    font-size: 20px;
 }
 
 li {
@@ -307,14 +309,18 @@ li {
     position: relative;
 }
 
+.recap-container h1 {
+    font-size: 25px;
+}
+
 .image-recap {
-    max-width: 50px;
+    max-width: 40px;
 }
 
 .position-image-recap {
     position: absolute;
-    top: -50px;
-    left: 40px;
+    top: -10px;
+    left: 35px;
 }
 
 /* not-found page  */
@@ -370,7 +376,7 @@ li {
 /* Footer */
 
 .footer-box {
-    /* background-image: url(./assets/background-footer.png); */
+    background-color: #070007;
     background-size: cover;
     background-position: center;
 }
@@ -400,13 +406,6 @@ li {
 .dropdown:hover .dropdown-menu {
     opacity: 1;
     transform: translateY(0);
-}
-
-#root {
-
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
 /*SIDECART*/
@@ -690,6 +689,16 @@ li {
 
 /*END SIDECART*/
 
+/* fonts */
+
+.font-medieval {
+    font-family: "Cinzel", serif;
+}
+
+.font-body {
+    font-family: "Forum", serif;
+}
+
 /* MEDIA QUERY */
 
 /* 1. Mobile - default */
@@ -779,6 +788,11 @@ li {
         width: 100px;
         height: 100px;
     }
+
+    .position-image-recap {
+        top: -20px;
+        left: 45px;
+    }
 }
 
 /* 3. Desktop (>= 992px) */
@@ -823,5 +837,10 @@ li {
     .logo {
         width: 120px;
         height: 120px;
+    }
+
+    .position-image-recap {
+        top: -18px;
+        left: 50px;
     }
 }

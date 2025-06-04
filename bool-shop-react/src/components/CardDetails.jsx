@@ -40,7 +40,7 @@ function CardDetails({ data }) {
                     />
                 </figure>
                 <div className="d-flex flex-column desciption-section ps-0 m-4 description-section justify-content-center">
-                    <h5 className="text-center fw-bold mb-4 title-detail">{name}</h5>
+                    <h5 className="text-center fw-bold mb-4 title-detail font-medieval">{name}</h5>
                     <p className="fst-italic fs-5 description-text">{description}</p>
                     {hasDiscount ? (
                         <div>

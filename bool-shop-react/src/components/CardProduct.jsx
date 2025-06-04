@@ -46,7 +46,7 @@ function CardProduct({ data }) {
 
                 {/* BODY */}
                 <div className="card-body d-flex flex-column flex-grow-1 align-items-center text-center">
-                    <h4 className="card-title fw-bold mb-3 fs-3 fst-italic">{name}</h4>
+                    <h4 className="card-title fw-bold mb-3 fs-5 font-medieval">{name}</h4>
 
                     <div className='mt-auto'>
                         {hasDiscount ? (

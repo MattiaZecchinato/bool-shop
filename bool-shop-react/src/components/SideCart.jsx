@@ -14,7 +14,7 @@ function SideCart({ isOpen, onClose }) {
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         <button className="sidecart-close-btn" onClick={onClose} aria-label="Chiudi carrello">✕</button>
 
-        <h3 className="sidecart-title">Prodotti nel carrello</h3>
+        <h3 className="sidecart-title font-medieval fs-4 fw-bold">Prodotti nel carrello</h3>
 
         {cartItems.length === 0 && <p className="sidecart-empty">Il carrello è vuoto</p>}
 

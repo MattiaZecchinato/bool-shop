@@ -50,7 +50,7 @@ function Header() {
                                 <li className="nav-item">
                                     <NavLink className="nav-link active d-flex align-items-center" aria-current="page" to="/">
                                         <img className="nav-img" src={building} alt="building-home" />
-                                        <span className="span-style-header">Home</span>
+                                        <span className="span-style-header font-medieval">Home</span>
                                     </NavLink>
                                 </li>
 
@@ -67,7 +67,7 @@ function Header() {
                                         {totalQuantityCart > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold">{totalQuantityCart}</div>
                                         )}
-                                        <span className="span-style-header">Carrello</span>
+                                        <span className="span-style-header font-medieval">Carrello</span>
                                     </Link>
                                 </li>
 
@@ -82,7 +82,7 @@ function Header() {
                                         {totalQuantityWishList > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold qnt-wish-list">{totalQuantityWishList}</div>
                                         )}
-                                        <span className="span-style-header">Wishlist</span>
+                                        <span className="span-style-header font-medieval">Wishlist</span>
                                     </NavLink>
                                 </li>
                             </ul>
