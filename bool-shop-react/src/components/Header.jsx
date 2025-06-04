@@ -47,7 +47,7 @@ function Header() {
                         </button>
                         <div className="collapse navbar-collapse flex-row-reverse" id="navbarNav">
                             <ul className="navbar-nav align-items-center">
-                                <li className="nav-item">
+                                <li className="nav-item header-icon">
                                     <NavLink className="nav-link active d-flex align-items-center" aria-current="page" to="/">
                                         <img className="nav-img" src={building} alt="building-home" />
                                         <span className="span-style-header font-medieval">Home</span>
@@ -55,7 +55,7 @@ function Header() {
                                 </li>
 
                                 {/* Pulsante Carrello */}
-                                <li className="dropdown position-relative">
+                                <li className="dropdown position-relative header-icon">
                                     <Link
                                         className="btn ms-auto position-relative"
                                         onClick={() => setIsSidebarOpen(true)}
@@ -72,7 +72,7 @@ function Header() {
                                 </li>
 
                                 {/* Wishlist */}
-                                <li>
+                                <li className="header-icon">
                                     <NavLink
                                         to="/wish-list"
                                         className="btn ms-auto position-relative"

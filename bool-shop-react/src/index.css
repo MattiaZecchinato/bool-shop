@@ -9,6 +9,43 @@ header {
     z-index: 10;
 }
 
+/* hover header */
+
+.header-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.header-icon:hover {
+    transform: scale(1.1);
+}
+
+/* hover menu */
+
+.menu {
+    position: relative;
+    color: #ffffff;
+}
+
+
+
+.menu::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #ffffff;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.menu:hover::before {
+    width: 40%;
+}
+
 .red-price {
     font-size: 18px;
 }
@@ -476,9 +513,10 @@ button:disabled img {
     position: absolute;
     top: 50px;
     left: 10px;
-    background-color: purple;
+    background-color: rgb(37, 4, 63);
     color: white;
     padding: 5px;
+    border-radius: 5px;
 
 }
 
