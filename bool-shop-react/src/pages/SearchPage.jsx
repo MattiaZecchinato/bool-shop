@@ -144,7 +144,7 @@ function SearchPage() {
 
         <div className="d-flex justify-content-between margin-bottom gap-2" role="group" aria-label="btn-group">
             <div className="d-flex col-md-2 gap-3">
-                <select id="inputOrder" className="form-select" name="limit" value={formSearch.limiPara} onChange={handleData}>
+                <select id="inputOrder" className="form-select" name="limit" value={formSearch.limiPara} onChange={handleData} style={{ width: "100px" }}>
                     <option value="6">6</option>
                     <option value="9">9</option>
                     <option value="12">12</option>
@@ -173,11 +173,11 @@ function SearchPage() {
                         ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
                         : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
                 )
-                :
-                <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
-                    <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
-                    <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
-                </div>}
+                : <h3>Nessun prodotto trovato</h3>}
+            {/* // <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                //     <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
+                //     <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
+                // </div>} */}
         </div>
 
 
