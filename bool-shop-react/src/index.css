@@ -237,8 +237,10 @@ li {
 .btn-card {
     border: unset;
     background-color: #361556;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 19px;
+    transition: all 0.5s ease-in-out;
 }
 
 .btn-card:hover {
@@ -285,6 +287,54 @@ li {
     gap: 4px;
     align-items: center;
     min-height: 20px;
+}
+
+/* button prev next search page  */
+
+.btn-prev-next {
+    border: unset;
+    border: 2px solid #fff;
+    background-color: transparent;
+    border-radius: 50px;
+    padding: 5px 20px;
+    font-size: 19px;
+    /* transition: all 0.5s ease-in-out; */
+    color: #fff;
+}
+
+.btn-prev-next:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.arrow-style {
+    width: 25px;
+    filter: invert(1);
+    /* transition: all 0.5s ease-in-out; */
+}
+
+.btn-prev-next:hover .arrow-style {
+    filter: invert(0);
+}
+
+.reverse-arrow {
+    transform: rotate(180deg);
+}
+
+button:disabled {
+    border-color: #ffffff88;
+}
+
+button:disabled:hover {
+    background-color: inherit;
+    box-shadow: none;
+}
+
+button:disabled img {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+    transition: none;
 }
 
 /* card-dettaglio */
