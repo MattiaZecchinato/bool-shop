@@ -25,7 +25,7 @@ function CardDetails({ data }) {
     return <>
 
         <div className="gold-gradient-border mb-5 card-detail-width">
-            <div className="card-detail card card-style d-flex flex-column flex-md-row p-4">
+            <div className="card-detail card card-style d-flex flex-column flex-md-row p-4 align-items-center">
                 <FontAwesomeIcon
                     icon={solidHeart}
                     className={prefercolor(data) ? 'text-danger' : ''}
