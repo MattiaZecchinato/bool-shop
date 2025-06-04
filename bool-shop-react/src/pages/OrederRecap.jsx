@@ -13,7 +13,7 @@ function OrderRecap() {
 
     return <>
         <div className="container py-4 text-white row gap-2 width-whish-container justify-content-center bg-light rounded rounded-3 mt-4 mb-4 border border-dark" style={{ maxWidth: "600px" }}>
-            <div className="recap-container d-flex flex-row-reverse align-items-center justify-content-center">
+            <div className="recap-container d-flex row-reverse align-items-center justify-content-center">
                 <h1 className="mb-4 text-dark text-center font-medieval">Ordine completato con successo!</h1>
                 <div>
                     <img className="image-recap me-2" src={staff} alt="staff" />
@@ -24,7 +24,7 @@ function OrderRecap() {
             <div className="text-dark text-center">
                 <p className="fs-4">Grazie <strong>{user_first_name}</strong> per il tuo acquisto.</p>
                 <p>Una conferma è stata inviata a <strong>{user_email}</strong>.</p>
-                <p>Numero ordine: <strong>#</strong></p> {/* questo e da vedere se si implementa */}
+                <p>Numero ordine: <strong>#</strong></p>
                 <p>Totale: <strong>€{total_order}</strong></p>
                 <p className="mb-5">Riceverai una notifica quando il tuo ordine sarà spedito.</p>
             </div>

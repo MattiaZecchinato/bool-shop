@@ -6,7 +6,8 @@ import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
-import arrowRight from "../assets/arrow-right.png"
+import arrowRight from "../assets/arrow-right.png";
+import sadUnicorn from "../assets/unicorn-sad.png";
 
 function SearchPage() {
     const [display, setDisplay] = useState(true);
@@ -172,10 +173,15 @@ function SearchPage() {
                         ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
                         : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
                 )
-                : <h3>Nessun Elemento Trovato</h3>
-            }
+                :
+                <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                    <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
+                    <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
+                </div>}
+            <div className="d-flex justify-content-center">
+                <Link className="btn btn-light col-3 mb-5" to="/search">Torna al Catalogo</Link>
+            </div>
         </div>
-
 
 
         <div className="d-flex justify-content-center my-4 gap-3 align-items-center">
