@@ -1,15 +1,19 @@
 import { useCart } from "../components/CartContext";
 import { Link } from "react-router-dom";
+import sadUnicorn from "../assets/unicorn-sad.png"
 
 function CartPage() {
     const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
 
     return (
         <div className="p-4 border border-dark bg-light rounded rounded-3 text-dark rounded container py-4 text-white " style={{ maxWidth: "600px" }}>
-            <h3 className="text-dark text-center mb-4">🛒 Riepilogo carrello</h3>
+            <h3 className="text-dark text-center mb-4">🛒 Carrello</h3>
 
             {cartItems.length === 0 ? (
-                <p className="text-dark fst-italic text-center fs-5">Il carrello è vuoto.</p>
+                <div className="container bg-light fst-italic rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                    <p className="text-dark fst-italic text-center fs-5 my-auto">Il carrello è vuoto</p>
+                    <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
+                </div>
             ) : (
                 <>
                     {cartItems.map(item => (
@@ -69,8 +73,9 @@ function CartPage() {
                         </div>
                     </div>
                 </>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 
