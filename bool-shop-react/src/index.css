@@ -272,6 +272,21 @@ li {
     margin: 0 auto;
 }
 
+.card-text-block {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.price-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    min-height: 20px;
+}
+
 /* card-dettaglio */
 
 .card-detail-width {
