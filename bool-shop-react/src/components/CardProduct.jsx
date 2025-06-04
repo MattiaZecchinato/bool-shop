@@ -67,7 +67,7 @@ function CardProduct({ data }) {
 
                         )}
 
-                        <p className="mb-4 fs-5">
+                        <p className="mb-4">
                             <strong>Categoria:</strong>{" "}
                             {categories && categories.length > 0
                                 ? categories.map((c) => c.category_name).join(", ")
