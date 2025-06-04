@@ -39,7 +39,7 @@ function CartPage() {
                         return (
                             <div
                                 key={item.id}
-                                className="border p-3 mb-2 d-flex text-dark justify-content-between align-items-center flex-wrap bg-list-checkout rounded rounded-2"
+                                className="border p-3 mb-4 d-flex text-dark justify-content-between align-items-center flex-wrap bg-list-checkout rounded rounded-2"
                             >
                                 <div>
                                     <h5 className="fst-italic">{item.name}</h5>
@@ -63,18 +63,18 @@ function CartPage() {
 
                                 <div className="d-flex align-items-center gap-2">
                                     <button
-                                        className="btn btn-outline-dark"
+                                        className="btn-cart-prev-next"
                                         onClick={() => removeFromCart(item.id, 1)}
                                         disabled={item.quantity <= 1}
                                     >
-                                        -
+                                        <span>-</span>
                                     </button>
                                     <span>{item.quantity}</span>
                                     <button
-                                        className="btn btn-outline-dark"
+                                        className="btn-cart-prev-next"
                                         onClick={() => addToCart(item)}
                                     >
-                                        +
+                                        <span>+</span>
                                     </button>
                                 </div>
 
@@ -83,10 +83,10 @@ function CartPage() {
                                         <strong>Totale: €{(discountedPrice * item.quantity).toFixed(2)}</strong>
                                     </p>
                                     <button
-                                        className="btn btn-sm btn-danger"
+                                        className="btn-cart-fail"
                                         onClick={() => removeFromCart(item.id, item.quantity)}
                                     >
-                                        🗑️ Rimuovi
+                                        Rimuovi
                                     </button>
                                 </div>
                             </div>
@@ -94,14 +94,14 @@ function CartPage() {
                     })}
 
                     <div className="text-end">
-                        <h4>
-                            Totale carrello: €{totalCart.toFixed(2)}
+                        <h4 className="text-black fs-5">
+                            Totale carrello: <strong>{totalCart.toFixed(2)}€</strong>
                         </h4>
                         <div className="d-flex justify-content-center gap-2">
-                            <button className="btn btn-danger mt-2" onClick={clearCart}>
+                            <button className="btn-cart-fail mt-2" onClick={clearCart}>
                                 Svuota carrello
                             </button>
-                            <Link to="/checkout" className="btn btn-success mt-2">
+                            <Link to="/checkout" className="btn-cart-success mt-2">
                                 Procedi al checkout
                             </Link>
                         </div>

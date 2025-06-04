@@ -308,6 +308,64 @@ a {
     background-color: #ffffff;
 }
 
+.btn-cart-prev-next {
+    border: unset;
+    border: 2px solid #fff;
+    background-color: transparent;
+    border-radius: 50px;
+    padding: 5px 8px;
+    font-size: 18px;
+    transition: all 0.25s ease-in-out;
+    color: #fff;
+    text-align: center;
+}
+
+.btn-cart-prev-next:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.btn-cart-prev-next:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+    transition: none;
+}
+
+.btn-cart-success {
+    border: unset;
+    border: 2px solid #52b788;
+    background-color: #80ed99;
+    border-radius: 50px;
+    padding: 5px 8px;
+    font-size: 18px;
+    transition: all 0.25s ease-in-out;
+    color: #1b4332;
+    text-align: center;
+}
+
+.btn-cart-success:hover {
+    background-color: #007f5f;
+    color: #fff;
+}
+
+.btn-cart-fail {
+    border: unset;
+    border: 2px solid #c1121f;
+    background-color: #ff4d6d;
+    border-radius: 50px;
+    padding: 5px 8px;
+    font-size: 18px;
+    transition: all 0.25s ease-in-out;
+    color: #000;
+    text-align: center;
+}
+
+.btn-cart-fail:hover {
+    background-color: #bf0603;
+    color: #fff;
+}
+
 .width-card-list {
     max-width: 600px;
 }
@@ -731,7 +789,7 @@ button:disabled img {
     border: none;
     color: #F5F1E9;
     padding: 6px 10px;
-    border-radius: 8px;
+    border-radius: 50px;
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 600;
@@ -792,7 +850,7 @@ button:disabled img {
 
 .sidecart-btn {
     padding: 10px 18px;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 700;
     border: none;
     cursor: pointer;
