@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
+import arrowRight from "../assets/arrow-right.png"
 
 function SearchPage() {
     const [display, setDisplay] = useState(true);
@@ -178,12 +179,12 @@ function SearchPage() {
 
 
         <div className="d-flex justify-content-center my-4 gap-3 align-items-center">
-            <button className="btn btn-outline-light" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
-                ← Precedente
+            <button className="btn-prev-next" disabled={currentPage <= 1} onClick={() => goToPage(currentPage - 1)}>
+                <img className="arrow-style reverse-arrow" src={arrowRight} alt="arrow-right" />
             </button>
-            <span className="text-white">Pagina <strong>{currentPage}</strong> di {totalPages}</span>
-            <button className="btn btn-outline-light" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
-                Successiva →
+            <span className="text-white fs-5">Pagina <strong>{currentPage}</strong> di {totalPages}</span>
+            <button className="btn-prev-next" disabled={currentPage >= totalPages} onClick={() => goToPage(currentPage + 1)}>
+                <img className="arrow-style" src={arrowRight} alt="arrow-right" />
             </button>
         </div>
     </>
