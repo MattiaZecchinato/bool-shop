@@ -117,7 +117,7 @@ function ProductDetailPage() {
 
                     {dataDettail && dataDettail.length > 0 ? (
                         <div id="carouselLatest" className="carousel slide" data-bs-ride="false">
-                            <div className="carousel-inner">
+                            <div className="carousel-inner pt-4">
                                 {groupProducts(finalArray).map((group, index) => (
                                     <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
                                         <div className="row justify-content-center flex-wrap">
