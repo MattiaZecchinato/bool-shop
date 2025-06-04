@@ -242,6 +242,8 @@ li {
     padding: 2px;
     border-radius: 20px;
     max-width: 350px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
 }
 
 .gold-gradient-border-list {
@@ -249,6 +251,8 @@ li {
     padding: 2px;
     border-radius: 20px;
     max-width: 600px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
 }
 
 .btn-card {
@@ -326,6 +330,20 @@ a {
     gap: 4px;
     align-items: center;
     min-height: 20px;
+}
+
+/* hover cards  */
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.gold-gradient-border:hover {
+    transform: translateY(-10px);
+}
+
+.gold-gradient-border-list:hover {
+    transform: scale(1.02);
 }
 
 /* button prev next search page  */
