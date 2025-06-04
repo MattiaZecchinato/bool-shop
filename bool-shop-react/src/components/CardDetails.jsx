@@ -46,20 +46,20 @@ function CardDetails({ data }) {
                         <div>
                             <div className="mb-3 detail-text">
                                 <span className="text-decoration-line-through me-2 text-danger detail-price">{priceParsed.toFixed(2)}€</span>
-                                <span className="fw-bold text-success detail-price">{discountPrice}€</span>
-                                <span className="fw-bold card-detail-discount ms-2 p-1"> - {discountAmountParsed}%</span>
+                                <span className="fw-bold text-success detail-price fs-4">{discountPrice}€</span>
+                                <span className="fw-bold card-detail-discount fs-5 ms-2 p-1"> - {discountAmountParsed}%</span>
                             </div>
                             <p className='detail-text'>
-                                Dal <strong>{dateFormatStart}</strong> al{' '}
-                                <strong>{dateFormatEnd}</strong>
+                                Dal <strong className='fs-5'>{dateFormatStart}</strong> al{' '}
+                                <strong className='fs-5'>{dateFormatEnd}</strong>
                             </p>
                         </div>
                     ) : (
-                        <span className="mb-3 detail-text">Prezzo: {priceParsed.toFixed(2)}€</span>
+                        <span className="mb-3 detail-text fs-5"><strong>Prezzo:</strong> {priceParsed.toFixed(2)}€</span>
                     )}
-                    {game_type === 'puzzle' ? '' : <p className='detail-text'>Giocatori: {min_player} - {max_player}</p>}
-                    <p className='detail-text'><strong>Età:</strong> {target_age}+</p>
-                    <p className='detail-text mb-4'>
+                    {game_type === 'puzzle' ? '' : <p className='detail-text fs-5'><strong>Giocatori:</strong> {min_player} - {max_player}</p>}
+                    <p className='detail-text fs-5'><strong>Età:</strong> {target_age}+</p>
+                    <p className='detail-text mb-4 fs-5'>
                         <strong>Categoria:</strong>{' '}
                         {categories && categories.length > 0
                             ? categories.map((c) => c.category_name).join(', ')
