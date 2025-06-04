@@ -71,7 +71,7 @@ function HomePage() {
         <div className="home-container mb-5">
             <div className="content-box w-100">
                 <div id="carouselExampleAutoplaying" className="carousel carousel-container slide m-auto" data-bs-ride="carousel">
-                    <div className="carousel-inner overflow-hidden">
+                    <div className="carousel-inner overflow-hidden margin-bottom">
                         <div className="carousel-item active">
                             <Link to={"/boardgames"} ><img src="./src/assets/img-sho-png.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" /></Link>
                         </div>

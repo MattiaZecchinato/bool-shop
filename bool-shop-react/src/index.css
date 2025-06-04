@@ -176,6 +176,10 @@ li {
     overflow: hidden;
 }
 
+.margin-bottom {
+    margin-bottom: 50px;
+}
+
 /* stile cuore */
 
 .card svg {
@@ -333,6 +337,15 @@ a {
     gap: 4px;
     align-items: center;
     min-height: 20px;
+}
+
+.card-title {
+    min-height: 3rem;
+    overflow: hidden;
+}
+
+.padding-card-title {
+    padding-right: 2rem;
 }
 
 /* hover cards  */
