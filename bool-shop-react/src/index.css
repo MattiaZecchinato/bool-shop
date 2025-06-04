@@ -248,7 +248,11 @@ li {
     background-color: #5d0aca;
 }
 
-.btn-card-search {
+a {
+    text-decoration: none;
+}
+
+/* .btn-card-search {
     border: unset;
     background-color: #361556;
     color: #ffffff;
@@ -259,6 +263,24 @@ li {
 .btn-card-search:hover {
     color: #fff;
     background-color: #5d0aca;
+} */
+
+
+.btn-search {
+    border: unset;
+    border: 2px solid #fff;
+    background-color: transparent;
+    border-radius: 50px;
+    padding: 5px 15px;
+    font-size: 18px;
+    transition: all 0.25s ease-in-out;
+    color: #fff;
+    text-align: center;
+}
+
+.btn-search:hover {
+    color: #000000;
+    background-color: #ffffff;
 }
 
 .width-card-list {

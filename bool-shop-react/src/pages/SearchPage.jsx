@@ -133,7 +133,7 @@ function SearchPage() {
             </div>
 
             <Link
-                className="btn btn-light col-sm-4 col-lg-1"
+                className="btn-search col-sm-4 col-lg-1"
                 to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}&limit=${formSearch.limit}&page=1`}
                 onClick={() => setCurrentPage(1)}
             >
@@ -149,7 +149,7 @@ function SearchPage() {
                     <option value="12">12</option>
                 </select>
                 <Link
-                    className="btn btn-light"
+                    className="btn-search"
                     to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}&limit=${formSearch.limit}&page=1`}
                     onClick={() => setCurrentPage(1)}
                 >
