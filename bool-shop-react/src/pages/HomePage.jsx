@@ -6,6 +6,7 @@ import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import checkDiscount from "../utils/checkDiscount";
 import elf from "../assets/christmas-elf.png";
 import unicorn from "../assets/unicorn.png";
+import { Link } from "react-router-dom";
 
 function HomePage() {
 
@@ -72,13 +73,13 @@ function HomePage() {
                 <div id="carouselExampleAutoplaying" className="carousel carousel-container slide m-auto" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src="./src/assets/img-sho-png.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" />
+                            <Link to={"/boardgames"} ><img src="./src/assets/img-sho-png.png" className="d-block w-100 carousel-img img-fluid" alt="giochi-da-tavolo" /></Link>
                         </div>
                         <div className="carousel-item">
-                            <img src="./src/assets/catan-png.png" className="d-block w-100 carousel-img img-fluid" alt="puzzle" />
+                            <Link to={"/detail/catan-base"} > <img src="./src/assets/catan-png.png" className="d-block w-100 carousel-img img-fluid" alt="puzzle" /></Link>
                         </div>
                         <div className="carousel-item">
-                            <img src="./src/assets/spedizione-free-png.png" className="d-block w-100 carousel-img img-fluid" alt="spedizione-gratuita" />
+                            <Link to={"/search"} ><img src="./src/assets/spedizione-free-png.png" className="d-block w-100 carousel-img img-fluid" alt="spedizione-gratuita" /></Link>
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
