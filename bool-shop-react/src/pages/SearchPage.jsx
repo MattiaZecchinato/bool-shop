@@ -141,7 +141,7 @@ function SearchPage() {
             </Link>
         </div>
 
-        <div className="d-flex justify-content-between mb-4 gap-2" role="group" aria-label="btn-group">
+        <div className="d-flex justify-content-between margin-bottom gap-2" role="group" aria-label="btn-group">
             <div className="d-flex col-md-2 gap-3">
                 <select id="inputOrder" className="form-select" name="limit" value={formSearch.limiPara} onChange={handleData}>
                     <option value="6">6</option>

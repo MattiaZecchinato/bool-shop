@@ -41,7 +41,7 @@ function CardWishList({ data }) {
                     </div>
                     <div className="col-8 col-sm-8 col-md-8 d-flex flex-column justify-content-between h-100 ">
                         <div className="card-text-block p-2 ms-2">
-                            <h5 className="card-title fw-bold">{name}</h5>
+                            <h5 className="card-title fw-bold padding-card-title">{name}</h5>
                             {hasDiscount ? (
                                 <div className="price-block">
                                     <span className="text-decoration-line-through me-2 text-danger red-price">
