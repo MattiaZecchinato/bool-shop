@@ -40,13 +40,16 @@ function CheckoutPage() {
 
     // Funzione per calcolare prezzo scontato se sconto percentuale
     const getDiscountedPrice = (item) => {
+        const checkDisc = checkDiscount(item);
 
-        const checkDisc = checkDiscount(item)
-        if (item.discount_type === "percentage" && item.discount_amount && checkDisc) {
+
+        if (item.discount_type === "percentage" && parseFloat(item.discount_amount) > 0 && checkDisc) {
             const discountPercent = parseFloat(item.discount_amount);
             const price = parseFloat(item.price);
             return price * (1 - discountPercent / 100);
         }
+
+        return parseFloat(item.price);
     };
 
     // Calcolo totale tenendo conto dello sconto sui singoli prodotti
