@@ -14,11 +14,11 @@ function OrderRecap() {
     return <>
         <div className="container py-4 text-white row gap-2 width-whish-container justify-content-center bg-light rounded rounded-3 mt-4 mb-4 border border-dark" style={{ maxWidth: "600px" }}>
             <div className="recap-container d-flex row-reverse align-items-center justify-content-center">
-                <h1 className="mb-4 text-dark text-center font-medieval">Ordine completato con successo!</h1>
                 <div>
                     <img className="image-recap me-2" src={staff} alt="staff" />
                     <img className="image-recap position-image-recap" src={magic} alt="magic" />
                 </div>
+                <h1 className="mb-4 text-dark text-center font-medieval">Ordine completato con successo!</h1>
             </div>
 
             <div className="text-dark text-center">
@@ -30,7 +30,7 @@ function OrderRecap() {
             </div>
         </div>
         <div className="text-center">
-            <button className="btn btn-outline-light" onClick={() => { navigate('/') }}>Torna alla Homepage</button>
+            <button className="btn-search" onClick={() => { navigate('/') }}>Torna alla Homepage</button>
         </div>
     </>
 }
