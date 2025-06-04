@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 function Menu() {
 
     return (
-        <nav className="container mb-5 mt-5 nav-style">
+        <nav className="container mb-5 mt-4 nav-style">
             <ul className="list-unstyled row justify-content-center menu-list align-items-center mt-lg-3">
                 <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
-                    <NavLink className="nav-link text-center" to='/search'>Catalogo</NavLink>
+                    <NavLink className="nav-link text-center fw-bold menu" to='/search'>Catalogo</NavLink>
                 </li>
                 <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
-                    <NavLink className="nav-link text-center" to='/boardgames'>Giochi da tavolo</NavLink>
+                    <NavLink className="nav-link text-center fw-bold menu" to='/boardgames'>Giochi da tavolo</NavLink>
                 </li>
                 <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
-                    <NavLink className="nav-link text-center" to='/puzzles'>Puzzle</NavLink>
+                    <NavLink className="nav-link text-center fw-bold menu" to='/puzzles'>Puzzle</NavLink>
                 </li>
                 <li className="menu-item col-10 col-sm-4 col-md-3 p-0">
                     <div className="cat-style text-center p-0">
-                        <Link type="button" aria-expanded="false">
+                        <Link type="button" aria-expanded="false" className="fw-bold">
                             Categorie
                         </Link>
                         <ul className="d-flex ul-nav-style m-0">
