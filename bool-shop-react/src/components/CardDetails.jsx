@@ -55,12 +55,12 @@ function CardDetails({ data }) {
                             </p>
                         </div>
                     ) : (
-                        <span className="mb-3 detail-text fs-5"><strong>Prezzo:</strong> {priceParsed.toFixed(2)}€</span>
+                        <span className="mb-3 detail-text fs-5"><strong><span style={{ fontSize: "20px" }}>💰</span>Prezzo:</strong> {priceParsed.toFixed(2)}€</span>
                     )}
-                    {game_type === 'puzzle' ? '' : <p className='detail-text fs-5'><strong>Giocatori:</strong> {min_player} - {max_player}</p>}
-                    <p className='detail-text fs-5'><strong>Età:</strong> {target_age}+</p>
+                    {game_type === 'puzzle' ? '' : <p className='detail-text fs-5'><strong><span style={{ fontSize: "20px" }}>👤</span>Giocatori:</strong> {min_player} - {max_player}</p>}
+                    <p className='detail-text fs-5'><strong><span style={{ fontSize: "20px" }}>👶</span>Età:</strong> {target_age}+</p>
                     <p className='detail-text mb-4 fs-5'>
-                        <strong>Categoria:</strong>{' '}
+                        <strong><span style={{ fontSize: "20px" }}>📂</span>Categoria:</strong>{' '}
                         {categories && categories.length > 0
                             ? categories.map((c) => c.category_name).join(', ')
                             : 'Nessuna'}
@@ -72,7 +72,7 @@ function CardDetails({ data }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     </>
 }
 
