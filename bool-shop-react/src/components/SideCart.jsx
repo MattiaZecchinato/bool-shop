@@ -24,18 +24,20 @@ function SideCart({ isOpen, onClose }) {
 
             return (
               <li key={item.id} className="sidecart-item">
-                <img src={`${VITE_BE_PATH}/img/${item.image}`} alt={item.name} className="sidecart-item-img" />
+                <div className="sidecart-container-img">
+                  <img src={`${VITE_BE_PATH}/img/${item.image}`} alt={item.name} className="sidecart-item-img" />
+                </div>
                 <div className="sidecart-item-info">
                   <h5 className="sidecart-item-title">{item.name}</h5>
                   <p className="sidecart-item-price">
-                    Prezzo:{" "}
+                    {" "}
                     {item.discount_type === "percentage" && checkDisc ? (
                       <>
                         <del className="sidecart-item-old-price">€{Number(item.price).toFixed(2)}</del>
-                        <span>€{Number(item.final_price).toFixed(2)}</span>
+                        <span className="text-success fw-bold">€{Number(item.final_price).toFixed(2)}</span>
                       </>
                     ) : (
-                      <>€{Number(item.price).toFixed(2)}</>
+                      <div className="fw-bold">€{Number(item.price).toFixed(2)}</div>
                     )}
                   </p>
                 </div>
@@ -52,8 +54,10 @@ function SideCart({ isOpen, onClose }) {
                     onClick={() => removeFromCart(item.id, item.quantity)}
                     title="Rimuovi prodotto dal carrello"
                   >
-                    <span className="remove-icon">🗑️</span>
-                    <span className="remove-text">Rimuovi</span>
+                    <div className="d-flex align-items-center">
+                      <span className="remove-icon">🗑️</span>
+                      <span className="remove-text">Rimuovi</span>
+                    </div>
                   </button>
                 </div>
               </li>

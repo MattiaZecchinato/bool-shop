@@ -2,9 +2,9 @@ import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../components/CartContext";
 import { useState, useEffect, useRef } from "react";
 import SideCart from "./SideCart"; // import componente SideCart
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import building from "../assets/building.png";
+import shoppingCart from "../assets/trolley.png";
+import heart from "../assets/heartC.png";
 
 function Header() {
     const { cartItems, prefer } = useCart();
@@ -29,7 +29,7 @@ function Header() {
     return (
         <>
             <header className="mb-5 scroll-header">
-                <nav className="container navbar navbar-expand">
+                <nav className="container navbar navbar-expand p-0">
                     <div className="container-fluid">
                         <NavLink className="navbar-brand" to="/">
                             <img src="/bool-shop-logo.png" alt="Logo" className="logo" />
@@ -48,8 +48,8 @@ function Header() {
                         <div className="collapse navbar-collapse flex-row-reverse" id="navbarNav">
                             <ul className="navbar-nav align-items-center">
                                 <li className="nav-item">
-                                    <NavLink className="nav-link active" aria-current="page" to="/">
-                                        <FontAwesomeIcon icon={faHome} className="fs-3 text-white" />
+                                    <NavLink className="nav-link active d-flex align-items-center" aria-current="page" to="/">
+                                        <img className="nav-img" src={building} alt="building-home" />
                                         <span className="span-style-header">Home</span>
                                     </NavLink>
                                 </li>
@@ -62,7 +62,8 @@ function Header() {
                                         aria-label="Mostra carrello"
                                         role="button"
                                     >
-                                        <FontAwesomeIcon icon={faShoppingCart} className="fs-3 text-white nav-icon" />
+
+                                        <img className="nav-img" src={shoppingCart} alt="shopping-cart" />
                                         {totalQuantityCart > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold">{totalQuantityCart}</div>
                                         )}
@@ -76,7 +77,8 @@ function Header() {
                                         to="/wish-list"
                                         className="btn ms-auto position-relative"
                                     >
-                                        <FontAwesomeIcon icon={solidHeart} className="fs-3 text-white nav-icon" />
+
+                                        <img className="nav-img" src={heart} alt="heart" />
                                         {totalQuantityWishList > 0 && (
                                             <div className="position-absolute tot-quantity fw-bold qnt-wish-list">{totalQuantityWishList}</div>
                                         )}

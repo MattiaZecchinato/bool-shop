@@ -9,18 +9,24 @@ header {
     z-index: 10;
 }
 
-.scroll-header {
+/* .scroll-header {
     background-color: rgba(10, 0, 14, 0.7);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .nav-icon {
     vertical-align: middle;
 }
 
+.nav-img {
+    filter: invert(1);
+    max-width: 40px;
+    margin-bottom: 10px;
+}
+
 .tot-quantity {
-    top: 3px;
-    left: 18px;
+    top: 15px;
+    left: 26px;
     width: 20px;
     color: rgb(230, 218, 56);
     background-color: #070007;
@@ -37,14 +43,14 @@ header {
 
 .qnt-wish-list {
     background-color: transparent;
-    top: 10px;
-    left: 14px;
-    color: #070007;
+    top: 15.5px;
+    left: 21.5px;
+    color: #fff;
 }
 
 .logo {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
 }
 
 /* body  */
@@ -277,6 +283,45 @@ li {
     background-color: #b292d0;
 }
 
+.alert-style {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #070007b6;
+    z-index: 9999;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.alert-style img {
+    max-width: 200px;
+}
+
+/* recap page  */
+
+.recap-container {
+    position: relative;
+}
+
+.image-recap {
+    max-width: 50px;
+}
+
+.position-image-recap {
+    position: absolute;
+    top: -50px;
+    left: 40px;
+}
+
+/* not-found page  */
+
+.not-found-img {
+    max-width: 300px;
+}
 
 /* freccia carosello */
 
@@ -389,7 +434,7 @@ li {
     right: -380px;
     width: 380px;
     height: 100vh;
-    background: linear-gradient(135deg, #5D3A7D, #1B263B);
+    background: linear-gradient(135deg, #b399cc, #ae7dcc);
     box-shadow: -3px 0 15px rgba(0, 0, 0, 0.7);
     padding: 25px;
     transition: right 0.35s ease;
@@ -397,7 +442,6 @@ li {
     overflow-y: auto;
     border-radius: 10px 0 0 10px;
     color: #F5F1E9;
-    font-family: 'Treasure Map Deadhand', cursive, sans-serif;
     letter-spacing: 0.03em;
 }
 
@@ -405,28 +449,28 @@ li {
     right: 0;
 }
 
-/* Header e titoli */
+/* header carrello */
+
 .sidecart-close-btn {
     float: right;
-    background-color: #7E2430;
+    background-color: #361556;
     border: none;
     font-weight: 700;
     font-size: 1.1rem;
     padding: 0 12px;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 0 8px #7E2430;
+    box-shadow: 0 0 8px #000000;
     color: #F5F1E9;
 }
 
 .sidecart-close-btn:hover {
-    background-color: #5B1B22;
+    background-color: #3f2564;
 }
 
 .sidecart-title {
-    margin-bottom: 1.2rem;
-    text-shadow: 2px 2px 6px #000;
-    color: #C9B037;
+    margin-bottom: 10px;
+    color: #000000;
 }
 
 .sidecart-empty {
@@ -434,11 +478,11 @@ li {
     text-align: center;
     margin-top: 40px;
     font-size: 1.2rem;
-    text-shadow: 1px 1px 3px #000;
-    color: #F5F1E9;
+    color: #000000;
 }
 
 /* Lista prodotti */
+
 .sidecart-list {
     list-style: none;
     padding-left: 0;
@@ -449,7 +493,7 @@ li {
     align-items: center;
     margin-bottom: 25px;
     padding-bottom: 10px;
-    border-bottom: 1px dotted rgba(249, 205, 75, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .sidecart-item-img {
@@ -458,7 +502,8 @@ li {
     object-fit: cover;
     border-radius: 12px;
     margin-right: 18px;
-    box-shadow: 0 0 10px #C9B037;
+    box-shadow: 0 0 10px #000000;
+    background-color: #ffffff;
 }
 
 .sidecart-item-info {
@@ -467,25 +512,25 @@ li {
 
 .sidecart-item-title {
     margin: 0 0 6px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    color: #F5F1E9;
+    color: #1a0a2a;
+    font-style: italic;
 }
 
 .sidecart-item-price {
     margin: 0;
     font-size: 1rem;
-    color: #4A7C59;
-    text-shadow: 1px 1px 3px #00000088;
+    color: #000000;
 }
 
 .sidecart-item-old-price {
-    color: #C9B037;
+    color: rgb(189, 14, 14);
     font-size: 0.9rem;
     margin-right: 8px;
     opacity: 0.8;
 }
 
 /* Quantità + / - */
+
 .sidecart-item-controls {
     display: flex;
     align-items: center;
@@ -510,8 +555,8 @@ li {
 }
 
 .sidecart-btn-round.red {
-    background-color: #7E2430;
-    box-shadow: 0 0 8px #7E2430;
+    background-color: #5D3A7D;
+    box-shadow: 0 0 8px #5D3A7D;
 }
 
 .sidecart-btn-round.red:hover {
@@ -550,7 +595,7 @@ li {
     display: flex;
     align-items: center;
     gap: 6px;
-    background-color: #7E2430;
+    background-color: #1c112d;
     border: none;
     color: #F5F1E9;
     padding: 6px 10px;
@@ -559,19 +604,18 @@ li {
     font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 0 8px #7E2430;
-    font-family: 'Treasure Map Deadhand', cursive, sans-serif;
+    box-shadow: 0 0 8px #000000;
     letter-spacing: 0.03em;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .sidecart-remove-btn:hover {
-    background-color: #5B1B22;
+    background-color: #2d1c47;
     filter: brightness(1.15);
 }
 
 .remove-icon {
-    font-size: 0.9rem;
+    font-size: 15px;
 }
 
 .remove-text {
@@ -606,8 +650,7 @@ li {
 .sidecart-total {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #C9B037;
-    text-shadow: 1px 1px 3px #000;
+    color: #070007;
 }
 
 .sidecart-buttons {
@@ -625,13 +668,14 @@ li {
 }
 
 .sidecart-btn.primary {
-    background-color: #7E2430;
+    background-color: #1c112d;
     color: #F5F1E9;
-    box-shadow: 0 0 10px #7E2430;
+    box-shadow: 0 0 10px #000000;
 }
 
 .sidecart-btn.primary:hover {
-    background-color: #5B1B22;
+    background-color: #2d1c47;
+    filter: brightness(1.15);
 }
 
 .sidecart-btn.secondary {
@@ -707,14 +751,14 @@ li {
     }
 
     .tot-quantity {
-        top: -1px;
-        left: 19px;
+        top: 10px;
+        left: 26.5px;
         font-size: medium;
     }
 
     .qnt-wish-list {
-        top: 7px;
-        left: 14.5px;
+        top: 13px;
+        left: 22px;
     }
 
     .cat-style {
@@ -729,6 +773,11 @@ li {
     .carousel-control-next.position-arrow-next {
         right: -45px;
         width: 50px;
+    }
+
+    .logo {
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -751,15 +800,14 @@ li {
     }
 
     .tot-quantity {
-        top: -1px;
-        left: 20px;
+        top: 10px;
+        left: 26.5px;
         font-size: medium;
     }
 
     .qnt-wish-list {
-        top: 8px;
-        left: 16px;
-        font-size: 18px;
+        top: 13px;
+        left: 22px;
     }
 
     .carousel-control-prev.position-arrow {
@@ -770,5 +818,10 @@ li {
     .carousel-control-next.position-arrow-next {
         right: 50px;
         width: 50px;
+    }
+
+    .logo {
+        width: 120px;
+        height: 120px;
     }
 }
