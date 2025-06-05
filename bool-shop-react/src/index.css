@@ -659,8 +659,8 @@ button:disabled img {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -380px;
-    width: 380px;
+    right: -500px;
+    max-width: 500px;
     height: 100vh;
     background: linear-gradient(135deg, #b399cc, #ae7dcc);
     box-shadow: -3px 0 15px rgba(0, 0, 0, 0.7);
@@ -847,7 +847,7 @@ button:disabled img {
 }
 
 .remove-text {
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 

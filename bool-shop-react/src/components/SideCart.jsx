@@ -42,7 +42,7 @@ function SideCart({ isOpen, onClose }) {
                   </div>
                 </div>
                 <div className="sidecart-item-actions">
-                  <div className="sidecart-item-controls">
+                  <div className="sidecart-item-controls mb-2">
                     <button onClick={() => removeFromCart(item.id, 1)} className="sidecart-btn-round red">
                       {item.quantity === 1 ? "🗑️" : "-"}
                     </button>
