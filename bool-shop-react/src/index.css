@@ -302,6 +302,7 @@ li {
     border-radius: 50px;
     padding: 10px 20px;
     font-size: 19px;
+    white-space: nowrap;
     transition: all 0.5s ease-in-out;
 }
 
