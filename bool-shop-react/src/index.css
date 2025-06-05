@@ -27,6 +27,12 @@ header {
     color: #ffffff;
 }
 
+/* checkout */
+
+.green-shipping {
+    color: #1a6010;
+}
+
 
 
 .menu::before {
@@ -384,7 +390,7 @@ a {
 
 .btn-cart-success:hover {
     background-color: #007f5f;
-    color: #fff;
+    color: #000000;
 }
 
 .btn-cart-fail {

@@ -9,6 +9,7 @@ function WishListPage() {
     const { prefer } = useContext(CartContext)
 
     return <>
+
         <div className="container py-4 text-white row gap-2 width-whish-container justify-content-center">
             <div className="d-flex align-items-center gap-2">
                 <h2 className="mb-5">Wishlist</h2>
