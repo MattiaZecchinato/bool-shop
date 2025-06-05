@@ -113,7 +113,7 @@ function ProductDetailPage() {
 
                     {data ? <CardDetails data={data} /> : <p>Nessun prodotto!</p>}
 
-                    <h3 className="mt-5 mb-5 text-white">Prodotti correlati</h3>
+                    <h3 className="mt-5 mb-5 text-white font-medieval">Prodotti correlati</h3>
 
                     {dataDettail && dataDettail.length > 0 ? (
                         <div id="carouselLatest" className="carousel slide" data-bs-ride="false">
