@@ -8,11 +8,14 @@ import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
 import arrowRight from "../assets/arrow-right.png";
 
+
+
 function PuzzlesPage() {
     const [display, setDisplay] = useState(true);
     const { VITE_BE_PATH } = import.meta.env;
 
     const [found, setFound] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
@@ -27,7 +30,7 @@ function PuzzlesPage() {
 
     function callEndPoint() {
         let finalUri = `${VITE_BE_PATH}/shop/search?type=puzzle&page=${currentPage}`;
-
+        setLoading(true);
 
 
         axios.get(finalUri)
@@ -43,6 +46,9 @@ function PuzzlesPage() {
                 setFound([]);
                 setTotalPages(1);
                 setCurrentPage(1);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }
 
@@ -62,13 +68,19 @@ function PuzzlesPage() {
         </div>
 
         <div className={display ? 'row justify-content-center' : ''}>
-            {found.length > 0
-                ? found.map(elem =>
-                    display
-                        ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
-                        : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
-                )
-                : <h3>Nessun Elemento Trovato</h3>
+            {loading ?
+                <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                    <p className="text-dark fst-italic text-center fs-5 my-auto">caricamento in corso</p>
+                    {/* <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} /> */}
+                </div>
+                :
+                found.length > 0
+                    ? found.map(elem =>
+                        display
+                            ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
+                            : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
+                    )
+                    : <h3>Nessun Elemento Trovato</h3>
             }
         </div>
 
