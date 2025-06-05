@@ -15,6 +15,8 @@ function SearchPage() {
     const { VITE_BE_PATH } = import.meta.env;
     const pageParam = parseInt(searchParams.get("page")) || 1;
     const [found, setFound] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const [currentPage, setCurrentPage] = useState(pageParam);
     const [totalPages, setTotalPages] = useState(1);
     const searchpara = searchParams.get("search") || "";
@@ -62,6 +64,7 @@ function SearchPage() {
     }, [searchParams, currentPage]);
 
     function callEndPoint() {
+        setLoading(true);
         let finalUri = `${VITE_BE_PATH}/shop/search?`;
         if (searchpara) {
             const currentsearch = searchpara.trim().replace(/ /g, "%20");
@@ -82,9 +85,13 @@ function SearchPage() {
                 setCurrentPage(data.currentPage || 1);
             })
             .catch(err => {
+
                 setFound([]);
                 setTotalPages(1);
                 setCurrentPage(1);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }
 
@@ -167,17 +174,23 @@ function SearchPage() {
             </div>
         </div>
         <div className={display ? 'row justify-content-center' : ''}>
-            {found.length > 0
-                ? found.map(elem =>
-                    display
-                        ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
-                        : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
-                )
-                :
+            {loading ?
                 <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
-                    <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
+                    <p className="text-dark fst-italic text-center fs-5 my-auto">caricamento in corso</p>
                     <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
-                </div>}
+                </div>
+                :
+                found.length > 0
+                    ? found.map(elem =>
+                        display
+                            ? <div key={elem.id} className='col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center'><CardProduct data={elem} /></div>
+                            : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
+                    )
+                    :
+                    <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                        <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
+                        <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
+                    </div>}
         </div>
 
 
