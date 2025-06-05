@@ -174,10 +174,10 @@ function SearchPage() {
                         : <div key={elem.id} className="d-flex justify-content-center"><CardProductList data={elem} /></div>
                 )
                 : <h3>Nessun prodotto trovato</h3>}
-            {/* // <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
-                //     <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
-                //     <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
-                // </div>} */}
+            {<div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                <p className="text-dark fst-italic text-center fs-5 my-auto">Nessun prodotto trovato</p>
+                <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
+            </div>}
         </div>
 
 
