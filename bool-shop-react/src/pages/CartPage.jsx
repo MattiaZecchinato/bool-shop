@@ -42,19 +42,19 @@ function CartPage() {
                                 className="border p-3 mb-4 d-flex text-dark justify-content-between align-items-center flex-wrap bg-list-checkout rounded rounded-2"
                             >
                                 <div>
-                                    <h5 className="fs-5 fst-italic">{item.name}</h5>
+                                    <h5 className="fs-5 fst-italic fw-bold">{item.name}</h5>
                                     {hasDiscount ? (
                                         <>
-                                            <p>
+                                            <p className="fs-5">
                                                 Prezzo unitario:{" "}
-                                                <span style={{ textDecoration: "line-through", color: "gray" }}>
+                                                <span style={{ textDecoration: "line-through", color: "red" }}>
                                                     €{originalPrice.toFixed(2)}
                                                 </span>{" "}
-                                                <span className="text-danger fw-bold">
+                                                <span className="text-dark fw-bold fs-5">
                                                     €{discountedPrice.toFixed(2)}
                                                 </span>
                                             </p>
-                                            <p className="text-danger small">-{item.discount_amount}%</p>
+                                            <p className="text-danger small fw-bold fs-5">-{item.discount_amount}%</p>
                                         </>
                                     ) : (
                                         <p className="fs-5">Prezzo unitario: <strong>{originalPrice.toFixed(2)}€</strong></p>
@@ -79,7 +79,7 @@ function CartPage() {
                                 </div>
 
                                 <div className="text-center">
-                                    <p>
+                                    <p className="fs-5">
                                         <strong>Totale: €{(discountedPrice * item.quantity).toFixed(2)}</strong>
                                     </p>
                                     <button
@@ -98,10 +98,10 @@ function CartPage() {
                             Totale carrello: <strong>{totalCart.toFixed(2)}€</strong>
                         </h4>
                         <div className="d-flex justify-content-center gap-2">
-                            <button className="btn-cart-fail mt-2" onClick={clearCart}>
+                            <button className="btn-cart-fail mt-2 fs-5" onClick={clearCart}>
                                 Svuota carrello
                             </button>
-                            <Link to="/checkout" className="btn-cart-success mt-2">
+                            <Link to="/checkout" className="btn-cart-success mt-2 fs-5">
                                 Procedi al checkout
                             </Link>
                         </div>

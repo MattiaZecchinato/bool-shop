@@ -159,7 +159,7 @@ function CheckoutPage() {
                         })}
                         <li className="list-group-item d-flex justify-content-between bg-list-checkout border border-dark">
                             <span className="fs-5">Spedizione</span>
-                            <span className="green-shipping fw-bold">{freeshipping ? "GRATIS" : "4.99€"}</span>
+                            <span className="green-shipping fw-bold fs-5">{freeshipping ? "GRATIS" : "4.99€"}</span>
                         </li>
                         <li className="list-group-item d-flex justify-content-between fw-bold bg-list-checkout border border-dark">
                             <span className="fs-5">Totale finale</span>
