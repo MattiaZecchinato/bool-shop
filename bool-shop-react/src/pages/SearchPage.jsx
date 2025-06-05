@@ -8,6 +8,7 @@ import { faGrip, faListUl } from "@fortawesome/free-solid-svg-icons";
 import CardProductList from "../components/CardProductList";
 import arrowRight from "../assets/arrow-right.png";
 import sadUnicorn from "../assets/unicorn-sad.png";
+import cauldron from "../assets/cauldron.png";
 
 function SearchPage() {
     const [display, setDisplay] = useState(true);
@@ -176,8 +177,8 @@ function SearchPage() {
         <div className={display ? 'row justify-content-center' : ''}>
             {loading ?
                 <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
-                    <p className="text-dark fst-italic text-center fs-5 my-auto">caricamento in corso</p>
-                    <img src={sadUnicorn} alt="sad-unicorn" style={{ width: "50px" }} />
+                    <p className="text-dark fst-italic text-center fs-5 my-auto">Caricamento in corso...</p>
+                    <img src={cauldron} alt="cauldron" style={{ width: "50px" }} />
                 </div>
                 :
                 found.length > 0
