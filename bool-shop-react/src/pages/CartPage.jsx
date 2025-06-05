@@ -22,7 +22,7 @@ function CartPage() {
 
     return (
         <div className="p-4 border border-dark bg-light rounded rounded-3 text-dark container py-4 text-white" style={{ maxWidth: "600px" }}>
-            <h3 className="text-dark text-center mb-4">🛒 Carrello</h3>
+            <h3 className="text-dark text-center mb-4 fw-bold">🛒 Carrello</h3>
 
             {cartItems.length === 0 ? (
                 <div className="container bg-light fst-italic rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5">
@@ -42,7 +42,7 @@ function CartPage() {
                                 className="border p-3 mb-4 d-flex text-dark justify-content-between align-items-center flex-wrap bg-list-checkout rounded rounded-2"
                             >
                                 <div>
-                                    <h5 className="fst-italic">{item.name}</h5>
+                                    <h5 className="fs-5 fst-italic">{item.name}</h5>
                                     {hasDiscount ? (
                                         <>
                                             <p>
@@ -57,7 +57,7 @@ function CartPage() {
                                             <p className="text-danger small">-{item.discount_amount}%</p>
                                         </>
                                     ) : (
-                                        <p>Prezzo unitario: €{originalPrice.toFixed(2)}</p>
+                                        <p className="fs-5">Prezzo unitario: <strong>{originalPrice.toFixed(2)}€</strong></p>
                                     )}
                                 </div>
 
@@ -67,14 +67,14 @@ function CartPage() {
                                         onClick={() => removeFromCart(item.id, 1)}
                                         disabled={item.quantity <= 1}
                                     >
-                                        <span>-</span>
+                                        <span className="fw-bold">-</span>
                                     </button>
-                                    <span>{item.quantity}</span>
+                                    <span className="fw-bold fs-5">{item.quantity}</span>
                                     <button
                                         className="btn-cart-prev-next"
                                         onClick={() => addToCart(item)}
                                     >
-                                        <span>+</span>
+                                        <span className="fw-bold">+</span>
                                     </button>
                                 </div>
 

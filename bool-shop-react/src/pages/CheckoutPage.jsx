@@ -109,12 +109,12 @@ function CheckoutPage() {
                 <div className="alert-style d-flex flex-column justify-content-center align-items-center">
                     {checkoutStatus === 'success' ? (
                         <>
-                            <p className="fs-5">Ordine completato! Verrai reindirizzato al riepilogo!</p>
+                            <p className="fs-4">Ordine completato! Verrai reindirizzato al riepilogo!</p>
                             <img src={broom} alt="scopa" />
                         </>
                     ) : (
                         <>
-                            <p className="fs-5">Ops, qualcosa è andato storto, riprova...</p>
+                            <p className="fs-4">Ops, qualcosa è andato storto, riprova...</p>
                             <img src={wizard} alt="wizard" />
                         </>
                     )}
@@ -124,7 +124,7 @@ function CheckoutPage() {
                 <p>Il carrello è vuoto.</p>
             ) : (
                 <div className=" p-4 border border-dark bg-light rounded rounded-3">
-                    <h3 className="mb-3 text-dark text-center"><span>📦</span>Riepilogo ordine</h3>
+                    <h3 className="mb-3 text-dark text-center fw-bold"><span>📦</span>Riepilogo ordine</h3>
                     <ul className="list-group mb-3">
                         {cartItems.map((item) => {
                             const originalPrice = parseFloat(item.price);
@@ -135,40 +135,40 @@ function CheckoutPage() {
                             return (
                                 <li className="list-group-item d-flex justify-content-between align-items-center bg-list-checkout text-dark border border-dark" key={item.id} >
                                     <div>
-                                        <span>{item.name} (x{item.quantity})</span><br />
+                                        <span className="fs-5">{item.name} (x{item.quantity})</span><br />
                                         {hasDiscount && (
-                                            <small className="text-danger me-2">
-                                                -{item.discount_amount}%
-                                            </small>
+                                            <span className="text-danger me-2 fw-bold">
+                                                - {item.discount_amount}%
+                                            </span>
                                         )}
                                     </div>
                                     <div>
                                         {hasDiscount ? (
                                             <>
-                                                <span style={{ textDecoration: "line-through", color: "gray", marginRight: "8px" }}>
-                                                    {(originalPrice * item.quantity).toFixed(2)}€
+                                                <span style={{ textDecoration: "line-through", color: "red", marginRight: "8px", fontWeight: "bold", fontSize: "18px" }}>
+                                                    <span>{(originalPrice * item.quantity).toFixed(2)}€</span>
                                                 </span>
-                                                <span className="fw-bold">{(discountedPrice * item.quantity).toFixed(2)}€</span>
+                                                <span className="fw-bold fs-5">{(discountedPrice * item.quantity).toFixed(2)}€</span>
                                             </>
                                         ) : (
-                                            <span>{(originalPrice * item.quantity).toFixed(2)}€</span>
+                                            <span className="fs-5">{(originalPrice * item.quantity).toFixed(2)}€</span>
                                         )}
                                     </div>
                                 </li>
                             );
                         })}
                         <li className="list-group-item d-flex justify-content-between bg-list-checkout border border-dark">
-                            <span>Spedizione</span>
-                            <span className="btn-success">{freeshipping ? "GRATIS" : "4.99€"}</span>
+                            <span className="fs-5">Spedizione</span>
+                            <span className="green-shipping fw-bold">{freeshipping ? "GRATIS" : "4.99€"}</span>
                         </li>
                         <li className="list-group-item d-flex justify-content-between fw-bold bg-list-checkout border border-dark">
-                            <span>Totale finale</span>
-                            <span>{(totalOrder + (freeshipping ? 0 : 4.99)).toFixed(2)}€</span>
+                            <span className="fs-5">Totale finale</span>
+                            <span className="fs-5">{(totalOrder + (freeshipping ? 0 : 4.99)).toFixed(2)}€</span>
                         </li>
                     </ul>
 
                     <form onSubmit={handleSubmit}>
-                        <h4 className="text-center mt-5 mb-4 text-dark">Inserisci i tuoi dati</h4>
+                        <h4 className="text-center mt-5 mb-4 text-dark fw-bold">Inserisci i tuoi dati</h4>
                         <div className="row g-3 d-flex justify-content-center">
                             <div className="col-md-6 ">
                                 <label className="form-label text-dark">Nome</label>
