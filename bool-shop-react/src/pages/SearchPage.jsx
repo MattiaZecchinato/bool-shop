@@ -104,13 +104,13 @@ function SearchPage() {
 
 
     return <>
-        <div className="d-flex gap-3 align-items-end mt-5 mb-5 pb-4 col-lg-12 justify-content-center flex-wrap">
-            <div className=" col-sm-6 col-md-2 text-center">
+        <div className="d-flex align-items-end mt-sm-0 mt-lg-3 mb-5 pb-4 col-lg-12 justify-content-center flex-wrap">
+            <div className="col-sm-7 col-md-2 text-center">
                 <label htmlFor="inputNameGame" className="form-label text-white fw-bold">Cerca il tuo gioco</label>
                 <input type="text" className="form-control" id="inputNameGame" name="search" value={formSearch.search} onChange={handleData}
                 />
             </div>
-            <div className="col-sm-6 col-md-2 text-center">
+            <div className="col-sm-7 col-md-2 text-center mt-sm-3 ms-md-3">
                 <label htmlFor="inputOrder" className="form-label text-white fw-bold">Ordina per</label>
                 <select id="inputOrder" className="form-select" name="choice" value={formSearch.choice} onChange={handleData}>
                     <option value="name">Nome</option>
@@ -118,14 +118,14 @@ function SearchPage() {
                     <option value="created_at">Recenti</option>
                 </select>
             </div>
-            <div className="col-sm-6 col-md-2 text-center">
-                <label htmlFor="inputOrder" className="form-label text-white fw-bold text-center">Ordina per</label>
+            <div className="col-sm-7 col-md-2 text-center mt-sm-3 ms-md-1">
+                <label htmlFor="inputOrder" className="form-label text-white fw-bold text-center">Ordine</label>
                 <select id="inputOrder" className="form-select" name="order" value={formSearch.order} onChange={handleData}>
                     <option value="asc">Crescente</option>
                     <option value="desc">Decrescente</option>
                 </select>
             </div>
-            <div className="col-sm-6 col-md-2 text-center">
+            <div className="col-sm-6 col-md-2 text-center mt-sm-3 ms-md-3">
                 <label htmlFor="inputOrder" className="form-label text-white"></label>
                 <select id="inputOrder" className="form-select" name="discount" value={formSearch.discount} onChange={handleData}>
                     <option value="true">Giochi in promozione</option>
@@ -134,7 +134,7 @@ function SearchPage() {
             </div>
 
             <Link
-                className="btn-search col-sm-4 col-lg-1"
+                className="btn-search col-sm-4 col-lg-1 mt-md-3 ms-sm-3 ms-lg-3"
                 to={`/search?search=${formSearch.search.replace(/ /g, "%20")}&choice=${formSearch.choice}&order=${formSearch.order}&discount=${formSearch.discount}&limit=${formSearch.limit}&page=1`}
                 onClick={() => setCurrentPage(1)}
             >
