@@ -7,6 +7,7 @@ import checkDiscount from "../utils/checkDiscount";
 import elf from "../assets/christmas-elf.png";
 import unicorn from "../assets/unicorn.png";
 import { Link } from "react-router-dom";
+import cauldron from "../assets/cauldron.png";
 
 function HomePage() {
 
@@ -14,16 +15,19 @@ function HomePage() {
 
     const [data, setData] = useState([]);
     const [groupNum, setGroupNum] = useState(3);
+    const [loading, setLoading] = useState(true);
 
     const url = `${VITE_BE_PATH}/shop`;
 
     function getData() {
+        setLoading(true);
         axios.get(url)
             .then(res => {
 
                 setData(res.data);
             })
             .catch(err => console.log(err))
+            .finally(() => setLoading(false));
     }
 
     function handleResize() {
@@ -99,19 +103,25 @@ function HomePage() {
 
                 <div id="carouselLatest" className="carousel slide mb-5" data-bs-ride="false">
                     <div className="carousel-inner pt-4">
-                        {groupProducts(
-                            data.filter(element => new Date(element.created_at) > new Date('2023-01-01'))
-                        ).map((group, index) => (
-                            <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                                <div className="row justify-content-center flex-wrap">
-                                    {group.map(product => (
-                                        <div key={product.id} className='mb-3 d-flex justify-content-center col-12 col-md-6 col-lg-3' >
-                                            <CardProduct data={product} />
-                                        </div>
-                                    ))}
-                                </div>
+                        {loading ?
+                            <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                                <p className="text-dark fst-italic text-center fs-5 my-auto">Caricamento in corso...</p>
+                                <img src={cauldron} alt="cauldron" style={{ width: "50px" }} />
                             </div>
-                        ))}
+                            :
+                            groupProducts(
+                                data.filter(element => new Date(element.created_at) > new Date('2023-01-01'))
+                            ).map((group, index) => (
+                                <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+                                    <div className="row justify-content-center flex-wrap">
+                                        {group.map(product => (
+                                            <div key={product.id} className='mb-3 d-flex justify-content-center col-12 col-md-6 col-lg-3' >
+                                                <CardProduct data={product} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                     </div>
 
                     <button className="carousel-control-prev position-arrow" type="button" data-bs-target="#carouselLatest" data-bs-slide="prev">
@@ -132,26 +142,31 @@ function HomePage() {
 
                 <div id="carouselPromo" className="carousel slide mb-5" data-bs-ride="false">
                     <div className="carousel-inner pt-4">
-                        {groupProducts(
-                            data.filter(element => {
-                                const discountAmount = element.discount_amount;
-                                const checkdisc = checkDiscount(element);
-
-                                return discountAmount >= 15.00 && discountAmount <= 40.00 && checkdisc;
-                            })
-                        ).map((group, index) => (
-                            <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                                <div className="row justify-content-center">
-
-                                    {group.map(product => (
-                                        <div key={product.id} className="mb-3 d-flex justify-content-center col-12 col-md-6 col-lg-3" >
-                                            <CardProduct data={product} />
-                                        </div>
-                                    ))}
-                                </div>
+                        {loading ?
+                            <div className="container bg-light fst-italic p-5 rounded rounded-3 d-flex align-items-center gap-2 justify-content-center mb-5" style={{ maxWidth: "600px" }}>
+                                <p className="text-dark fst-italic text-center fs-5 my-auto">Caricamento in corso...</p>
+                                <img src={cauldron} alt="cauldron" style={{ width: "50px" }} />
                             </div>
+                            : groupProducts(
+                                data.filter(element => {
+                                    const discountAmount = element.discount_amount;
+                                    const checkdisc = checkDiscount(element);
 
-                        ))}
+                                    return discountAmount >= 15.00 && discountAmount <= 40.00 && checkdisc;
+                                })
+                            ).map((group, index) => (
+                                <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+                                    <div className="row justify-content-center">
+
+                                        {group.map(product => (
+                                            <div key={product.id} className="mb-3 d-flex justify-content-center col-12 col-md-6 col-lg-3" >
+                                                <CardProduct data={product} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                            ))}
                     </div>
 
                     <button className="carousel-control-prev position-arrow" type="button" data-bs-target="#carouselPromo" data-bs-slide="prev">
