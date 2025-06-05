@@ -75,7 +75,7 @@ function Header() {
                                 <li className="header-icon">
                                     <NavLink
                                         to="/wish-list"
-                                        className="btn ms-auto position-relative"
+                                        className="btn border-0 ms-auto position-relative"
                                     >
 
                                         <img className="nav-img" src={heart} alt="heart" />
